@@ -86,7 +86,7 @@ def banner_info():
 	input()
 
 def start_input():
-	country_code = {"1": "+380",
+	country_code = {"1": "+375",
 					"2": "+7"}
 	country_code_2 = {"1": "by",
 					  "2": "ru"}
@@ -94,7 +94,7 @@ def start_input():
 		print("")
 		print(colored("[99] Отмена", "red"))
 		print("")
-		print(colored("[1]", "red"), colored("Беларусь +380", "blue"))
+		print(colored("[1]", "red"), colored("Беларусь +375", "blue"))
 		print(colored("[2]", "red"), colored("Россия +7", "cyan"))
 		print("")
 		ct = input(colored("Выберите страну: ", "green"))
