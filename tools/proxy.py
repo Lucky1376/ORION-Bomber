@@ -1,190 +1,306 @@
-import requests as r
-from bs4 import BeautifulSoup as bs
-from fake_useragent import UserAgent
+import requests, random, threading as th
+from bs4 import BeautifulSoup as BS
+from fake_useragent import UserAgent as UA
+
 import os
-#os.system("cls")
+os.system("cls")
 
-def GetProxyList(country="all", type_="all"):
-	url_type = ""
-	if country == "all":
-		country = ["ru", "ca", "by", "kz", "de", "es", "uk"]
-		country_list_service_2_3 = ['ru', 'ca', 'by', 'kz', 'de', 'es', 'uk', 'gb', 'us', 'nl', 'jp', 'unk', 'sg', 'hk', 'co', 'br', 'dk', 'do', 'uz', 'fr', 'ec', 'se', 'it', 'tw', 'hn', 'at', 'mx', 'in', 'kr', 'fi', 'cn', 'eg', 'ro', 'si', 'rs', 'sa', 'ps', 'pl', 'sr', 'ua']
-	else:
-		country_list_service_2_3 = country
-	if type_ == "all":
-		type_ = ["http", "https"]
-		url_type = "hs"
-	elif type_ == "http":
-		url_type = "h"
-	elif type_ == "https":
-		url_type = "s"
+def SPC(ip, port, login=None, password=None):
+    ua = UA().random
+    ipp = ip + ':' + port
+    proxy_https = {'http': 'http://' + ipp,
+                   'https': 'http://' + ipp}
+    proxy_http = {'http': 'http://' + ipp}
 
-	ua = UserAgent()
-	ua = ua.random
+    ip_user = requests.get("http://icanhazip.com/", headers={'User-Agent': ua}).text
+    if login == None and password == None: # проверка публичных прокси
+        try:
+            ip_proxy = requests.get("http://icanhazip.com/", headers={'User-Agent': ua}, proxies=proxy_https, timeout=5)
+            if ip_user not in ip_proxy.text and ip_proxy.status_code == 200:
+                return proxy_https
+            else:
+                return False                                                            #кирилл лох
+        except:
+            try:
+                ip_proxy = requests.get("http://icanhazip.com/", headers={'User-Agent': ua}, proxies=proxy_http, timeout=5)
+                if ip_user not in ip_proxy.text and ip_proxy.status_code == 200:
+                    return proxy_http
+                else:
+                    return False
+            except:
+                return False
+    else: #проверка приватных прокси
+        proxy_private_https = {'http': 'http://' + login + ':' + password + '@' + ip + ':' + port,
+                               'https': 'http://' + login + ':' + password + '@' + ip + ':' + port}
+        proxy_private_http = {'http': 'http://' + login + ':' + password + '@' + ip + ':' + port}
+        try:
+            ip_proxy = requests.get("http://icanhazip.com/", headers={'User-Agent': ua}, proxies=proxy_private_https,
+                             timeout=5)
+            if ip_user not in ip_proxy.text and ip_proxy.status_code == 200:
+                return proxy_private_https
+            else:
+                return False
+        except:
+            try:
+                ip_proxy = requests.get("http://icanhazip.com/", headers={'User-Agent': ua}, proxies=proxy_private_http,
+                                 timeout=5)
+                if ip_user not in ip_proxy.text and ip_proxy.status_code == 200:
+                    return proxy_private_http
+                else:
+                    return False
+            except:
+                return False
 
-	itog = {}
-
-	# Service 1
-	country_url = {"ru": "https://hidemy.name/ru/proxy-list/?country=RU&type="+url_type+"#list", # Россия
-				   "ca": "https://hidemy.name/ru/proxy-list/?country=CA&type="+url_type+"#list", # Канада
-				   "by": "https://hidemy.name/ru/proxy-list/?country=BY&type="+url_type+"#list", # Беларусь
-				   "kz": "https://hidemy.name/ru/proxy-list/?country=KZ&type="+url_type+"#list", # Казахстан
-				   "de": "https://hidemy.name/ru/proxy-list/?country=DE&type="+url_type+"#list", # Германия
-				   "es": "https://hidemy.name/ru/proxy-list/?country=ES&type="+url_type+"#list", # Испания
-				   "uk": "https://hidemy.name/ru/proxy-list/?country=UA&type="+url_type+"#list"} # Украина
-	for ct in country:
-		if ct not in country_url:
-			continue
-		itog[ct] = []
-		result = r.get(country_url[ct], headers={'User-Agent': ua})
-		html = bs(result.content, "lxml")
-
-		all_proxy = html.find("div", class_="table_block").find("tbody")
-
-		pred_itog = []
-		for tr in all_proxy:
-			for td in tr:
-				try:
-					pred_itog.append(td.text.replace(" ", ""))
-				except:
-					continue
-			if len(pred_itog) > 0:
-				itog[ct].append({"ip": pred_itog[0],
-								 "port": pred_itog[1],
-								 "type": pred_itog[4]})
-			pred_itog = []
-
-	# Service 2
-	format_ = "json"
-	if type_ == ['http', 'https']:
-		type_s = "http,https"
-	else:
-		type_s = type_
-	limit = "20"
-
-	result = r.get(f"https://www.proxyscan.io/api/proxy?&format=json&format={format_}&type={type_s}&limit={limit}")
-	for i in result.json():
-		ip = i["Ip"]
-		port = i["Port"]
-		country_s = i["Location"]["countryCode"]
-		if len(country_s) < 1:
-			country_s = "us"
-		if country_s.lower() not in country_list_service_2_3:
-			continue
-		type_ss = i["Type"]
-		
-		if len(type_) == 1:
-			type_ss = type_ss[0]
+class Proxy:
+	def __init__(self, country=["ru", "by", "ua", "us"], unknown=False, timeout=15):
+		# Проверка на ошибки в параметрах
+		# -----------------------------------------------
+		if len(country) < 1:
+			print("Не указаны страны")
+			exit()
 		else:
+			for ct in country:
+				if ct not in ["ru", "by", "ua", "us"]:
+					print(f"{ct} - неизвестная страна")
+					exit()
+		if unknown not in [False, True]:
+			print("Неизвестный параметр для unknown")
+			exit()
+		try:
+			timeout = int(timeout)
+		except:
+			print("Параметр timeout возможно указан как строка")
+			exit()
+		if timeout < 10 or timeout > 15:
+			print("timeout не может быть меньше 10 или больше 15 секунд")
+			exit()
+		# -----------------------------------------------
+		self.unknown = unknown
+		self.country = country
+		self.timeout = timeout
+		self.list = {}
+		self.list_2 = {}
+		self.list_3 = {}
+		self.list_4 = {}
+
+	def random(self, country=False, delete_el=False):
+		if country != False and country not in self.country:
+			print("Указанной страны нет в списке возможных стран")
+			exit()
+		if self.list == {}:
+			print("Список прокси пустой")
+			exit()
+		if country == False:
+			key = random.choice(self.country)
+			pr = random.choice(self.list[key])
+		else:
+			key = country
+			pr = random.choice(self.list[country])
+
+		if delete_el == True:
+			self.list[key].remove(pr)
+
+		return pr
+
+	def verify(self):
+		if self.list == {}:
+			print("Список прокси пустой")
+			exit()
+
+		new_list = {}
+
+		def vrf_th(key, ip, port):
+			a = SPC(ip, port)
+			if a != False:
+				if key not in new_list:
+					new_list[key] = []
+				new_list[key].append({"ip": ip,
+									  "port": port,
+									  "fromat": a})
+
+		threads = []
+
+		for key in self.list:
+			for pr in self.list[key]:
+				t = th.Thread(target=vrf_th, args=(key, pr["ip"], pr["port"],))
+				threads.append(t)
+
+		for i in range(len(threads)):
+			threads[i].start()
+
+		for i in range(len(threads)):
+			threads[i].join()
+
+		self.list = new_list
+
+
+	def get(self):
+		# User-Agent
+		ua = UA()
+
+		# Итоговый лист с прокси
+		itog = {}
+
+		# https://hidemy.name
+		# -----------------------------------------------
+		"""Составление url Адресов для 1 сервиса"""
+		url_list = {}
+		for ct in self.country:
+			url_list[ct] = f"https://hidemy.name/ru/proxy-list/?country={ct.upper()}&type=hs#list"
+		"""Парсинг"""
+		for ct in url_list:
+			can = False
 			try:
-				type_ss = type_ss[0]+","+type_ss[1]
+				response = requests.get(url_list[ct], headers={"User-Agent": ua.random}, timeout=self.timeout)
+				can = True
 			except:
 				pass
+			if response.status_code == 200 or can == True:
+				itog[ct] = []
 
-		if country_s.lower() not in itog:
-			itog[country_s.lower()] = []
+				html = BS(response.content, "lxml")
 
-		itog[country_s.lower()].append({"ip": ip,
-									  "port": port,
-									  "type": type_ss})
+				all_list_bs = html.find("div", class_="table_block").find("tbody")
 
-	# Service 3
-	type_slovar = {"hs": "HTTP,HTTPS",
-				   "h": "HTTP",
-				   "s": "HTTPS"}
+				pred_itog = []
+				for tr in all_list_bs:
+					for td in tr:
+						try:
+							pred_itog.append(td.text.replace(" ", ""))
+						except:
+							continue
+					if len(pred_itog) > 0:
+						itog[ct].append({"ip": pred_itog[0],
+										 "port": pred_itog[1]})
+					pred_itog = []
+		self.list = itog
+		# -----------------------------------------------
 
-	result = r.get("https://www.sslproxies.org", headers={"User-Agent": ua})
-	html = bs(result.content, "lxml")
-	table = html.find_all("tbody")[0]
+		itog_2 = {}
 
-	for i in table:
-		proxy_sp = []
-		for j in i:
-			proxy_sp.append(j.text.replace(" ", ""))
-		if proxy_sp[2].lower() not in country_list_service_2_3:
-			proxy_sp = []
-			continue
-		if proxy_sp[2].lower() in itog:
-			itog[proxy_sp[2].lower()].append({"ip": proxy_sp[0],
-											  "port": proxy_sp[1],
-											  "type": type_slovar[url_type]})
-		else:
-			itog[proxy_sp[2].lower()] = []
-			itog[proxy_sp[2].lower()].append({"ip": proxy_sp[0],
-											  "port": proxy_sp[1],
-											  "type": type_slovar[url_type]})
-		proxy_sp = []
-
-	# Обработка итогового словаря на повторы
-	itog_2 = {}
-	for key in itog:
-		itog_2[key] = []
-		for pr in itog[key]:
-			if pr in itog_2[key]:
-				continue
-			else:
-				itog_2[key].append(pr)
-
-	return itog_2
-
-def CheckingTheProxyList(proxys): # BETA TEST
-	itog = {}
-
-	for ct in proxys:
-		if len(proxys[ct]) < 1:
-			continue
-		else:
-			itog[ct] = []
-
-			proxy_sp = proxys[ct]
-			for proxy in proxy_sp:
-				ua = UserAgent()
-				ua = ua.random
-
-				ip = proxy["ip"]
-				port = proxy["port"]
-				type_ = proxy["type"]
-
-				if type_ == "HTTP,HTTPS":
-					proxy_get = {"http://": ip+":"+port,
-								 "https://": ip+":"+port}
-				else:
-					proxy_get = {type_.lower()+"://": ip+":"+port,}
-
-				result = r.get("https://google.com", proxies=proxy_get, headers={'User-Agent': ua})
-				if result.status_code == r.codes["ok"]:
-					itog[ct].append({"ip": ip,
-									 "port": port,
-									 "type": type_})
-				else:
-					continue
-	return itog
-
-def CheckingTheProxy(dict): # BETA TEST
-	ua = UserAgent()
-	ua = ua.random
-
-	result = r.get("https://google.com", proxies=dict, headers={'User-Agent': ua})
-
-	if result.status_code == r.codes["ok"]:
-		return True # Прокси работает
-	else:
-		return False # Прокси не работает
-
-def FormattingProxy(dict=None, ip=None, port=None, type_=None): # BETA TEST
-	if dict != None:
+		# https://free-proxy-list.net
+		# -----------------------------------------------
+		can = False
 		try:
-			ip = dict["ip"]
-			port = dict["port"]
-			type_ = dict["type"]
+			response = requests.get("https://www.sslproxies.org", headers={"User-Agent": ua.random}, timeout=self.timeout)
+			can = True
 		except:
-			return False, "ERROR in specifying dictionary elements" # При ошибке указания элементов словаря
-	elif ip != None and port != None and type_ != None:
-		pass
-	else:
-		return False, "NO parameters are specified"
+			pass
+		if response.status_code == 200 or can == True:
+			"""Парсинг"""
+			html = BS(response.content, "lxml")
 
-	proxy_get = {"http://": ip+":"+port,
-				 "https://": ip+":"+port}
-	
-	return True, proxy_get
+			all_list_bs = html.find("div", "table-responsive fpl-list").find("tbody")
+
+			pred_itog = []
+			for tr in all_list_bs:
+				for td in tr:
+					pred_itog.append(td.text.strip())
+				#print(pred_itog[2].lower())
+				if pred_itog[2].lower() not in self.country:
+					pred_itog = []
+					continue
+				if pred_itog[2].lower() in itog_2:
+					itog_2[pred_itog[2].lower()].append({"ip": pred_itog[0],
+														 "port": pred_itog[1]})
+				else:
+					itog_2[pred_itog[2].lower()] = []
+					itog_2[pred_itog[2].lower()].append({"ip": pred_itog[0],
+														 "port": pred_itog[1]})
+				pred_itog = []
+		self.list_2 = itog_2
+		# -----------------------------------------------
+
+		itog_3 = {"unk":[]}
+
+		# https://proxyscrape.com
+		# -----------------------------------------------
+		if self.unknown == True:
+			can = False
+			try:
+				response = requests.get("https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=5000&country=all&ssl=all&anonymity=all", headers={"User-Agent": ua.random}, timeout=self.timeout)
+				can = True
+			except:
+				pass
+			if response.status_code == 200 or can == True:
+				a = response.text.split("\n")
+				a.remove("")
+				for i in a:
+					ip = i.replace("\r", "").split(":")[0]
+					port = i.replace("\r", "").split(":")[1]
+					itog_3["unk"].append({"ip": ip,
+										  "port": port})
+			self.list_3 = itog_3
+		# -----------------------------------------------
+
+		itog_4 = {}
+
+		# https://proxylist.geonode.com
+		# -----------------------------------------------
+		"""Подсчет количества страниц на сервисе"""
+		col_page = 1
+		can = False
+		try:
+			result = requests.get("https://proxylist.geonode.com/api/proxy-list?limit=50&page=1&sort_by=lastChecked&sort_type=desc&speed=medium&protocols=http%2Chttps", headers={"User-Agent": ua.random}, timeout=self.timeout)
+			can = True
+		except:
+			pass
+		if can == True:
+			if result.json()["total"] / 50 > result.json()["total"] // 50:
+				col_page += result.json()["total"] // 50 + 1
+			else:
+				col_page += result.json()["total"] // 50
+		
+		"""Парсинг"""
+		if can == True:
+			i = 1
+			while i < col_page:
+				try:
+					response = requests.get(f"https://proxylist.geonode.com/api/proxy-list?limit=50&page={i}&sort_by=lastChecked&sort_type=desc&speed=medium&protocols=http%2Chttps", headers={"User-Agent": ua.random}, timeout=15)
+					if response.status_code == 200:
+						for pr in response.json()["data"]:
+							ip = pr["ip"]
+							port = pr["port"]
+							ct = pr["country"].lower()
+							if ct in self.country:
+								if ct in itog_4:
+									itog_4[ct].append({"ip": ip,
+													   "port": port})
+								else:
+									itog_4[ct] = []
+									itog_4[ct].append({"ip": ip,
+													   "port": port})
+					i+=1
+				except:
+					i+=1
+			try:
+				self.list_4 = itog_4
+			except:
+				pass
+		# -----------------------------------------------
+
+
+		# -----------------------------------------------
+		"""Формирование в один словарь"""
+		l1 = self.list
+
+		def formation(dict):
+			for key in dict:
+				if len(dict[key]) < 1:
+					continue
+				else:
+					for pr in dict[key]:
+						if key not in l1:
+							l1[key] = []
+						if pr not in l1[key]:
+							l1[key].append(pr)
+
+		if self.list_2 != {}:
+			formation(self.list_2)
+		if self.list_3 != {}:
+			formation(self.list_3)
+		if self.list_4 != {}:
+			formation(self.list_4)
+
+		self.list = l1
+		# -----------------------------------------------

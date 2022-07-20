@@ -1,7 +1,11 @@
 # Инструменты для разных обработок
 
 from termcolor import colored
-
+from datetime import datetime
+import requests as r, os, time, random
+from sys import platform
+from tools import proxy
+from tools import headers
 
 def FormattingNumber(number, country):
 	numb = str(number)
@@ -38,30 +42,177 @@ def FormattingNumber(number, country):
 	elif country == "ru":
 		return numb_1, numb_2, numb_3, numb_4
 
-def FormattingResponse(response):
+def clear():
+	if platform == "linux" or platform == "linux2":
+	    os.system("clear")
+	elif platform == "win32":
+	    os.system("cls")
+
+def banner():
+	a = open("tools\\version.txt", "r")
+	ver = a.read()
+	a.close()
+
+	banner = colored("""
+
+	 ▒█████   ██▀███   ██▓ ▒█████   ███▄    █ 
+	▒██▒  ██▒▓██ ▒ ██▒▓██▒▒██▒  ██▒ ██ ▀█   █ 
+	▒██░  ██▒▓██ ░▄█ ▒▒██▒▒██░  ██▒▓██  ▀█ ██▒
+	▒██   ██░▒██▀▀█▄  ░██░▒██   ██░▓██▒  ▐▌██▒
+	░ ████▓▒░░██▓ ▒██▒░██░░ ████▓▒░▒██░   ▓██░
+	░ ▒░▒░▒░ ░ ▒▓ ░▒▓░░▓  ░ ▒░▒░▒░ ░ ▒░   ▒ ▒ 
+	  ░ ▒ ▒░   ░▒ ░ ▒░ ▒ ░  ░ ▒ ▒░ ░ ░░   ░ ▒░
+	░ ░ ░ ▒    ░░   ░  ▒ ░░ ░ ░ ▒     ░   ░ ░ 
+	    ░ ░     ░      ░      ░ ░           ░ 
+	               Sms Bomber                            
+	\n""", "red")
+
+	info = " "*13+colored("[", "blue")+"Developers :"+colored("Lucky", "green")+" and "+colored("LostIk", "red")+"\n"
+	info_2 = " "*13+colored("[", "blue")+"Version    :"+colored(ver, "red")+"\n"
+
+	print(banner+info+info_2)
+
+def banner_tools():
+	print(colored("[1]", "red"), colored("Начать спам", "green"))
+	print(colored("[99]", "red"), colored("Информация", "cyan"))
+	print(colored("\n[0] Выход", "red"))
+
+def banner_info():
+	print(colored("\nТелеграм", "cyan"))
+	print("├"+colored("Lucky", "green")+":", colored("https://t.me/Lucky1376", "cyan"))
+	print("├"+colored("LostIk", "red")+":", colored("https://t.me/LostIk31", "cyan"))
+	print("└"+colored("Канал", "cyan")+":", colored("https://t.me/orion_bomber", "cyan"))
+	print("\nНажмите Enter чтобы вернуться назад")
+	input()
+
+def start_input():
+	country_code = {"1": "+380",
+					"2": "+7"}
+	country_code_2 = {"1": "by",
+					  "2": "ru"}
+	while True:
+		print("")
+		print(colored("[99] Отмена", "red"))
+		print("")
+		print(colored("[1]", "red"), colored("Беларусь +380", "blue"))
+		print(colored("[2]", "red"), colored("Россия +7", "cyan"))
+		print("")
+		ct = input(colored("Выберите страну: ", "green"))
+		if ct in ["1", "2"]:
+			break
+		elif ct == "99":
+			return 0, 0, 0
+	while True:
+		print("")
+		print(colored("[99] Отмена", "red"))
+		print("")
+		numb = input(colored("Введите номер без кода страны "+country_code[ct]+" ", "green"))
+		if ct == "1" and len(numb) == 9 or ct == "2" and len(numb) == 10:
+			break
+		elif numb == "99":
+			return 0, 0, 0
+	while True:
+		print("")
+		print(colored("[99] Отмена", "red"))
+		print("")
+		print(colored("[1]", "red"), colored("Да", "green"))
+		print(colored("[2]", "red"), colored("Нет", "red"))
+		print("")
+		pr = input(colored("Использовать прокси?: ", "green"))
+		if pr in ["1", "2"]:
+			if pr == "1":
+				pr = country_code_2[ct]
+			else:
+				pr = None
+			break
+		elif pr == "99":
+			return 0, 0, 0
+	if pr != None:
+		while True:
+			print("")
+			print(colored("[99] Отмена", "red"))
+			print("")
+			print(colored("[1]", "red"), colored("Общедоступный прокси", "yellow"))
+			print("└"+colored("Общедоступный прокси используют все пользователи ORION-Bomber", "cyan"))
+			print("")
+			print(colored("[2]", "red"), colored("Свой прокси", "green"))
+			print("└"+colored("Ваш прокси обязательно должен иметь протокол HTTP или HTTPS с поддержкой ipv4 и страну вашего номера", "cyan"))
+			print("")
+			who_pr = input("Вариант: ")
+			if who_pr in ["1", "2"]:
+				if who_pr == "2":
+					print("")
+					print(colored("[99] Отмена", "red"))
+					print("")
+					print(colored("Введите Ip и Port и логин и пароль если прокси частный", "green"))
+					print("└"+colored("Пример:\n├123.45.678.910:8080\n└123.45.678.910:8080:LOGIN:PASSWORD", "cyan"))
+					print("")
+					new_pr = input(colored("~# ", "red"))
+					
+					if len(new_pr.split(":")) < 3:
+						# Проверка общего прокси
+						result = proxy.SPC(new_pr.split(":")[0], new_pr.split(":")[1])
+						if result == False:
+							print(colored("Ваш прокси не работает!", "red"))
+						else:
+							pr = result
+							print(colored("Прокси работает!", "green"))
+							time.sleep(2)
+							break
+					elif len(new_pr.split(":")) > 2:
+						# Проверка частного прокси
+						result = proxy.SPC(new_pr.split(":")[0], new_pr.split(":")[1], login=new_pr.split(":")[2], password=new_pr.split(":")[3])
+						if result == False:
+							print(colored("Ваш прокси не работает!", "red"))
+						else:
+							pr = result
+							print(colored("Прокси работает!", "green"))
+							time.sleep(2)
+							break
+
+				else:
+					break
+			elif who_pr == "99":
+				return 0, 0, 0
+
+	return country_code[ct]+numb, country_code_2[ct], pr
+
+
+def ICC():
 	try:
-		code = (response.status_code)
-	except:
-		code = int(response)
+		print(colored("Проверка интернет соединения...", "green"))
+		time.sleep(1)
+		r.get("https://google.com")
+		clear()
+	except Exception as es:
+		clear()
+		print(colored("[!]", "red"), colored("Ваше устройство не подключено к интернету!", "magenta"))
+		exit()
 
-	SUCCESS = {200: ("OK", "good", "green"),
-			   204: ("OK", "no content", "green"),}
+def FormattingResponse(status_code, service):
+	date = datetime.now()
+	if status_code == 200:
+		print(colored())
 
-	FAIL_USER = {404: ("FAIL_USER", "not found", "red"),
-				 423: ("FAIL_USER", "locked ip", "red"),
-				 400: ("FAIL_USER", "bad requests", "red"),
-				 429: ("FAIL_USER", "too many requests", "red"),
-				 403: ("FAIL_USER", "forbidden", "red")}
+def start(number, country, proxy_=None):
+	print("")
+	print(colored("Остановка спама", "yellow"))
+	print("├"+colored("Termux", "magenta")+":", colored("На встроенной клавиатуре от Termux выбрать CTRL затем Z", "cyan"))
+	print("└"+colored("Windows", "blue")+":", colored("Комбинация клавишь Ctrl+C или Ctrl+Z", "cyan"))
+	an=["10", "9", "8", "7", "6", "5", "4", "3", "2", "1"]
+	for i in an:
+		print(colored("Спам начнется через ", "red")+colored(i, "green")+" ",sep=' ',end='\r')
+		time.sleep(1)
+	clear()
 
-	FAIL_SERVER = {500: ("FAIL_SERVER", "internal server error", "red"),
-				   503: ("FAIL_SERVER", "service unavailable", "red"),
-				   504: ("FAIL_SERVER", "timeout", "red")}
+	# Форматы номера
+	number = FormattingNumber(number, country)
 
-	if code in SUCCESS:
-		return SUCCESS[code]
-	elif code in FAIL_USER:
-		return FAIL_USER[code]
-	elif code in FAIL_SERVER:
-		return FAIL_SERVER[code]
-	else:
-		return None
+	print(number)
+	print(country)
+	print(proxy_)
+
+	time.sleep(30)
+
+	# Запуск Бомбера
+	

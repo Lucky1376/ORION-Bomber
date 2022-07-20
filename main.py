@@ -1,11 +1,25 @@
-import requests, tools, headers
-from fake_useragent import UserAgent
+from tools import tools
+from tools import proxy
+from tools import headers
+from termcolor import colored
+import requests
 
-ua = UserAgent()
-ua = ua.random
+tools.clear()
+tools.ICC()
 
-number = tools.FormattingNumber("", "ru")[3]
-headers = headers.headers["apteka.ru"]
-result = requests.post("https://api.apteka.ru/Auth/Auth_Code?cityUrl=moskva", json={"phone":number, "u": "U"}, headers=headers, proxies=None)
-print(result.status_code)
-print(result.json())
+
+while True:
+	tools.clear()
+	tools.banner()
+	tools.banner_tools()
+
+	tool = input(colored("\n~# ", "red"))
+	if tool == "1":
+		numb, ct, pr = tools.start_input()
+		if numb != 0:
+			tools.start(numb, ct, proxy_=pr)
+	elif tool == "0":
+		tools.clear()
+		break
+	elif tool == "99":
+		tools.banner_info()
