@@ -116,7 +116,7 @@ class Proxy:
 					new_list[key] = []
 				new_list[key].append({"ip": ip,
 									  "port": port,
-									  "fromat": a})
+									  "format": a})
 
 		threads = []
 

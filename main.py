@@ -4,6 +4,9 @@ from tools import headers
 from termcolor import colored
 import requests
 
+# Зачем ты это читаешь?
+# Топай в папку tools
+
 tools.clear()
 tools.ICC()
 

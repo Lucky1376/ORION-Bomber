@@ -195,6 +195,42 @@ def FormattingResponse(status_code, service):
 		print(colored())
 
 def start(number, country, proxy_=None):
+	# Подготовка прокси
+	if proxy_ == None:
+		proxy_ = None
+	elif proxy_ in ["ru", "by"]:
+		print(colored("\nПодготовка прокси... (Не дольше 1 минуты)", "yellow"))
+		proxy_class = proxy.Proxy(country=[proxy_])
+		proxy_class.get()
+		print(colored("Проверка найденного списка прокси... (Не дольше 2х минут)", "yellow"))
+		proxy_class.verify()
+		for i in range(len(proxy_class.list[proxy_])):
+			random_pr = proxy_class.random(delete_el=True)
+			ch = proxy.SPC(random_pr["ip"], random_pr["port"])
+			if ch != False:
+				proxy_ = ch
+				break
+		if proxy_ in ["ru", "by"]:
+			print(colored("\nК сожалению наша программа не нашла рабочий прокси ;(", "yellow"))
+			print("")
+			print(colored("[1]", "red"), colored("Да", "green"))
+			print(colored("[2]", "red"), colored("Нет", "red"))
+			print("")
+			while True:
+				how = input(colored("Начать спам без прокси? ", "green"))
+				if how == "2":
+					return
+				elif how == "1":
+					proxy_ = None
+					break
+		else:
+			print(colored("Прокси найден!", "green"))
+			time.sleep(2)
+	else:
+		proxy_ = proxy_
+
+
+
 	print("")
 	print(colored("Остановка спама", "yellow"))
 	print("├"+colored("Termux", "magenta")+":", colored("На встроенной клавиатуре от Termux выбрать CTRL затем Z", "cyan"))
@@ -208,11 +244,9 @@ def start(number, country, proxy_=None):
 	# Форматы номера
 	number = FormattingNumber(number, country)
 
+	# Запуск Бомбера
 	print(number)
 	print(country)
 	print(proxy_)
 
 	time.sleep(30)
-
-	# Запуск Бомбера
-	
