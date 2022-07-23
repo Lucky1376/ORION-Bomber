@@ -1,0 +1,43 @@
+{
+  "ru":
+  [
+    {
+      "apteka": {
+        "url": "https://api.apteka.ru/Auth/Auth_Code?cityUrl=moskva",
+        "json": "{'phone': '#phone()#' , 'u': 'U'}",
+        "headers": {
+          "Accept": "*/*",
+          "Accept-Encoding": "gzip, deflate, br",
+          "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+          "Access-Control-Request-Headers": "authorization,content-type",
+          "Access-Control-Request-Method": "POST",
+          "Connection": "keep-alive",
+          "Host": "api.apteka.ru",
+          "Origin": "https://apteka.ru",
+          "Referer": "https://apteka.ru/",
+          "Sec-Fetch-Dest": "empty",
+          "Sec-Fetch-Mode": "cors",
+          "Sec-Fetch-Site": "same-site",
+          "User-Agent": "#ua#"
+        }
+      },
+      "magnit": {
+        "url": "https://new.moy.magnit.ru/local/ajax/login/",
+        "data": "{'phone': '#+phone#', 'ksid': 'ee191257-a4fe-4e39-9f0f-079c7f721eee_0'}"
+      },
+      "telegram": {
+        "url": "https://my.telegram.org/auth/send_password",
+        "data": "{'phone': '#+phone#'}"
+      }
+    }
+  ],
+  "by":
+  [
+    {
+     "telegram": {
+       "url": "https://my.telegram.org/auth/send_password",
+       "data": "{'phone': '#+phone#'}"
+      }
+    }
+  ]
+}
