@@ -29,9 +29,9 @@ ___
   + `pkg install git`
   + `pkg install python`
   + `pip install --upgrade pip`
-  + `pip install -r requirements.txt`
   + `git clone https://github.com/Lucky1376/ORION-Bomber`
   + `cd ORION-Bomber`
+  + `pip install -r requirements.txt`
   + `python main.py`
 
 + #### **Windows:**
