@@ -27,7 +27,7 @@ def FormattingNumber(number, country):
 			numb_3 = numb
 			numb = "+7"+numb[1:]
 			numb_4 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + "-" + numb[8:10] + "-" + numb[10:]
-	elif country == "by": # Для Балуруси
+	elif country == "by": # Для Беларуси
 		if numb[0:1] == "+": # +123456789012
 			numb_1 = numb
 			numb_2 = numb[1:]
