@@ -2,9 +2,6 @@ import requests, random, threading as th
 from bs4 import BeautifulSoup as BS
 from fake_useragent import UserAgent as UA
 
-import os
-os.system("cls")
-
 def SPC(ip, port, login=None, password=None):
     ua = UA().random
     ipp = ip + ':' + port

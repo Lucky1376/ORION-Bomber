@@ -42,7 +42,7 @@ class Send:
             country = "ru"
 
         # Загрузка json
-        with open('services.json') as f:
+        with open('tools/services.json') as f:
             services = json.load(f)
         # Получение сервисов по стране
         self.services = services[country][0]
@@ -112,7 +112,6 @@ class Send:
             request.json = eval(payload)
         elif datatype == "data":
             request.data = eval(payload)
-            print(payload)
         elif datatype == "url":
             request.url = payload["url"]
 
