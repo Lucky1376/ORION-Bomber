@@ -2,7 +2,7 @@
   "ru":
   [
     {
-      "apteka": {
+      "apteka.ru": {
         "url": "https://api.apteka.ru/Auth/Auth_Code?cityUrl=moskva",
         "json": "{'phone': '#phone()#' , 'u': 'U'}",
         "headers": {

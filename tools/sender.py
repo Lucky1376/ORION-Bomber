@@ -9,8 +9,8 @@ class Send:
         self.service = service
         self.service_data = None
         self.services = None
-        self.time_out_ = {'apteka': 0, 'magnit': 0, 'telegram': 0}
-        self.time_out_config = {'apteka': 120, 'magnit': 120, 'telegram': 120}
+        self.time_out_ = {'apteka.ru': 0, 'magnit': 0, 'telegram': 0}
+        self.time_out_config = {'apteka.ru': 120, 'magnit': 120, 'telegram': 120}
 
     def checktimeout(self, service):
         # now_time = time.time()
