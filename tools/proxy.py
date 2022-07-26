@@ -1,6 +1,7 @@
 import requests, random, threading as th
 from bs4 import BeautifulSoup as BS
 from fake_useragent import UserAgent as UA
+from progress.bar import ChargingBar
 
 def SPC(ip, port, login=None, password=None):
     ua = UA().random
@@ -102,12 +103,20 @@ class Proxy:
 	def verify(self):
 		if self.list == {}:
 			print("Список прокси пустой")
-			exit()
+			return
+		else:
+			# Progress bar
+			pr_b = []
+			for key in self.list:
+				for i in range(len(self.list[key])):
+					pr_b.append(i)
+			bar = ChargingBar('Проверка', max = len(pr_b))
 
 		new_list = {}
 
 		def vrf_th(key, ip, port):
 			a = SPC(ip, port)
+			bar.next()
 			if a != False:
 				if key not in new_list:
 					new_list[key] = []
@@ -132,6 +141,10 @@ class Proxy:
 
 
 	def get(self):
+		# Progress bar
+		pr_b = [1, 2, 3, 4]
+		bar = ChargingBar('Парсинг', max = len(pr_b))
+
 		# User-Agent
 		ua = UA()
 
@@ -171,6 +184,7 @@ class Proxy:
 										 "port": pred_itog[1]})
 					pred_itog = []
 		self.list = itog
+		bar.next()
 		# -----------------------------------------------
 
 		itog_2 = {}
@@ -206,6 +220,7 @@ class Proxy:
 														 "port": pred_itog[1]})
 				pred_itog = []
 		self.list_2 = itog_2
+		bar.next()
 		# -----------------------------------------------
 
 		itog_3 = {"unk":[]}
@@ -228,6 +243,7 @@ class Proxy:
 					itog_3["unk"].append({"ip": ip,
 										  "port": port})
 			self.list_3 = itog_3
+		bar.next()
 		# -----------------------------------------------
 
 		itog_4 = {}
@@ -272,8 +288,11 @@ class Proxy:
 					i+=1
 			try:
 				self.list_4 = itog_4
+				bar.next()
+				bar.finish()
 			except:
-				pass
+				bar.next()
+				bar.finish()
 		# -----------------------------------------------
 
 

@@ -6,6 +6,7 @@ import requests as r, os, time, random
 from sys import platform
 from tools import proxy
 from tools import headers
+from progress.bar import ChargingBar
 
 def FormattingNumber(number, country):
 	numb = str(number)
@@ -202,11 +203,15 @@ def start(number, country, proxy_=None):
 		print(colored("\nПодготовка прокси... (Не дольше 1 минуты)", "yellow"))
 		proxy_class = proxy.Proxy(country=[proxy_])
 		proxy_class.get()
+		print("")
 		print(colored("Проверка найденного списка прокси... (Не дольше 2х минут)", "yellow"))
 		proxy_class.verify()
+		print(colored("\n\nПытаемся найти подходящий! (Не дольше 1 минуты)", "cyan"))
+		bar = ChargingBar('Ищем подходящий', max = len(proxy_class.list[proxy_]))
 		for i in range(len(proxy_class.list[proxy_])):
 			random_pr = proxy_class.random(delete_el=True)
 			ch = proxy.SPC(random_pr["ip"], random_pr["port"])
+			bar.next()
 			if ch != False:
 				proxy_ = ch
 				break
@@ -224,6 +229,7 @@ def start(number, country, proxy_=None):
 					proxy_ = None
 					break
 		else:
+			print("")
 			print(colored("Прокси найден!", "green"))
 			time.sleep(2)
 	else:
