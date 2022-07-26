@@ -168,7 +168,7 @@ class Proxy:
 			if response.status_code == 200 or can == True:
 				itog[ct] = []
 
-				html = BS(response.content, "lxml")
+				html = BS(response.content, "html.parser")
 
 				all_list_bs = html.find("div", class_="table_block").find("tbody")
 
@@ -199,7 +199,7 @@ class Proxy:
 			pass
 		if response.status_code == 200 or can == True:
 			"""Парсинг"""
-			html = BS(response.content, "lxml")
+			html = BS(response.content, "html.parser")
 
 			all_list_bs = html.find("div", "table-responsive fpl-list").find("tbody")
 

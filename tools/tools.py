@@ -53,7 +53,7 @@ def clear():
 		exit()
 
 def banner():
-	a = open("tools\\version.txt", "r")
+	a = open("tools/version.txt", "r")
 	ver = a.read()
 	a.close()
 
