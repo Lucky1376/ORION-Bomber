@@ -5,8 +5,8 @@ from datetime import datetime
 import requests as r, os, time, random
 from sys import platform
 from tools import proxy
-from tools import headers
 from progress.bar import ChargingBar
+import threading as th
 
 def FormattingNumber(number, country):
 	numb = str(number)
@@ -45,9 +45,12 @@ def FormattingNumber(number, country):
 
 def clear():
 	if platform == "linux" or platform == "linux2":
-	    os.system("clear")
+		os.system("clear")
 	elif platform == "win32":
-	    os.system("cls")
+		os.system("cls")
+	else:
+		print(colored("\nИзвините наша программа не поддерживает вашу операционную систему ;(\n", "red"))
+		exit()
 
 def banner():
 	a = open("tools\\version.txt", "r")
@@ -64,14 +67,17 @@ def banner():
 	░ ▒░▒░▒░ ░ ▒▓ ░▒▓░░▓  ░ ▒░▒░▒░ ░ ▒░   ▒ ▒ 
 	  ░ ▒ ▒░   ░▒ ░ ▒░ ▒ ░  ░ ▒ ▒░ ░ ░░   ░ ▒░
 	░ ░ ░ ▒    ░░   ░  ▒ ░░ ░ ░ ▒     ░   ░ ░ 
-	    ░ ░     ░      ░      ░ ░           ░ 
-	               Sms Bomber                            
-	\n""", "red")
+	    ░ ░     ░      ░      ░ ░           ░
 
-	info = " "*13+colored("[", "blue")+"Developers :"+colored("Lucky", "green")+" and "+colored("LostIk", "red")+"\n"
+	               Sms bomber                            
+	""", "red")
+
+	info = " "*13+colored("[", "blue")+"Developers :"+colored("Lucky", "green")+" and "+colored("LostIk", "red")
 	info_2 = " "*13+colored("[", "blue")+"Version    :"+colored(ver, "red")+"\n"
 
-	print(banner+info+info_2)
+	print(banner)
+	print(info)
+	print(info_2)
 
 def banner_tools():
 	print(colored("[1]", "red"), colored("Начать спам", "green"))
@@ -178,17 +184,40 @@ def start_input():
 
 	return country_code[ct]+numb, country_code_2[ct], pr
 
-
 def ICC():
 	try:
 		print(colored("Проверка интернет соединения...", "green"))
-		time.sleep(1)
-		r.get("https://google.com")
+		r.get("https://google.com", timeout=5)
 		clear()
 	except Exception as es:
 		clear()
-		print(colored("[!]", "red"), colored("Ваше устройство не подключено к интернету!", "magenta"))
+		print(colored("[!]", "red"), colored("Ваше устройство не подключено к интернету или интернет слишком слабый!", "magenta"))
 		exit()
+
+def check_files():
+	print(colored("Проверка файлов...", "green"))
+	time.sleep(1)
+	files = os.listdir()
+	list_ = ["main.py", "LICENSE", "README.md", "tools"]
+	list_2 = ["proxy.py", "sender.py", "services.json", "tools.py", "version.txt"]
+
+	for f in list_:
+		if f not in files:
+			clear()
+			print(colored("Наша программа не нашла некоторые наши файлы", "red"))
+			print(colored("Пожалуйста установите программу заново предварительно удалив папку с этой!\n", "green"))
+			exit()
+	last_dir = os.getcwd()
+	os.chdir("tools")
+	files = os.listdir()
+	for f in list_2:
+		if f not in files:
+			clear()
+			print(colored("Наша программа не нашла некоторые наши файлы", "red"))
+			print(colored("Пожалуйста установите программу заново предварительно удалив папку с этой!\n", "green"))
+			os.chdir(last_dir)
+			exit()
+	os.chdir(last_dir)
 
 def FormattingResponse(status_code, service):
 	date = datetime.now()

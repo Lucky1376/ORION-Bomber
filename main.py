@@ -1,6 +1,5 @@
 from tools import tools
 from tools import proxy
-from tools import headers
 from termcolor import colored
 import requests
 
@@ -9,7 +8,8 @@ import requests
 
 tools.clear()
 tools.ICC()
-
+tools.clear()
+tools.check_files()
 
 while True:
 	tools.clear()
