@@ -18,18 +18,21 @@ def FormattingNumber(number, country):
 			numb_2 = numb[1:]
 			numb_3 = "8"+numb[2:]
 			numb_4 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + "-" + numb[8:10] + "-" + numb[10:]
+			numb_5 = numb[:2] + " " + numb[2:5] + " " + numb[5:8] + " " + numb[8:10] + " " + numb[10:]
 		elif numb[0:1] == "7":  # 71234567890
 			numb_1 = "+"+numb
 			numb_2 = numb
 			numb_3 = "8"+numb[1:]
 			numb = "+"+numb
 			numb_4 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + "-" + numb[8:10] + "-" + numb[10:]
+			numb_5 = numb[:2] + " " + numb[2:5] + " " + numb[5:8] + " " + numb[8:10] + " " + numb[10:]
 		elif numb[0:1] == "8":  # 81234567890
 			numb_1 = "+7"+numb[1:]
 			numb_2 = "7"+numb[1:]
 			numb_3 = numb
 			numb = "+7"+numb[1:]
 			numb_4 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + "-" + numb[8:10] + "-" + numb[10:]
+			numb_5 = numb[:2] + " " + numb[2:5] + " " + numb[5:8] + " " + numb[8:10] + " " + numb[10:]
 	elif country == "by": # Для Беларуси
 		if numb[0:1] == "+": # +123456789012
 			numb_1 = numb
@@ -43,7 +46,7 @@ def FormattingNumber(number, country):
 	if country == "by":
 		return numb_1, numb_2, numb_3
 	elif country == "ru":
-		return numb_1, numb_2, numb_3, numb_4
+		return numb_1, numb_2, numb_3, numb_4, numb_5
 
 def clear():
 	if platform == "linux" or platform == "linux2":
