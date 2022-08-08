@@ -19,6 +19,9 @@ def FormattingNumber(number, country):
 			numb_3 = "8"+numb[2:]
 			numb_4 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + "-" + numb[8:10] + "-" + numb[10:]
 			numb_5 = numb[:2] + " " + numb[2:5] + " " + numb[5:8] + " " + numb[8:10] + " " + numb[10:]
+			numb_6 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + " - " + numb[8:10] + " - " + numb[10:]
+			numb_7 = numb[:2] + " ("+numb[2:]
+			numb_8 = numb[2:]
 		elif numb[0:1] == "7":  # 71234567890
 			numb_1 = "+"+numb
 			numb_2 = numb
@@ -26,6 +29,9 @@ def FormattingNumber(number, country):
 			numb = "+"+numb
 			numb_4 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + "-" + numb[8:10] + "-" + numb[10:]
 			numb_5 = numb[:2] + " " + numb[2:5] + " " + numb[5:8] + " " + numb[8:10] + " " + numb[10:]
+			numb_6 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + " - " + numb[8:10] + " - " + numb[10:]
+			numb_7 = numb[:2] + " ("+numb[2:]
+			numb_8 = numb[2:]
 		elif numb[0:1] == "8":  # 81234567890
 			numb_1 = "+7"+numb[1:]
 			numb_2 = "7"+numb[1:]
@@ -33,6 +39,9 @@ def FormattingNumber(number, country):
 			numb = "+7"+numb[1:]
 			numb_4 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + "-" + numb[8:10] + "-" + numb[10:]
 			numb_5 = numb[:2] + " " + numb[2:5] + " " + numb[5:8] + " " + numb[8:10] + " " + numb[10:]
+			numb_6 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + " - " + numb[8:10] + " - " + numb[10:]
+			numb_7 = numb[:2] + " ("+numb[2:]
+			numb_8 = numb[2:]
 	elif country == "by": # Для Беларуси
 		if numb[0:1] == "+": # +123456789012
 			numb_1 = numb
@@ -46,7 +55,7 @@ def FormattingNumber(number, country):
 	if country == "by":
 		return numb_1, numb_2, numb_3
 	elif country == "ru":
-		return numb_1, numb_2, numb_3, numb_4, numb_5
+		return numb_1, numb_2, numb_3, numb_4, numb_5, numb_6, numb_7, numb_8
 
 def clear():
 	if platform == "linux" or platform == "linux2":
@@ -166,12 +175,16 @@ def start_input():
 		print("")
 		print(colored("[99] Отмена", "red"))
 		print("")
-		print(colored("[1]", "red"), colored("Беларусь +375", "blue"))
+		print(colored("[1]", "red"), colored("Беларусь +375", "blue"), colored("В РАЗРАБОТКЕ", "red"))
 		print(colored("[2]", "red"), colored("Россия +7", "cyan"))
 		print("")
 		ct = input(colored("Выберите страну: ", "green"))
-		if ct in ["1", "2"]:
+		if ct == "2":
 			break
+		elif ct == "1":
+			print("")
+			print(colored("Спам на беларусь находиться в разработке", "yellow"))
+			print("")
 		elif ct == "99":
 			return 0, 0, 0
 	while True:
@@ -428,7 +441,10 @@ def start(number, country, proxy_=None):
 	# Запуск Бомбера
 	sender_class = send.Send()
 	logs = Logs()
-	services_list = send.services_list
+	if country == "ru":
+		services_list = send.services_list
+	else:
+		pass
 	starting_spam = True
 	while starting_spam:
 		try:
