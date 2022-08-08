@@ -3,17 +3,17 @@ import time
 import requests
 from fake_useragent import UserAgent
 
-services_list = ["apteka.ru", "magnit", "telegram", "citi_link", "akbarsa", "yota", "b_apteka", "mir", "pochtabank"]
+services_list = ["apteka.ru", "magnit", "telegram", "citi_link", "akbarsa", "yota", "b_apteka", "mir", "pochtabank", 'mt_free', "megafon.tv", "moezdorovie", "totopizza", "zdesapteka", "stockmann"]
 
 class Send:
     def __init__(self):
         self.service = None
         self.service_data = None
         self.services = None
-        self.cookie = {'yota': 'https://tv.yota.ru/'}
-        self.response_services = {'apteka.ru': 200, 'magnit': "json", 'telegram': 200, 'citi_link': 200, 'akbarsa': 200, 'yota': 201, 'b_apteka': 200, 'mir': 200, 'pochtabank': 200}
-        self.time_out_ = {'apteka.ru': 0, 'magnit': 0, 'telegram': 0, 'citi_link': 0, 'akbarsa': 0, 'yota': 0, 'b_apteka': 0, 'mir': 0, 'pochtabank': 0}
-        self.time_out_config = {'apteka.ru': 125, 'magnit': 125, 'telegram': 125, 'citi_link': 65, 'akbarsa': 65, 'yota': 65, 'b_apteka': 65, 'mir': 65, 'pochtabank': 125}
+        self.cookie = {'yota': 'https://tv.yota.ru/', 'megafon.tv': 'https://megafon.tv/', "zdesapteka": "https://zdesapteka.ru/"}
+        self.response_services = {'apteka.ru': 200, 'magnit': "json", 'telegram': 200, 'citi_link': 200, 'akbarsa': 200, 'yota': 201, 'b_apteka': 200, 'mir': 200, 'pochtabank': 200, 'mt_free': "json", "megafon.tv": 201, "moezdorovie": 200, "totopizza": 200, "zdesapteka": 200, "stockmann": 200}
+        self.time_out_ = {'apteka.ru': 0, 'magnit': 0, 'telegram': 0, 'citi_link': 0, 'akbarsa': 0, 'yota': 0, 'b_apteka': 0, 'mir': 0, 'pochtabank': 0, 'mt_free': 0, "megafon.tv": 0, "moezdorovie": 0, "totopizza": 0, "zdesapteka": 0, "stockmann": 0}
+        self.time_out_config = {'apteka.ru': 120, 'magnit': 120, 'telegram': 120, 'citi_link': 60, 'akbarsa': 60, 'yota': 60, 'b_apteka': 60, 'mir': 60, 'pochtabank': 120, 'mt_free': 185, "megafon.tv": 600, "moezdorovie": 300, "totopizza": 65, "zdesapteka": 65, "stockmann": 600}
         self.default_headers = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
 				                'Accept-Encoding': 'gzip, deflate, br',
 				                'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
@@ -48,7 +48,11 @@ class Send:
                 "*+phone*": phone[0],
                 "*phone*": phone[1],
                 "*phone8*": phone[2],
-                "*phone()*": phone[3]
+                "*phone()*": phone[3],
+                "*phone2*": phone[4],
+                "*phone3*": phone[5],
+                "*mtfree*": phone[6],
+                "*-phone*": phone[7]
             }.items():
                 if old in payload:
                     payload = payload.replace(old, new)
@@ -90,6 +94,8 @@ class Send:
         elif "data" in service: # Если данные для запроса data
             payload = service["data"]
             datatype = 'data'
+        else:
+            return self.json_parse(service["url"], "url", country, phone)
 
         payload, datatype = self.json_parse(payload, datatype, country, phone)
 
@@ -108,11 +114,15 @@ class Send:
 
         payloadUrl = ''
         if self.json_processing(phone) != False:
-            if self.json_processing(phone)[0] == True:
-                payloadUrl = self.json_processing(phone)[1][1]
-                datatype, payload = self.json_processing(phone)[2]
-            else:
-                datatype, payload = self.json_processing(phone)[1]
+            try:
+                if self.json_processing(phone)[0] == True:
+                    payloadUrl = self.json_processing(phone)[1][1]
+                    datatype, payload = self.json_processing(phone)[2]
+                else:
+                    datatype, payload = self.json_processing(phone)[1]
+            except: # Если передается только url
+                datatype = "url"
+                payloadUrl = self.json_processing(phone)[1]
         else: # Если сервиса нет в json
             return False, False
 
@@ -137,7 +147,7 @@ class Send:
         # Получаем куки сайта (если нужны)
         cookies = None
         if self.service in self.cookie:
-            cookies = session.get(self.cookie[self.service]).cookies
+            cookies = session.get(self.cookie[self.service], headers=headers).cookies
 
         # В зависимости от типа входных данных, добавляем их в запрос
         json_ = None
@@ -148,9 +158,15 @@ class Send:
             data = json.loads(payload)
         # Отправляем запрос
         try:
-            if self.service == 'pochtabank': # для инвалида
+            if self.service == 'pochtabank': # для инвалидов
                 session.post('https://my.pochtabank.ru/dbo/registrationService/ib')
-                r = session.put(url, json=json_)
+                r = session.put(url, json=json_, timeout=10, proxies=proxy)
+            elif self.service == "zdesapteka":
+                ses_id = cookies["PHPSESSID"]
+                data['sessid'] = ses_id
+                r = session.post(url, data=data, timeout=10, proxies=proxy, cookies=cookies, headers=headers)
+            elif self.service == "stockmann":
+                r = requests.get(url, timeout=10, proxies=proxy, headers=headers)
             else:
                 r = session.post(url, json=json_, data=data, timeout=10, proxies=proxy, cookies=cookies, headers=headers)
             if self.response_services[self.service] == "json":

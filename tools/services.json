@@ -56,6 +56,30 @@
       "pochtabank": {
         "url": "https://my.pochtabank.ru/dbo/registrationService/ib/phoneNumber",
         "json": "{'confirmation': 'send', 'phone': '*phone()*'}"
+      },
+      "mt_free": {
+        "url": "https://cabinet.wi-fi.ru/api/auth/by-sms",
+        "data": "{'msisdn': '*mtfree*', 'g-recaptcha-response': ''}",
+        "headers": {"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9", "Accept-Encoding": "gzip, deflate, br", "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7", "App-ID": "cabinet", "Cache-Control": "no-cache", "Connection": "keep-alive", "User-Agent": ""}
+      },
+      "megafon.tv": {
+        "url": "https://bmp.megafon.tv/api/v10/auth/register/msisdn",
+        "json": "{'msisdn':'*+phone*', 'password':'123456'}"
+      },
+      "moezdorovie": {
+        "url": "https://moezdorovie.ru/rpc/?method=auth.GetCode",
+        "json": "{'jsonrpc':'2.0','id':40,'method':'auth.GetCode','params':{'phone':'*-phone*','mustExist':false, 'sendRealSms':true}}"
+      },
+      "totopizza": {
+        "url": "https://api.totopizza.ru/graphql",
+        "json": "{\"operationName\":\"requestPhoneCodeAuth\",\"query\":\"\\n  mutation requestPhoneCodeAuth($telephone:String!) {\\n    requestPhoneCodeAuth(telephone:$telephone)\\n  }\\n\",\"variables\":{\"telephone\":\"*phone2*\"}}"
+      },
+      "zdesapteka": {
+        "url": "https://zdesapteka.ru/bitrix/services/main/ajax.php?action=zs:main.ajax.AuthActions.sendAuthCode",
+        "data": "{'userPhone': '*phone()*', 'SITE_ID': 's1', 'sessid': ''}"
+      },
+      "stockmann": {
+        "url": "https://stockmann.ru/ajax/?controller=user&action=registerUser&surname=Popovich&name=Oleg&phone=*phone3*&email=rgeaefs@gmail.com&password=123456&password_confirm=123456"
       }
     }
   ],
