@@ -3,16 +3,17 @@ import time
 import requests
 from fake_useragent import UserAgent
 
+services_list = ["apteka.ru", "magnit", "telegram", "citi_link", "akbarsa", "yota", "b_apteka", "mir", "pochtabank"]
 
 class Send:
-    def __init__(self, service):
-        self.service = service
+    def __init__(self):
+        self.service = None
         self.service_data = None
         self.services = None
         self.cookie = {'yota': 'https://tv.yota.ru/'}
         self.response_services = {'apteka.ru': 200, 'magnit': "json", 'telegram': 200, 'citi_link': 200, 'akbarsa': 200, 'yota': 201, 'b_apteka': 200, 'mir': 200, 'pochtabank': 200}
         self.time_out_ = {'apteka.ru': 0, 'magnit': 0, 'telegram': 0, 'citi_link': 0, 'akbarsa': 0, 'yota': 0, 'b_apteka': 0, 'mir': 0, 'pochtabank': 0}
-        self.time_out_config = {'apteka.ru': 120, 'magnit': 120, 'telegram': 120, 'citi_link': 60, 'akbarsa': 60, 'yota': 60, 'b_apteka': 60, 'mir': 60, 'pochtabank': 120}
+        self.time_out_config = {'apteka.ru': 125, 'magnit': 125, 'telegram': 125, 'citi_link': 65, 'akbarsa': 65, 'yota': 65, 'b_apteka': 65, 'mir': 65, 'pochtabank': 125}
         self.default_headers = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
 				                'Accept-Encoding': 'gzip, deflate, br',
 				                'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
@@ -102,7 +103,9 @@ class Send:
 
 
     # Функция для спама
-    def spam(self, phone, proxy=None):
+    def spam(self, service, phone, proxy=None):
+        self.service = service
+
         payloadUrl = ''
         if self.json_processing(phone) != False:
             if self.json_processing(phone)[0] == True:

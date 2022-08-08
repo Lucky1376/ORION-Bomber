@@ -6,7 +6,7 @@ import requests as r, os, time, random
 from sys import platform
 from tools import proxy
 from progress.bar import ChargingBar
-import threading as th
+from tools import sender as send
 
 def FormattingNumber(number, country):
 	numb = str(number)
@@ -156,13 +156,17 @@ def start_input():
 					print("")
 					new_pr = input(colored("~# ", "red"))
 					
-					if len(new_pr.split(":")) < 3:
+					if new_pr == "99":
+						return 0, 0, 0
+					elif len(new_pr.split(":")) < 3:
 						# Проверка общего прокси
 						result = proxy.SPC(new_pr.split(":")[0], new_pr.split(":")[1])
 						if result == False:
 							print(colored("Ваш прокси не работает!", "red"))
 						else:
-							pr = result
+							pr = {"ip": new_pr.split(":")[0],
+								  "port": new_pr.split(":")[1],
+								  "format": result}
 							print(colored("Прокси работает!", "green"))
 							time.sleep(2)
 							break
@@ -172,7 +176,11 @@ def start_input():
 						if result == False:
 							print(colored("Ваш прокси не работает!", "red"))
 						else:
-							pr = result
+							pr = {"ip": new_pr.split(":")[0],
+								  "port": new_pr.split(":")[1],
+								  "login": new_pr.split(":")[2],
+								  "password": new_pr.split(":")[3],
+								  "format": result}
 							print(colored("Прокси работает!", "green"))
 							time.sleep(2)
 							break
@@ -193,6 +201,24 @@ def ICC():
 		clear()
 		print(colored("[!]", "red"), colored("Ваше устройство не подключено к интернету или интернет слишком слабый!", "magenta"))
 		exit()
+
+class Logs:
+	def __init__(self):
+		pass
+
+	def save_logs(self, service, status_code, error="There is not"):
+		date = datetime.now()
+		if status_code in [666, False]:
+			status_code = "Unknown"
+		file = open("tools/logs.txt", "a")
+		file.write(f"DATE - {date}\nService - {service}\nStatus_code - {status_code}\nERROR:\n{error}\n\n\n")
+		file.close()
+
+	def error_logs(self, error):
+		date = datetime.now()
+		file_error = open("tools/error_logs.txt", "a")
+		file_error.write(f"DATE - {date}\nERROR:\n{error}")
+		file_error.close()
 
 def check_files():
 	print(colored("Проверка файлов...", "green"))
@@ -221,46 +247,101 @@ def check_files():
 
 def FormattingResponse(status_code, service):
 	date = datetime.now()
-	if status_code == 200:
-		print(colored())
+	# Час
+	if date.hour <= 9:
+		hour = f"0{date.hour}"
+	else:
+		hour = date.hour
+	# Минута
+	if date.minute <= 9:
+		minute = f"0{date.minute}"
+	else:
+		minute = date.minute
+	# Секунда
+	if date.second <= 9:
+		second = f"0{date.second}"
+	else:
+		second = date.second
+	date = colored(f"{hour}:{minute}:{second}", "magenta")
+
+	status_codes = {200: colored("SUCCES", "green"),
+					429: colored("TIME-OUT", "yellow"),
+					404: colored("NOT FOUND", "red")}
+	service = colored(service, "yellow")
+	if status_code not in status_codes:
+		status_code = colored("UNKNOWN ANSWER", "red")
+		info = f"{date} | {service} | {status_code}"
+		print(info)
+	else:
+		info = f"{date} | {service} | {status_codes[status_code]}"
+		print(info)
 
 def start(number, country, proxy_=None):
 	# Подготовка прокси
 	if proxy_ == None:
 		proxy_ = None
 	elif proxy_ in ["ru", "by"]:
-		print(colored("\nПодготовка прокси... (Не дольше 1 минуты)", "yellow"))
-		proxy_class = proxy.Proxy(country=[proxy_])
-		proxy_class.get()
-		print("")
-		print(colored("Проверка найденного списка прокси... (Не дольше 2х минут)", "yellow"))
-		proxy_class.verify()
-		print(colored("\n\nПытаемся найти подходящий! (Не дольше 1 минуты)", "cyan"))
-		bar = ChargingBar('Ищем подходящий', max = len(proxy_class.list[proxy_]))
-		for i in range(len(proxy_class.list[proxy_])):
-			random_pr = proxy_class.random(delete_el=True)
-			ch = proxy.SPC(random_pr["ip"], random_pr["port"])
-			bar.next()
-			if ch != False:
-				proxy_ = ch
-				break
-		if proxy_ in ["ru", "by"]:
-			print(colored("\nК сожалению наша программа не нашла рабочий прокси ;(", "yellow"))
+		starting = True
+		while starting:
+			print(colored("\nПодготовка прокси... (Не дольше 1 минуты)", "yellow"))
+			proxy_class = proxy.Proxy(country=[country])
+			proxy_class.get()
 			print("")
-			print(colored("[1]", "red"), colored("Да", "green"))
-			print(colored("[2]", "red"), colored("Нет", "red"))
-			print("")
-			while True:
-				how = input(colored("Начать спам без прокси? ", "green"))
-				if how == "2":
-					return
-				elif how == "1":
-					proxy_ = None
-					break
-		else:
-			print("")
-			print(colored("Прокси найден!", "green"))
-			time.sleep(2)
+			print(colored("Проверка найденного списка прокси... (Не дольше 2х минут)", "yellow"))
+			proxy_class.verify()
+			if proxy_class.mix() == False:
+				print(colored("\n\nУПС!", "yellow"), colored("К сожалению наша программа не смогла найти ни одного рабочего прокси ;(", "green"))
+				print("")
+				print(colored("[1]", "red"), colored("Без прокси", "green"))
+				print(colored("[2]", "red"), colored("Попробуем еще раз", "yellow"))
+				print(colored("[3]", "red"), colored("Выход", "red"))
+				print("")
+				print(colored("Начать спам без прокси или попробуем еще раз?", "yellow"))
+				while True:
+					how = input(colored("~# ", "red"))
+					if how in ["3", "0", "99"]:
+						return
+					elif how == "1":
+						proxy_ = None
+						starting = False
+						break
+					elif how == "2":
+						break
+			else:
+				print(colored("\n\nПытаемся найти подходящий! (Не дольше 1 минуты)", "cyan"))
+				all_list = proxy_class.mix()
+				bar = ChargingBar('Ищем подходящий', max = len(all_list["all"]))
+				# proxy_class.list[proxy_]
+				for pr in all_list["all"]:
+					ch = proxy.SPC(pr["ip"], pr["port"])
+					bar.next()
+					if ch != False:
+						proxy_ = {"ip": pr["ip"],
+								  "port": pr["port"],
+								  "format": ch}
+						starting = False
+						break
+					else:
+						all_list["all"].remove(pr)
+				if proxy_ in ["ru", "by"]:
+					print(colored("\n\nК сожалению наша программа не нашла рабочий прокси ;(", "yellow"))
+					print("")
+					print(colored("[1]", "red"), colored("Да", "green"))
+					print(colored("[2]", "red"), colored("Нет", "red"))
+					print("")
+					while True:
+						how = input(colored("Начать спам без прокси? ", "green"))
+						if how == "2":
+							return
+						elif how == "1":
+							proxy_ = None
+							starting = False
+							break
+				else:
+					print("")
+					print(colored("Прокси найден!", "green"))
+					time.sleep(2)
+					starting = False
 	else:
 		proxy_ = proxy_
 
@@ -280,8 +361,147 @@ def start(number, country, proxy_=None):
 	number = FormattingNumber(number, country)
 
 	# Запуск Бомбера
-	print(number)
-	print(country)
-	print(proxy_)
+	sender_class = send.Send()
+	logs = Logs()
+	services_list = send.services_list
+	starting_spam = True
+	while starting_spam:
+		try:
+			time.sleep(1)
+			for serv in services_list:
+				if sender_class.checktimeout(serv) == True:
+					if proxy_ != None:
+						result = sender_class.spam(serv, number, proxy=proxy_["format"])
+						logs.save_logs(serv, result[0])
+						if result[0] == False:
+							# Проверяем прокси перед следующей попыткой спама
+							print(colored("Проверка прокси...", "yellow"))
+							if "login" in proxy_:
+								test_proxy = proxy.SPC(proxy_["ip"], proxy_["port"], login=proxy_["login"], password=proxy_["password"])
+								if test_proxy == False:
+									print(colored("Ваш прокси больше не работает!", "red"))
+									print("")
+									print(colored("[1]", "red"), colored("Да", "green"))
+									print(colored("[2]", "red"), colored("Нет", "red"))
+									while True:
+										print("")
+										print(colored("Продолжить спам без прокси?", "yellow"))
+										print("")
+										how = input(colored("~# ", "red"))
+										if how == "2":
+											starting_spam = False
+											return
+										elif how == "1":
+											proxy_ = None
+											break
+								else:
+									proxy_ = {"ip": proxy_["ip"],
+										     "port": proxy_["port"],
+										     "login": proxy_["login"],
+										     "password": proxy_["password"],
+										     "format": test_proxy}
+									print(colored("Прокси работает!", "green"))
+									print(colored("Продолжаю спам!", "green"))
 
-	time.sleep(30)
+							else:
+								try:
+									a = all_list
+									general = True
+								except:
+									general = False
+								if general == False:
+									test_proxy = proxy.SPC(proxy_["ip"], proxy_["port"])
+									if test_proxy == False:
+										print(colored("Ваш прокси больше не работает!", "red"))
+										print("")
+										print(colored("[1]", "red"), colored("Да", "green"))
+										print(colored("[2]", "red"), colored("Нет", "red"))
+										while True:
+											print("")
+											print(colored("Продолжить спам без прокси?", "yellow"))
+											print("")
+											how = input(colored("~# ", "red"))
+											if how == "2":
+												starting_spam = False
+												return
+											elif how == "1":
+												proxy_ = None
+												break
+								else:
+									test_proxy = proxy.SPC(proxy_["ip"], proxy_["port"])
+									if test_proxy == False:
+										if len(all_list["all"]) < 1:
+											print(colored("Увы но прокси закончились ;(", "yellow"))
+											print("")
+											print(colored("[1]", "red"), colored("Да", "green"))
+											print(colored("[2]", "red"), colored("Нет", "red"))
+											while True:
+												print("")
+												print(colored("Продолжить спам без прокси?", "yellow"))
+												print("")
+												how = input(colored("~# ", "red"))
+												if how == "2":
+													starting_spam = False
+													return
+												elif how == "1":
+													proxy_ = None
+													break
+										else:
+											last_pr = proxy_
+											all_list["all"].remove(proxy_)
+											for pr in all_list["all"]:
+												ch = proxy.SPC(pr["ip"], pr["port"])
+												if ch != False:
+													proxy_ = ch
+													starting = False
+													break
+												else:
+													all_list["all"].remove(pr)
+											if proxy_ == last_pr:
+												print(colored("Увы но прокси закончились ;(", "yellow"))
+												print("")
+												print(colored("[1]", "red"), colored("Да", "green"))
+												print(colored("[2]", "red"), colored("Нет", "red"))
+												while True:
+													print("")
+													print(colored("Продолжить спам без прокси?", "yellow"))
+													print("")
+													how = input(colored("~# ", "red"))
+													if how == "2":
+														starting_spam = False
+														return
+													elif how == "1":
+														proxy_ = None
+														break
+						else:
+							FormattingResponse(result[0], serv)
+					else:
+						result = sender_class.spam(serv, number)
+						logs.save_logs(serv, result[0])
+						if result[0] == False:
+							FormattingResponse(666, serv)
+						else:
+							FormattingResponse(result[0], serv)
+		except KeyboardInterrupt:
+			starting_spam = False
+			print("\n")
+			print(colored("Спам был принудительно оставлен\n", "green"))
+			print("Нажмите Enter чтобы вернуть назад")
+			try:
+				input()
+			except KeyboardInterrupt:
+				return
+			return
+		except Exception as e:
+			starting_spam = False
+			print("\n")
+			print(colored("Из-за неизвестной ошибки наша программа выдала ошибку при спаме\n", "yellow"))
+			logs.error_logs(str(e))
+			print(colored("Данная ошибка была сохранена в логги", "green"))
+			print(colored("Пожалуйста отправьте нам файл с логгами по инструкции в главном меню чтобы мы могли улучшать наш проект с вашей помощью", "green"))
+			print("\nНажмите Enter чтобы вернуть назад")
+			try:
+				input()
+			except KeyboardInterrupt:
+				return
+			return

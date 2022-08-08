@@ -81,13 +81,22 @@ class Proxy:
 		self.list_3 = {}
 		self.list_4 = {}
 
-	def random(self, country=False, delete_el=False):
-		if country != False and country not in self.country:
-			print("Указанной страны нет в списке возможных стран")
-			exit()
+	def mix(self):
 		if self.list == {}:
-			print("Список прокси пустой")
-			exit()
+			return False
+		else:
+			new_itog = {"all": []}
+			for ct in self.list:
+				for pr in self.list[ct]:
+					new_itog["all"].append(pr)
+			return new_itog
+
+
+	def random(self, country=False, delete_el=False, sp=None):
+		if country != False and country not in self.country:
+			return False
+		if self.list == {}:
+			return False
 		if country == False:
 			key = random.choice(self.country)
 			pr = random.choice(self.list[key])
