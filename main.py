@@ -26,3 +26,11 @@ while True:
 		break
 	elif tool == "99":
 		tools.banner_info()
+	elif tool == "2":
+		tools.faq_proxy()
+	elif tool == "3":
+		tools.inst_logs()
+	elif tool.lower() == "clear logs":
+		tools.clear_logs()
+	else:
+		pass

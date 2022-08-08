@@ -4,7 +4,7 @@
 #
 #
 # 💻Menu
-![Alt-текст](https://i.ibb.co/Gd2gKzK/image.png)
+![Alt-текст](https://i.ibb.co/QkC7PPL/image.png)
 #
 #
 #

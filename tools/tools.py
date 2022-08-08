@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
+
 # Инструменты для разных обработок
 
 from termcolor import colored
 from datetime import datetime
-import requests as r, os, time, random
+import requests as r, os, time, random, shutil
 from sys import platform
 from tools import proxy
 from progress.bar import ChargingBar
@@ -81,8 +83,68 @@ def banner():
 
 def banner_tools():
 	print(colored("[1]", "red"), colored("Начать спам", "green"))
-	print(colored("[99]", "red"), colored("Информация", "cyan"))
+	print(colored("[2]", "red"), colored("FAQ Про прокси", "blue"))
+	print(colored("[3]", "red"), colored("Инструкция по отправке логов", "yellow"))
+	print(colored("\n[99]", "red"), colored("Информация", "cyan"))
 	print(colored("\n[0] Выход", "red"))
+
+def faq_proxy():
+	print("")
+	print(colored("Почему с прокси такой медленный спам и такая частая проверка?", "cyan"))
+	print(colored("Наш парсер берет прокси с общедоступных сервисов, конечно не только мы так делаем и соотвественно не только мы пользуемся этими прокси.", "green"))
+	print(colored("Также на данных сервисах очень мало довольно быстрых и анонимных прокси что позволяло бы улучшить спам с ними.", "green"))
+	print(colored("Частая проверка возникает из-за не стабильности этих прокси, часто они просто перестают работать и программа берет следующий из списка.", "green"))
+	print("")
+	print(colored("Почему нельзя просто брать прокси любой страны а не только номера которого ввели?", "cyan"))
+	print(colored("Не получиться использовать допустим канадские прокси с российскими сервисами с доменом .ru", "green"))
+	print(colored("Если на сайте указан домен данной страны то и прокси должны быть этой же страны.", "green"))
+	print(colored("Сервисы с доменом своей страны просто не пустят наш запрос с прокси иной страны.", "green"))
+	print("")
+	print(colored("Почему нельзя просто подключить больше сервисов для прокси?", "cyan"))
+	print(colored("90% Сервисов с бесплатными прокси просто воруют их друг у друга и из-за этого просто не получиться получить больший список.", "green"))
+	print(colored("Мы стараемся искать хорошие сервисы с бесплатными прокси которые не воруют друг у другу и удобны в парсинге либо имеют свой API.", "green"))
+	print("")
+	print("")
+	print(colored("Советуем вам использовать ваши собственные покупные прокси если хотите сократить блокировку вашего IP у сервисов и иметь хорошую скорость спама", "green"))
+	print("\nНажмите Enter чтобы вернуться назад")
+	input()
+
+def inst_logs():
+	# Проверка доступа к файловой системе
+	try:
+		if platform == "linux" or platform == "linux2":
+			shutil.copyfile('tools/logs.txt', '/storage/emulated/0/Download/logs.txt')
+			shutil.copyfile('tools/error_logs.txt', '/storage/emulated/0/Download/error_logs.txt')
+			print(colored("Файлы", "green"), colored("logs.txt error_logs.txt", "cyan"), colored("были сохранены в папку Download на вашем устройстве", "green"))
+			print(colored("Пожлайста отправьте эти 2 файла нашему боту в телеграм", "green"), colored("https://t.me/orion_feedback_bot", "cyan"))
+			print("")
+			print("\nНажмите Enter чтобы вернуться назад")
+			input()
+		elif platform == "win32":
+			print("")
+			print(colored("Пожалуйста отправьте нашему боту в телеграм", "green"), colored("https://t.me/orion_feedback_bot", "cyan"), colored("файлы", "green"), colored("logs.txt error_logs.txt", "cyan"), colored("из папки", "green"), colored("tools", "cyan"))
+			print("")
+			print("\nНажмите Enter чтобы вернуться назад")
+			input()
+	except:
+		print("")
+		print(colored("Мы не смогли переместить файлы в нужную директорию", "yellow"))
+		print(colored("Возможно у вас для Термукса в настройках разрешения приложению не доступны Файлы и медиаконтент", "yellow"))
+		print(colored("Пожалуйста разрешите Термуксу в настройках все нужные разрешения и повторите попытку"))
+		print(colored("За помощью по данному вопросу пишите в нашего бота в телеграм"), colored("https://t.me/orion_feedback_bot", "cyan"))
+		print("")
+		print("\nНажмите Enter чтобы вернуться назад")
+		input()
+
+def clear_logs():
+	a = open("tools/logs.txt", "w")
+	a.close()
+	a = open("tools/error_logs.txt", "w")
+	a.close()
+	print("")
+	print(colored("Логи успешно были очищены", "green"))
+	print("\nНажмите Enter чтобы вернуться назад")
+	input()
 
 def banner_info():
 	print(colored("\nТелеграм", "cyan"))
@@ -225,7 +287,7 @@ def check_files():
 	time.sleep(1)
 	files = os.listdir()
 	list_ = ["main.py", "LICENSE", "README.md", "tools"]
-	list_2 = ["proxy.py", "sender.py", "services.json", "tools.py", "version.txt"]
+	list_2 = ["proxy.py", "sender.py", "services.json", "tools.py", "version.txt", "logs.txt", "error_logs.txt"]
 
 	for f in list_:
 		if f not in files:
@@ -497,8 +559,8 @@ def start(number, country, proxy_=None):
 			print("\n")
 			print(colored("Из-за неизвестной ошибки наша программа выдала ошибку при спаме\n", "yellow"))
 			logs.error_logs(str(e))
-			print(colored("Данная ошибка была сохранена в логги", "green"))
-			print(colored("Пожалуйста отправьте нам файл с логгами по инструкции в главном меню чтобы мы могли улучшать наш проект с вашей помощью", "green"))
+			print(colored("Данная ошибка была сохранена в логи", "green"))
+			print(colored("Пожалуйста отправьте нам файл с логами по инструкции в главном меню чтобы мы могли улучшать наш проект с вашей помощью", "green"))
 			print("\nНажмите Enter чтобы вернуть назад")
 			try:
 				input()
