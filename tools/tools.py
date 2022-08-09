@@ -162,7 +162,7 @@ def inst_logs():
 			shutil.copyfile('tools/logs.txt', '/storage/emulated/0/Download/logs.txt')
 			shutil.copyfile('tools/error_logs.txt', '/storage/emulated/0/Download/error_logs.txt')
 			print(colored("Файлы", "green"), colored("logs.txt error_logs.txt", "cyan"), colored("были сохранены в папку Download на вашем устройстве", "green"))
-			print(colored("Пожлайста отправьте поочередно эти 2 файла нашему боту в телеграм", "green"), colored("https://t.me/orion_feedback_bot", "cyan"))
+			print(colored("Пожалуйста отправьте поочередно эти 2 файла нашему боту в телеграм", "green"), colored("https://t.me/orion_feedback_bot", "cyan"))
 			print("")
 			print("\nНажмите Enter чтобы вернуться назад")
 			input()
