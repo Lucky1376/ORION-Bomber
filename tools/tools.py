@@ -96,9 +96,43 @@ def banner():
 def banner_tools():
 	print(colored("[1]", "red"), colored("Начать спам", "green"))
 	print(colored("[2]", "red"), colored("FAQ Про прокси", "blue"))
-	print(colored("[3]", "red"), colored("Инструкция по отправке логов", "yellow"))
+	print(colored("[3]", "red"), colored("Краткое руководство проблем", "cyan"))
+	print(colored("[4]", "red"), colored("Отказ от ответственности", "red"))
+	print(colored("[5]", "red"), colored("Поддержать разработчиков!    <---", "green"))
+	print(colored("[6]", "red"), colored("Инструкция по отправке логов", "yellow"))
 	print(colored("\n[99]", "red"), colored("Информация", "cyan"))
 	print(colored("\n[0] Выход", "red"))
+
+def quick_guide():
+	print("")
+	print(colored("В нашем бомбере спам может постепенно ухудшаться из-за того что на один и тот же номер поступает очень много запросов на отправку смс.", "green"))
+	print(colored("Не пытайтесь оставить спам на всю ночь на один и тот же номер, вы просто заставите сервисы заблокировать данный номер у себя в базе и никакие прокси тут уже не помогут.", "green"))
+	print(colored("Достаточно 2-3 круга на один номер раз в сутки чтобы доставить не малое количество смс на один номер.", "green"))
+	print(colored("Не будьте жадны и слишком мстительны, тогда вы сможете отправлять смс на один и тот же номер постоянно.", "green"))
+	print("\nНажмите Enter чтобы вернуться назад")
+	input()
+
+def disclaimer():
+	print("")
+	print(colored("Разработчики команды ORION не несут ответственность за доставленный моральный или физический ущерб вашей жертве.", "green"))
+	print(colored("Пользуясь данной программой вы автоматически соглашаетесь на это и берете всю ответственность на себя", "green"))
+	print("\nНажмите Enter чтобы вернуться назад")
+	input()
+
+def donate():
+	print("")
+	print(colored("Ваша поддержа еще больше мотивирует нас выпускать обновления!", "green"))
+	print("")
+	print(colored("QIWI", "yellow"))
+	print("├"+colored("https://qiwi.com/n/LUCKY1376", "cyan"), colored("Перевод по никнейму", "green"))
+	print("├"+colored("2200 7302 4344 6206", "cyan"), colored("MIR", "green"))
+	print("└"+colored("4890 4947 5754 5546", "cyan"), colored("VISA", "blue"))
+	print("")
+	print(colored("Сбербанк", "green"))
+	print("├"+colored("2202 2024 3331 7181", "cyan"), colored("MIR", "green"))
+	print("└"+colored("5469 4500 1265 2996", "cyan"), colored("MasterCard", "red"))
+	print("\nНажмите Enter чтобы вернуться назад")
+	input()
 
 def faq_proxy():
 	print("")
@@ -128,13 +162,13 @@ def inst_logs():
 			shutil.copyfile('tools/logs.txt', '/storage/emulated/0/Download/logs.txt')
 			shutil.copyfile('tools/error_logs.txt', '/storage/emulated/0/Download/error_logs.txt')
 			print(colored("Файлы", "green"), colored("logs.txt error_logs.txt", "cyan"), colored("были сохранены в папку Download на вашем устройстве", "green"))
-			print(colored("Пожлайста отправьте эти 2 файла нашему боту в телеграм", "green"), colored("https://t.me/orion_feedback_bot", "cyan"))
+			print(colored("Пожлайста отправьте поочередно эти 2 файла нашему боту в телеграм", "green"), colored("https://t.me/orion_feedback_bot", "cyan"))
 			print("")
 			print("\nНажмите Enter чтобы вернуться назад")
 			input()
 		elif platform == "win32":
 			print("")
-			print(colored("Пожалуйста отправьте нашему боту в телеграм", "green"), colored("https://t.me/orion_feedback_bot", "cyan"), colored("файлы", "green"), colored("logs.txt error_logs.txt", "cyan"), colored("из папки", "green"), colored("tools", "cyan"))
+			print(colored("Пожалуйста отправьте нашему боту в телеграм", "green"), colored("https://t.me/orion_feedback_bot", "cyan"), colored("поочередно файлы", "green"), colored("logs.txt error_logs.txt", "cyan"), colored("из папки", "green"), colored("tools", "cyan"))
 			print("")
 			print("\nНажмите Enter чтобы вернуться назад")
 			input()
