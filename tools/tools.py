@@ -378,7 +378,8 @@ def FormattingResponse(status_code, service):
 
 	status_codes = {200: colored("SUCCES", "green"),
 					429: colored("TIME-OUT", "yellow"),
-					404: colored("NOT FOUND", "red")}
+					404: colored("NOT FOUND", "red"),
+					500: colored("TIME-OUT", "yellow")}
 	service = colored(service, "yellow")
 	if status_code not in status_codes:
 		status_code = colored("UNKNOWN ANSWER", "red")

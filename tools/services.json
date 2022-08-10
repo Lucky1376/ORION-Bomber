@@ -80,6 +80,10 @@
       },
       "stockmann": {
         "url": "https://stockmann.ru/ajax/?controller=user&action=registerUser&surname=Popovich&name=Oleg&phone=*phone3*&email=rgeaefs@gmail.com&password=123456&password_confirm=123456"
+      },
+      "SberUslugi":{
+        "url": "https://sberuslugi.ru/api/v1/user/secret",
+        "data": "{'phone': '*phone()*'}"
       }
     }
   ],
