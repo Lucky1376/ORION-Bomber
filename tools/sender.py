@@ -151,12 +151,9 @@ class Send:
         json_ = None
         data = None
         if datatype == "json":
-            json_ = eval(payload)
+            json_ = json.loads(payload)
         elif datatype == "data":
-            data = eval(payload)
-        elif self.service == "victoria": # для инвалида
-            json_ = {"parameter": "{\"MobilePhone\":\"" + phone[0] + "\",\"CardNumber\":null,\"AgreeToTerms\":1,\"AllowNotification\":1}"}
-
+            data = json.loads(payload)
         # Отправляем запрос
         try:
             if self.service == 'pochtabank': # для инвалидов
