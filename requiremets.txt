@@ -1,0 +1,6 @@
+requests
+termcolor
+fake_useragent
+progress
+beautifulsoup4
+datetime

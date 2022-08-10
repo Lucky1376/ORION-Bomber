@@ -5,10 +5,6 @@
 #
 # 💻Menu
 ![Alt-текст](https://i.ibb.co/B2TG9Y7/image.png)
-#
-#
-#
-#
 ___
 # ❤️️**Без них не обошлись**
 | Метод | Описание | Ссылки|
@@ -27,7 +23,7 @@ ___
   + `pkg upgrade -y`
   + `pkg update -y`
   + `pkg install git`
-  + `pkg install python`
+  + `pkg install python -y`
   + `pip install --upgrade pip`
   + `git clone https://github.com/Lucky1376/ORION-Bomber`
   + `cd ORION-Bomber`
