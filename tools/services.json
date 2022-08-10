@@ -84,6 +84,9 @@
       "SberUslugi":{
         "url": "https://sberuslugi.ru/api/v1/user/secret",
         "data": "{'phone': '*phone()*'}"
+      },
+      "victoria": {
+        "url": "https://new.victoria-group.ru/api/v2/manzana/Identity/RequestAdvancedPhoneEmailRegistration"
       }
     }
   ],
@@ -92,7 +95,7 @@
     {
      "telegram": {
        "url": "https://my.telegram.org/auth/send_password",
-       "data": "{'phone': '∆+phone∆'}"
+       "data": "{'phone': '*+phone*'}"
       }
     }
   ]
