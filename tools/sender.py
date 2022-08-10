@@ -44,6 +44,7 @@ class Send:
         # Форматирование для России
         if country == 'ru':
             for old, new in {
+                "'": '"',
                 "*+phone*": phone[0],
                 "*phone*": phone[1],
                 "*phone8*": phone[2],
@@ -59,6 +60,7 @@ class Send:
         # Форматирование для Беларуси
         elif country == 'by':
             for old, new in {
+                "'": '"',
                 "*+phone*": phone[0],
                 "*phone*": phone[1],
                 "*-phone*": phone[2]
@@ -154,6 +156,8 @@ class Send:
             json_ = json.loads(payload)
         elif datatype == "data":
             data = json.loads(payload)
+        elif self.service == 'victoria':
+            json_ = {"parameter": "{\"MobilePhone\":\"+79502135308\",\"CardNumber\":null,\"AgreeToTerms\":1,\"AllowNotification\":1}"}
         # Отправляем запрос
         try:
             if self.service == 'pochtabank': # для инвалидов

@@ -378,6 +378,7 @@ def FormattingResponse(status_code, service):
 
 	status_codes = {200: colored("SUCCES", "green"),
 					429: colored("TIME-OUT", "yellow"),
+					400: colored("TIME-OUT", "yellow"),
 					404: colored("NOT FOUND", "red"),
 					500: colored("TIME-OUT", "yellow")}
 	service = colored(service, "yellow")
@@ -462,7 +463,7 @@ def start(number, country, proxy_=None):
 
 	print("")
 	print(colored("Остановка спама", "yellow"))
-	print("├"+colored("Termux", "magenta")+":", colored("На встроенной клавиатуре от Termux выбрать CTRL затем Z", "cyan"))
+	print("├"+colored("Termux", "magenta")+":", colored("На встроенной клавиатуре от Termux выбрать CTRL затем C", "cyan"))
 	print("└"+colored("Windows", "blue")+":", colored("Комбинация клавишь Ctrl+C или Ctrl+Z", "cyan"))
 	an=["10", "9", "8", "7", "6", "5", "4", "3", "2", "1"]
 	for i in an:
