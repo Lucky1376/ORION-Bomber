@@ -618,6 +618,8 @@ def start(number, country, proxy_=None):
 											elif how == "1":
 												proxy_ = None
 												break
+									else:
+										print(colored("Ваш прокси работает, продолжаю спам", "green"))
 								else:
 									test_proxy = proxy.SPC(proxy_["ip"], proxy_["port"])
 									if test_proxy == False:
@@ -638,12 +640,15 @@ def start(number, country, proxy_=None):
 													proxy_ = None
 													break
 										else:
+											print(colored("Берем следующий прокси...", "green"))
 											last_pr = proxy_
 											all_list["all"].remove(proxy_)
 											for pr in all_list["all"]:
 												ch = proxy.SPC(pr["ip"], pr["port"])
 												if ch != False:
-													proxy_ = ch
+													proxy_ = {"ip": proxy_["ip"],
+														      "port": proxy_["port"],
+														      "format": ch}
 													starting = False
 													break
 												else:
@@ -664,6 +669,8 @@ def start(number, country, proxy_=None):
 													elif how == "1":
 														proxy_ = None
 														break
+									else:
+										print(colored("Прокси работает, продолжаю спам!", "green"))
 						else:
 							FormattingResponse(result[0], serv)
 					else:
@@ -683,7 +690,7 @@ def start(number, country, proxy_=None):
 			except KeyboardInterrupt:
 				return
 			return
-		except Exception as e:
+		"""except Exception as e:
 			starting_spam = False
 			print("\n")
 			print(colored("Из-за неизвестной ошибки наша программа выдала ошибку при спаме\n", "yellow"))
@@ -695,4 +702,4 @@ def start(number, country, proxy_=None):
 				input()
 			except KeyboardInterrupt:
 				return
-			return
+			return"""
