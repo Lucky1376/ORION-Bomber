@@ -332,7 +332,7 @@ def CFU():
 		a = open("tools/version.txt", "r")
 		current_ver = a.read()
 		a.close()
-		if last_ver != current_ver:
+		if last_ver != current_ver and platform != "win32":
 			clear()
 			print(colored("[!]", "magenta"), colored("Найдено новое обновление", "green"), colored(last_ver, "cyan")+colored("!", "green"))
 			print("")
@@ -376,11 +376,11 @@ def CFU():
 						print(colored("Обновление прошло успешно, запускаю ORION-Bomber...", "green"))
 						time.sleep(1.5)
 
+						os.system("pip install -r requirements.txt")
 						os.system("python main.py")
 						exit()
 					elif platform == "win32":
-						clear()
-						exit()
+						pass
 				elif how == "2":
 					clear()
 					break
