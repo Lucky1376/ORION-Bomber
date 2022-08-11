@@ -87,6 +87,10 @@
       },
       "victoria": {
         "url": "https://new.victoria-group.ru/api/v2/manzana/Identity/RequestAdvancedPhoneEmailRegistration"
+      },
+      "sunlight": {
+        "url": "https://api.sunlight.net/v3/customers/authorization/",
+        "json": "{'phone':'*phone*'}"
       }
     }
   ],

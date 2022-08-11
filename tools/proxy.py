@@ -6,27 +6,27 @@ from progress.bar import ChargingBar
 def SPC(ip, port, login=None, password=None):
     ua = UA().random
     ipp = ip + ':' + port
-    proxy_https = {'http': 'http://' + ipp,
-                   'https': 'http://' + ipp}
+    #proxy_https = {'http': 'http://' + ipp,
+    #               'https': 'http://' + ipp}
     proxy_http = {'http': 'http://' + ipp}
 
     ip_user = requests.get("http://icanhazip.com/", headers={'User-Agent': ua}).text
     if login == None and password == None: # проверка публичных прокси
+        #try:
+        #    ip_proxy = requests.get("http://icanhazip.com/", headers={'User-Agent': ua}, proxies=proxy_https, timeout=5)
+        #    if ip_user not in ip_proxy.text and ip_proxy.status_code == 200:
+        #        return proxy_https
+        #    else:
+        #        return False                                                            #кирилл лох
+        #except:
         try:
-            ip_proxy = requests.get("http://icanhazip.com/", headers={'User-Agent': ua}, proxies=proxy_https, timeout=5)
+            ip_proxy = requests.get("http://icanhazip.com/", headers={'User-Agent': ua}, proxies=proxy_http, timeout=5)
             if ip_user not in ip_proxy.text and ip_proxy.status_code == 200:
-                return proxy_https
+                return proxy_http
             else:
-                return False                                                            #кирилл лох
-        except:
-            try:
-                ip_proxy = requests.get("http://icanhazip.com/", headers={'User-Agent': ua}, proxies=proxy_http, timeout=5)
-                if ip_user not in ip_proxy.text and ip_proxy.status_code == 200:
-                    return proxy_http
-                else:
-                    return False
-            except:
                 return False
+        except:
+            return False
     else: #проверка приватных прокси
         proxy_private_https = {'http': 'http://' + login + ':' + password + '@' + ip + ':' + port,
                                'https': 'http://' + login + ':' + password + '@' + ip + ':' + port}

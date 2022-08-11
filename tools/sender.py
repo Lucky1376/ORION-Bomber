@@ -3,17 +3,17 @@ import time
 import requests
 from fake_useragent import UserAgent
 
-services_list = ["apteka.ru", "magnit", "telegram", "citi_link", "akbarsa", "yota", "b_apteka", "mir", "pochtabank", 'mt_free', "megafon.tv", "moezdorovie", "totopizza", "zdesapteka", "stockmann", "SberUslugi", "victoria"]
+services_list = ["apteka.ru", "magnit", "telegram", "citi_link", "akbarsa", "yota", "b_apteka", "mir", "pochtabank", 'mt_free', "megafon.tv", "moezdorovie", "totopizza", "zdesapteka", "stockmann", "SberUslugi", "victoria", "sunlight"]
 
 class Send:
     def __init__(self):
         self.service = None
         self.service_data = None
         self.services = None
-        self.cookie = {'yota': 'https://tv.yota.ru/', 'megafon.tv': 'https://megafon.tv/', "zdesapteka": "https://zdesapteka.ru/"}
-        self.response_services = {'apteka.ru': 200, 'magnit': "json", 'telegram': 200, 'citi_link': 200, 'akbarsa': 200, 'yota': 201, 'b_apteka': 200, 'mir': 200, 'pochtabank': 200, 'mt_free': "json", "megafon.tv": 201, "moezdorovie": 200, "totopizza": 200, "zdesapteka": 200, "stockmann": 200, "SberUslugi": 200, "victoria": 200}
-        self.time_out_ = {'apteka.ru': 0, 'magnit': 0, 'telegram': 0, 'citi_link': 0, 'akbarsa': 0, 'yota': 0, 'b_apteka': 0, 'mir': 0, 'pochtabank': 0, 'mt_free': 0, "megafon.tv": 0, "moezdorovie": 0, "totopizza": 0, "zdesapteka": 0, "stockmann": 0, "SberUslugi": 0, "victoria": 0}
-        self.time_out_config = {'apteka.ru': 120, 'magnit': 120, 'telegram': 120, 'citi_link': 60, 'akbarsa': 60, 'yota': 60, 'b_apteka': 60, 'mir': 60, 'pochtabank': 120, 'mt_free': 185, "megafon.tv": 600, "moezdorovie": 300, "totopizza": 65, "zdesapteka": 65, "stockmann": 600, "SberUslugi": 180, "victoria": 65}
+        self.cookie = {'yota': 'https://tv.yota.ru/', 'megafon.tv': 'https://megafon.tv/', "zdesapteka": "https://zdesapteka.ru/", "sunlight": "https://sunlight.net/profile/login/?next_encoded=Lw=="}
+        self.response_services = {'apteka.ru': 200, 'magnit': "json", 'telegram': 200, 'citi_link': 200, 'akbarsa': 200, 'yota': 201, 'b_apteka': 200, 'mir': 200, 'pochtabank': 200, 'mt_free': "json", "megafon.tv": 201, "moezdorovie": 200, "totopizza": 200, "zdesapteka": 200, "stockmann": 200, "SberUslugi": 200, "victoria": 200, "sunlight": 200}
+        self.time_out_ = {'apteka.ru': 0, 'magnit': 0, 'telegram': 0, 'citi_link': 0, 'akbarsa': 0, 'yota': 0, 'b_apteka': 0, 'mir': 0, 'pochtabank': 0, 'mt_free': 0, "megafon.tv": 0, "moezdorovie": 0, "totopizza": 0, "zdesapteka": 0, "stockmann": 0, "SberUslugi": 0, "victoria": 0, "sunlight": 0}
+        self.time_out_config = {'apteka.ru': 120, 'magnit': 120, 'telegram': 120, 'citi_link': 60, 'akbarsa': 60, 'yota': 60, 'b_apteka': 60, 'mir': 60, 'pochtabank': 120, 'mt_free': 185, "megafon.tv": 600, "moezdorovie": 300, "totopizza": 65, "zdesapteka": 65, "stockmann": 600, "SberUslugi": 180, "victoria": 65, "sunlight": 35}
         self.default_headers = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
 				                'Accept-Encoding': 'gzip, deflate, br',
 				                'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
