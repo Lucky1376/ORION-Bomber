@@ -350,7 +350,7 @@ def CFU():
 						os.chdir("/data/data/com.termux/files/home")
 						os.system("rm -rf ORION-Bomber")
 						
-						result = requests.get("https://github.com/Lucky1376/ORION-Bomber/archive/refs/heads/master.zip")
+						result = r.get("https://github.com/Lucky1376/ORION-Bomber/archive/refs/heads/master.zip")
 						
 						a = open("ORION-Bomber.zip", "wb")
 						a.write(result.content)
@@ -362,11 +362,22 @@ def CFU():
 						fantasy_zip.extractall("ORION-Bomber")
 						fantasy_zip.close()
 						os.system("rm -rf ORION-Bomber.zip")
+
 						os.chdir("ORION-Bomber")
+						os.chdir("ORION-Bomber-master")
+						 
+						get_files = os.listdir(os.getcwd())
+						 
+						for g in get_files:
+							shutil.move(g, "/data/data/com.termux/files/home/ORION-Bomber")
+						os.chdir("/data/data/com.termux/files/home/ORION-Bomber")
+						os.system("rm -rf ORION-Bomber-master")
 
 						print(colored("Обновление прошло успешно, запускаю ORION-Bomber...", "green"))
+						time.sleep(1.5)
 
 						os.system("python main.py")
+						exit()
 					elif platform == "win32":
 						clear()
 						exit()
