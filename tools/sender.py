@@ -44,6 +44,7 @@ class Send:
         # Форматирование для России
         if country == 'ru':
             for old, new in {
+                "'": '"',
                 "*+phone*": phone[0],
                 "*phone*": phone[1],
                 "*phone8*": phone[2],
@@ -59,6 +60,7 @@ class Send:
         # Форматирование для Беларуси
         elif country == 'by':
             for old, new in {
+                "'": '"',
                 "*+phone*": phone[0],
                 "*phone*": phone[1],
                 "*-phone*": phone[2]
