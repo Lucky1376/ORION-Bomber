@@ -324,6 +324,7 @@ def CFU():
 		clear()
 		print(colored("[!]", "red"), colored("Ваше устройство не подключено к интернету или интернет слишком слабый!", "magenta"))
 		exit()
+	clear()
 	if in_d:
 		print(colored("Проверяем обновление...", "green"))
 		time.sleep(0.7)
