@@ -86,7 +86,8 @@
         "data": "{'phone': '*phone()*'}"
       },
       "victoria": {
-        "url": "https://new.victoria-group.ru/api/v2/manzana/Identity/RequestAdvancedPhoneEmailRegistration"
+        "url": "https://new.victoria-group.ru/api/v2/manzana/Identity/RequestAdvancedPhoneEmailRegistration",
+        "json": "{'parameter': '{\"MobilePhone\":\"*+phone*\",\"CardNumber\":null,\"AgreeToTerms\":1,\"AllowNotification\":1}'}"
       }
     }
   ],

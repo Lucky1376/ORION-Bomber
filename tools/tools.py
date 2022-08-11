@@ -4,7 +4,7 @@
 
 from termcolor import colored
 from datetime import datetime
-import requests as r, os, time, random, shutil
+import requests as r, os, time, random, shutil, zipfile
 from sys import platform
 from tools import proxy
 from progress.bar import ChargingBar
@@ -314,6 +314,68 @@ def ICC():
 		print(colored("[!]", "red"), colored("Ваше устройство не подключено к интернету или интернет слишком слабый!", "magenta"))
 		exit()
 
+def CFU():
+	in_d = False
+	# Проверяем интернет
+	try:
+		r.get("https://google.com", timeout=5)
+		in_d = True
+	except:
+		clear()
+		print(colored("[!]", "red"), colored("Ваше устройство не подключено к интернету или интернет слишком слабый!", "magenta"))
+		exit()
+	if in_d:
+		print(colored("Проверяем обновление...", "green"))
+		time.sleep(0.7)
+		result = r.get("https://raw.githubusercontent.com/Lucky1376/ORION-Bomber/master/tools/version.txt")
+		last_ver = result.content.decode("utf-8")
+		a = open("tools/version.txt", "r")
+		current_ver = a.read()
+		a.close()
+		if last_ver != current_ver:
+			clear()
+			print(colored("[!]", "magenta"), colored("Найдено новое обновление", "green"), colored(last_ver, "cyan")+colored("!", "green"))
+			print("")
+			print(colored("Желаете ли вы обновиться до актуальной версии?", "yellow"))
+			print("")
+			print(colored("[1]", "red"), colored("Да", "green"))
+			print(colored("[2]", "red"), colored("Нет", "red"))
+			print("")
+			while True:
+				how = input(colored("~# ", "red"))
+				if how == "1":
+					clear()
+					print(colored("Устанавливаю архив...", "green"))
+					if platform == "linux" or platform == "linux2":
+						os.chdir("/data/data/com.termux/files/home")
+						os.system("rm -rf ORION-Bomber")
+						
+						result = requests.get("https://github.com/Lucky1376/ORION-Bomber/archive/refs/heads/master.zip")
+						
+						a = open("ORION-Bomber.zip", "wb")
+						a.write(result.content)
+						a.close()
+						
+						print(colored("Распаковка архива...", "green"))
+
+						fantasy_zip = zipfile.ZipFile("ORION-Bomber.zip")
+						fantasy_zip.extractall("ORION-Bomber")
+						fantasy_zip.close()
+						os.system("rm -rf ORION-Bomber.zip")
+						os.chdir("ORION-Bomber")
+
+						print(colored("Обновление прошло успешно, запускаю ORION-Bomber...", "green"))
+
+						os.system("python main.py")
+					elif platform == "win32":
+						clear()
+						exit()
+				elif how == "2":
+					clear()
+					break
+		else:
+			clear()
+
 class Logs:
 	def __init__(self):
 		pass
@@ -378,7 +440,6 @@ def FormattingResponse(status_code, service):
 
 	status_codes = {200: colored("SUCCES", "green"),
 					429: colored("TIME-OUT", "yellow"),
-					400: colored("TIME-OUT", "yellow"),
 					404: colored("NOT FOUND", "red"),
 					500: colored("TIME-OUT", "yellow")}
 	service = colored(service, "yellow")
@@ -463,7 +524,7 @@ def start(number, country, proxy_=None):
 
 	print("")
 	print(colored("Остановка спама", "yellow"))
-	print("├"+colored("Termux", "magenta")+":", colored("На встроенной клавиатуре от Termux выбрать CTRL затем C", "cyan"))
+	print("├"+colored("Termux", "magenta")+":", colored("На встроенной клавиатуре от Termux выбрать CTRL затем Z", "cyan"))
 	print("└"+colored("Windows", "blue")+":", colored("Комбинация клавишь Ctrl+C или Ctrl+Z", "cyan"))
 	an=["10", "9", "8", "7", "6", "5", "4", "3", "2", "1"]
 	for i in an:
