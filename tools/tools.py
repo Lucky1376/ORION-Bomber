@@ -690,7 +690,7 @@ def start(number, country, proxy_=None):
 			except KeyboardInterrupt:
 				return
 			return
-		"""except Exception as e:
+		except Exception as e:
 			starting_spam = False
 			print("\n")
 			print(colored("Из-за неизвестной ошибки наша программа выдала ошибку при спаме\n", "yellow"))
@@ -702,4 +702,4 @@ def start(number, country, proxy_=None):
 				input()
 			except KeyboardInterrupt:
 				return
-			return"""
+			return
