@@ -91,6 +91,10 @@
       "sunlight": {
         "url": "https://api.sunlight.net/v3/customers/authorization/",
         "json": "{'phone':'*phone*'}"
+      },
+      "citystar": {
+        "url": "https://citystarwear.com/bitrix/templates/bspc/php/bs.auth.sms/templates/pc/handlers.php",
+        "data": "{'hdlr': 'bsSendCodeAuth','bshsmsk': 'h5Plm22xoaFs9YTp', 'phone': '*-phone*', 'xemail': '', 'xphone': ''}"
       }
     }
   ],

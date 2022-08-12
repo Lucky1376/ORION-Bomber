@@ -454,7 +454,8 @@ def FormattingResponse(status_code, service):
 					429: colored("TIME-OUT", "yellow"),
 					400: colored("TIME_OUT", "yellow"),
 					404: colored("NOT FOUND", "red"),
-					500: colored("TIME-OUT", "yellow")}
+					500: colored("TIME-OUT", "yellow"),
+					400: colored("TIME_OUT", "yellow")}
 	service = colored(service, "yellow")
 	if status_code not in status_codes:
 		status_code = colored("UNKNOWN ANSWER", "red")
@@ -672,14 +673,29 @@ def start(number, country, proxy_=None):
 									else:
 										print(colored("Прокси работает, продолжаю спам!", "green"))
 						else:
-							FormattingResponse(result[0], serv)
+							if result[1] != False:
+								if serv == "magnit":
+									if result[1]["status_code"] == 200:
+										FormattingResponse(200, serv)
+									elif result[1]["status_code"] == 422:
+										FormattingResponse(429, serv)
+								else:
+									FormattingResponse(result[0], serv)
+							else:
+								FormattingResponse(666, serv)
 					else:
 						result = sender_class.spam(serv, number)
 						logs.save_logs(serv, result[0])
-						if result[0] == False:
-							FormattingResponse(666, serv)
+						if result[1] != False:
+							if serv == "magnit":
+								if result[1]["status_code"] == 200:
+									FormattingResponse(200, serv)
+								elif result[1]["status_code"] == 422:
+									FormattingResponse(429, serv)
+							else:
+								FormattingResponse(result[0], serv)
 						else:
-							FormattingResponse(result[0], serv)
+							FormattingResponse(666, serv)
 		except KeyboardInterrupt:
 			starting_spam = False
 			print("\n")
