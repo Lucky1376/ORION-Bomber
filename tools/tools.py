@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Инструменты для разных обработок
+# Tools for different processing
 
 from termcolor import colored
 from datetime import datetime
@@ -12,7 +12,7 @@ from tools import sender as send
 
 def FormattingNumber(number, country):
 	numb = str(number)
-	if country == "ru": # Для России
+	if country == "ru": # For Russia
 		if numb[0:1] == "+" and numb[1:2] == "7": # +71234567890
 			numb_1 = numb
 			numb_2 = numb[1:]
@@ -42,7 +42,7 @@ def FormattingNumber(number, country):
 			numb_6 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + " - " + numb[8:10] + " - " + numb[10:]
 			numb_7 = numb[:2] + " ("+numb[2:]
 			numb_8 = numb[2:]
-	elif country == "by": # Для Беларуси
+	elif country == "by": # For Belarus
 		if numb[0:1] == "+": # +123456789012
 			numb_1 = numb
 			numb_2 = numb[1:]
@@ -158,7 +158,7 @@ def faq_proxy():
 	input()
 
 def inst_logs():
-	# Проверка доступа к файловой системе
+	# Checking File System Access
 	try:
 		if platform == "linux" or platform == "linux2":
 			shutil.copyfile('tools/logs.txt', '/storage/emulated/0/Download/logs.txt')
@@ -273,7 +273,7 @@ def start_input():
 					if new_pr == "99":
 						return 0, 0, 0
 					elif len(new_pr.split(":")) < 3:
-						# Проверка общего прокси
+						# Shared Proxy Check
 						result = proxy.SPC(new_pr.split(":")[0], new_pr.split(":")[1])
 						if result == False:
 							print(colored("Ваш прокси не работает!", "red"))
@@ -285,7 +285,7 @@ def start_input():
 							time.sleep(2)
 							break
 					elif len(new_pr.split(":")) > 2:
-						# Проверка частного прокси
+						# Private Proxy Check
 						result = proxy.SPC(new_pr.split(":")[0], new_pr.split(":")[1], login=new_pr.split(":")[2], password=new_pr.split(":")[3])
 						if result == False:
 							print(colored("Ваш прокси не работает!", "red"))
@@ -318,7 +318,7 @@ def ICC():
 
 def CFU():
 	in_d = False
-	# Проверяем интернет
+	# Checking the Internet
 	try:
 		r.get("https://google.com", timeout=5)
 		in_d = True
@@ -435,17 +435,17 @@ def check_files():
 
 def FormattingResponse(status_code, service):
 	date = datetime.now()
-	# Час
+	# Hour
 	if date.hour <= 9:
 		hour = f"0{date.hour}"
 	else:
 		hour = date.hour
-	# Минута
+	# Minute
 	if date.minute <= 9:
 		minute = f"0{date.minute}"
 	else:
 		minute = date.minute
-	# Секунда
+	# Second
 	if date.second <= 9:
 		second = f"0{date.second}"
 	else:
@@ -468,7 +468,7 @@ def FormattingResponse(status_code, service):
 		print(info)
 
 def start(number, country, proxy_=None):
-	# Подготовка прокси
+	# Proxy preparation
 	if proxy_ == None:
 		proxy_ = None
 	elif proxy_ in ["ru", "by"]:
@@ -548,10 +548,10 @@ def start(number, country, proxy_=None):
 		time.sleep(1)
 	clear()
 
-	# Форматы номера
+	# Number formats
 	number = FormattingNumber(number, country)
 
-	# Запуск Бомбера
+	# Bomber launch
 	sender_class = send.Send()
 	logs = Logs()
 	if country == "ru":
@@ -568,7 +568,7 @@ def start(number, country, proxy_=None):
 						result = sender_class.spam(serv, number, proxy=proxy_["format"])
 						logs.save_logs(serv, result[0])
 						if result[0] == False:
-							# Проверяем прокси перед следующей попыткой спама
+							# Checking the proxy before the next spam attempt
 							print(colored("Проверка прокси...", "yellow"))
 							if "login" in proxy_:
 								test_proxy = proxy.SPC(proxy_["ip"], proxy_["port"], login=proxy_["login"], password=proxy_["password"])

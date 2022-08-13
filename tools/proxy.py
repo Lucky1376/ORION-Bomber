@@ -27,7 +27,7 @@ def SPC(ip, port, login=None, password=None):
                 return False
         except:
             return False
-    else: #проверка приватных прокси
+    else: #checking private proxies
         proxy_private_https = {'http': 'http://' + login + ':' + password + '@' + ip + ':' + port,
                                'https': 'http://' + login + ':' + password + '@' + ip + ':' + port}
         proxy_private_http = {'http': 'http://' + login + ':' + password + '@' + ip + ':' + port}
@@ -51,7 +51,7 @@ def SPC(ip, port, login=None, password=None):
 
 class Proxy:
 	def __init__(self, country=["ru", "by", "ua", "us"], unknown=False, timeout=15):
-		# Проверка на ошибки в параметрах
+		# Checking for Errors in Parameters
 		# -----------------------------------------------
 		if len(country) < 1:
 			print("Не указаны страны")
@@ -157,16 +157,16 @@ class Proxy:
 		# User-Agent
 		ua = UA()
 
-		# Итоговый лист с прокси
+		# Summary sheet with proxy
 		itog = {}
 
 		# https://hidemy.name
 		# -----------------------------------------------
-		"""Составление url Адресов для 1 сервиса"""
+		"""Composing url Addresses for 1 service"""
 		url_list = {}
 		for ct in self.country:
 			url_list[ct] = f"https://hidemy.name/ru/proxy-list/?country={ct.upper()}&type=hs#list"
-		"""Парсинг"""
+		"""Parsing"""
 		for ct in url_list:
 			can = False
 			try:
@@ -259,7 +259,7 @@ class Proxy:
 
 		# https://proxylist.geonode.com
 		# -----------------------------------------------
-		"""Подсчет количества страниц на сервисе"""
+		"""Counting the number of pages on the service"""
 		col_page = 1
 		can = False
 		try:
@@ -306,7 +306,7 @@ class Proxy:
 
 
 		# -----------------------------------------------
-		"""Формирование в один словарь"""
+		"""Formation into one dictionary"""
 		l1 = self.list
 
 		def formation(dict):

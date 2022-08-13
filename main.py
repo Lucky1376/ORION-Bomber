@@ -3,8 +3,7 @@ from tools import proxy
 from termcolor import colored
 import requests
 
-# Зачем ты это читаешь?
-# Топай в папку tools
+# Why are you reading this?
 
 tools.clear()
 tools.ICC()
