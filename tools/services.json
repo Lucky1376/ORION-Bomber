@@ -19,27 +19,40 @@
           "Sec-Fetch-Mode": "cors",
           "Sec-Fetch-Site": "same-site",
           "User-Agent": ""
-        }
+        },
+        "response": 200,
+        "timeout": 120
       },
       "magnit": {
         "url": "https://new.moy.magnit.ru/local/ajax/login/",
-        "data": "{'phone': '*+phone*', 'ksid': 'ee191257-a4fe-4e39-9f0f-079c7f721eee_0'}"
+        "data": "{'phone': '*+phone*', 'ksid': 'ee191257-a4fe-4e39-9f0f-079c7f721eee_0'}",
+        "response": "json",
+        "timeout": 120
       },
       "telegram": {
         "url": "https://my.telegram.org/auth/send_password",
-        "data": "{'phone': '*+phone*'}"
+        "data": "{'phone': '*+phone*'}",
+        "response": 200,
+        "timeout": 120
       },
       "citi_link": {
         "url": "https://www.citilink.ru/registration/confirm/phone/*phone*/",
-        "data": "{'phone': '*phone*', 'ret': '1', 'smsRepeatDelay': '60', 'smsRepeatsDelay': '60', 'smsRepeatsLimit': '5', 'smsRequestToken': 't19d686d-6d80-4297-8909-b11c575627b8'}"
+        "data": "{'phone': '*phone*', 'ret': '1', 'smsRepeatDelay': '60', 'smsRepeatsDelay': '60', 'smsRepeatsLimit': '5', 'smsRequestToken': 't19d686d-6d80-4297-8909-b11c575627b8'}",
+        "response": 200,
+        "timeout": 60
       },
       "akbarsa": {
         "url": "https://www.akbars.ru/api/PhoneConfirm/",
-        "json": "{'phoneNumber': *phone*}"
+        "json": "{'phoneNumber': *phone*}",
+        "response": 200,
+        "timeout": 300
       },
       "yota": {
         "url": "https://bmp.tv.yota.ru/api/v10/auth/register/msisdn",
-        "json": "{'msisdn': '*phone*', 'password': '123456'}"
+        "json": "{'msisdn': '*phone*', 'password': '123456'}",
+        "cookies": "https://tv.yota.ru/",
+        "response": 201,
+        "timeout": 60
       },
       "b_apteka": {
         "url": "https://b-apteka.ru/lk/send_confirm_code",
@@ -47,54 +60,83 @@
         "headers": {"X-Requested-With": "XMLHttpRequest", "Connection": "keep-alive", "Pragma": "no-cache",
                                 "Cache-Control": "no-cache", "Accept-Encoding": "gzip, deflate, br",
                                 "User-Agent": "",
-                                "DNT":"1"}
+                                "DNT":"1"},
+        "response": 200,
+        "timeout": 60
       },
       "mir": {
         "url": "https://api-user.privetmir.ru/api/v2/send-code",
-        "data": "{'checkApproves': 'Y', 'approve1': 'on', 'approve2': 'on', 'back_url': '', 'scope': 'register-user reset-password', 'login': '*phone()*'}"
+        "data": "{'checkApproves': 'Y', 'approve1': 'on', 'approve2': 'on', 'back_url': '', 'scope': 'register-user reset-password', 'login': '*phone()*'}",
+        "response": 200,
+        "timeout": 60
       },
       "pochtabank": {
         "url": "https://my.pochtabank.ru/dbo/registrationService/ib/phoneNumber",
-        "json": "{'confirmation': 'send', 'phone': '*phone()*'}"
+        "json": "{'confirmation': 'send', 'phone': '*phone()*'}",
+        "response": 200,
+        "timeout": 120
       },
       "mt_free": {
         "url": "https://cabinet.wi-fi.ru/api/auth/by-sms",
         "data": "{'msisdn': '*mtfree*', 'g-recaptcha-response': ''}",
-        "headers": {"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9", "Accept-Encoding": "gzip, deflate, br", "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7", "App-ID": "cabinet", "Cache-Control": "no-cache", "Connection": "keep-alive", "User-Agent": ""}
+        "headers": {"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9", "Accept-Encoding": "gzip, deflate, br", "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7", "App-ID": "cabinet", "Cache-Control": "no-cache", "Connection": "keep-alive", "User-Agent": ""},
+        "response": "json",
+        "timeout": 180
       },
       "megafon.tv": {
         "url": "https://bmp.megafon.tv/api/v10/auth/register/msisdn",
-        "json": "{'msisdn':'*+phone*', 'password':'123456'}"
+        "json": "{'msisdn':'*+phone*', 'password':'123456'}",
+        "response": 201,
+        "timeout": 600,
+        "cookies": "https://megafon.tv/"
       },
       "moezdorovie": {
         "url": "https://moezdorovie.ru/rpc/?method=auth.GetCode",
-        "json": "{'jsonrpc':'2.0','id':40,'method':'auth.GetCode','params':{'phone':'*-phone*','mustExist':false, 'sendRealSms':true}}"
+        "json": "{'jsonrpc':'2.0','id':40,'method':'auth.GetCode','params':{'phone':'*-phone*','mustExist':false, 'sendRealSms':true}}",
+        "response": 200,
+        "timeout": 300
       },
       "totopizza": {
         "url": "https://api.totopizza.ru/graphql",
-        "json": "{\"operationName\":\"requestPhoneCodeAuth\",\"query\":\"\\n  mutation requestPhoneCodeAuth($telephone:String!) {\\n    requestPhoneCodeAuth(telephone:$telephone)\\n  }\\n\",\"variables\":{\"telephone\":\"*phone2*\"}}"
+        "json": "{\"operationName\":\"requestPhoneCodeAuth\",\"query\":\"\\n  mutation requestPhoneCodeAuth($telephone:String!) {\\n    requestPhoneCodeAuth(telephone:$telephone)\\n  }\\n\",\"variables\":{\"telephone\":\"*phone2*\"}}",
+        "response": 200,
+        "timeout": 60
       },
       "zdesapteka": {
         "url": "https://zdesapteka.ru/bitrix/services/main/ajax.php?action=zs:main.ajax.AuthActions.sendAuthCode",
-        "data": "{'userPhone': '*phone()*', 'SITE_ID': 's1', 'sessid': ''}"
+        "data": "{'userPhone': '*phone()*', 'SITE_ID': 's1', 'sessid': ''}",
+        "response": 200,
+        "timeout": 60,
+        "cookies": "https://zdesapteka.ru/"
       },
       "stockmann": {
-        "url": "https://stockmann.ru/ajax/?controller=user&action=registerUser&surname=Popovich&name=Oleg&phone=*phone3*&email=rgeaefs@gmail.com&password=123456&password_confirm=123456"
+        "url": "https://stockmann.ru/ajax/?controller=user&action=registerUser&surname=Popovich&name=Oleg&phone=*phone3*&email=rgeaefs@gmail.com&password=123456&password_confirm=123456",
+        "response": 200,
+        "timeout": 600
       },
       "SberUslugi":{
         "url": "https://sberuslugi.ru/api/v1/user/secret",
-        "data": "{'phone': '*phone()*'}"
+        "data": "{'phone': '*phone()*'}",
+        "response": 200,
+        "timeout": 180
       },
       "victoria": {
-        "url": "https://new.victoria-group.ru/api/v2/manzana/Identity/RequestAdvancedPhoneEmailRegistration"
+        "url": "https://new.victoria-group.ru/api/v2/manzana/Identity/RequestAdvancedPhoneEmailRegistration",
+        "response": 200,
+        "timeout": 60
       },
       "sunlight": {
         "url": "https://api.sunlight.net/v3/customers/authorization/",
-        "json": "{'phone':'*phone*'}"
+        "json": "{'phone':'*phone*'}",
+        "response": 200,
+        "timeout": 30,
+        "cookies": "https://sunlight.net/profile/login/?next_encoded=Lw=="
       },
       "citystar": {
         "url": "https://citystarwear.com/bitrix/templates/bspc/php/bs.auth.sms/templates/pc/handlers.php",
-        "data": "{'hdlr': 'bsSendCodeAuth','bshsmsk': 'h5Plm22xoaFs9YTp', 'phone': '*-phone*', 'xemail': '', 'xphone': ''}"
+        "data": "{'hdlr': 'bsSendCodeAuth','bshsmsk': 'h5Plm22xoaFs9YTp', 'phone': '*-phone*', 'xemail': '', 'xphone': ''}",
+        "response": 200,
+        "timeout": 180
       }
     }
   ],
@@ -103,7 +145,9 @@
     {
      "telegram": {
        "url": "https://my.telegram.org/auth/send_password",
-       "data": "{'phone': '*+phone*'}"
+       "data": "{'phone': '*+phone*'}",
+       "response": 200,
+       "timeout": 120
       }
     }
   ]
