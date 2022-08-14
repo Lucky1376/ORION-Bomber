@@ -202,6 +202,18 @@ def banner_info():
 	print("\nНажмите Enter чтобы вернуться назад")
 	input()
 
+def number_ckeck(numb):
+	if len(numb) == 9 or len(numb) == 10:
+		sp_numb = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+		for i in str(numb):
+			try:
+				int(i)
+			except:
+				return False
+		return True
+	else:
+		return False
+
 def start_input():
 	country_code = {"1": "+375",
 					"2": "+7"}
@@ -228,7 +240,7 @@ def start_input():
 		print(colored("[99] Отмена", "red"))
 		print("")
 		numb = input(colored("Введите номер без кода страны "+country_code[ct]+" ", "green"))
-		if ct == "1" and len(numb) == 9 or ct == "2" and len(numb) == 10:
+		if number_ckeck(numb):
 			break
 		elif numb == "99":
 			return 0, 0, 0
@@ -559,8 +571,14 @@ def start(number, country, proxy_=None):
 	else:
 		pass
 	starting_spam = True
+	circles = 0
+	circles_2 = 1
 	while starting_spam:
 		try:
+			if circles == len(services_list):
+				print(colored("Круг ", "green")+colored(circles_2, "yellow"), colored("Пройден!", "green"))
+				circles -= len(services_list)
+				circles_2 += 1
 			time.sleep(1)
 			for serv in services_list:
 				if sender_class.checktimeout(serv) == True:
@@ -675,6 +693,7 @@ def start(number, country, proxy_=None):
 									else:
 										print(colored("Прокси работает, продолжаю спам!", "green"))
 						else:
+							circles += 1
 							if result[1] != False:
 								if serv == "magnit":
 									if result[1]["status_code"] == 200:
@@ -688,6 +707,7 @@ def start(number, country, proxy_=None):
 					else:
 						result = sender_class.spam(serv, number)
 						logs.save_logs(serv, result[0])
+						circles += 1
 						if result[1] != False:
 							if serv == "magnit":
 								if result[1]["status_code"] == 200:
