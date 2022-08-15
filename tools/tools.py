@@ -487,7 +487,10 @@ def start(number, country, proxy_=None):
 		starting = True
 		while starting:
 			print(colored("\nПодготовка прокси... (Не дольше 1 минуты)", "yellow"))
-			proxy_class = proxy.Proxy(country=[country])
+			if proxy_ == "by":
+				proxy_class = proxy.Proxy(country=["ru", "by"])
+			else:
+				proxy_class = proxy.Proxy(country=[country])
 			proxy_class.get()
 			print("")
 			print(colored("Проверка найденного списка прокси... (Не дольше 2х минут)", "yellow"))
@@ -569,7 +572,7 @@ def start(number, country, proxy_=None):
 	if country == "ru":
 		services_list = send.services_list
 	else:
-		pass
+		services_list = None
 	starting_spam = True
 	circles = 0
 	circles_2 = 1
