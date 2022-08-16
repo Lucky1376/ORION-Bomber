@@ -47,13 +47,16 @@ def FormattingNumber(number, country):
 			numb_1 = numb
 			numb_2 = numb[1:]
 			numb_3 = numb[4:]
+			numb_4 = numb[:4] + ' (' + numb[4:6] + ") " + numb[6:9] + '-' + numb[9:11] + '-' + numb[11:13]
+			numb_5 = numb[:4] + ' (' + numb[4:6] + ") " + numb[6:9] +numb[9:11] +numb[11:13]
 		elif numb[0:1] == "3" or numb[0:3] == "375": # 123456789012
 			numb_1 = "+"+numb
 			numb_2 = numb
 			numb_3 = numb[3:]
-
+			numb_4 = '+' + numb[:3] + ' (' + numb[3:5] + ") " + numb[5:8] + '-' + numb[8:10] + '-' + numb[10:12]
+			numb_5 = numb_1[:4] + ' (' + numb_1[4:6] + ") " + numb_1[6:9] +numb_1[9:11] +numb_1[11:13]
 	if country == "by":
-		return numb_1, numb_2, numb_3
+		return numb_1, numb_2, numb_3, numb_4, numb_5
 	elif country == "ru":
 		return numb_1, numb_2, numb_3, numb_4, numb_5, numb_6, numb_7, numb_8
 
@@ -223,16 +226,14 @@ def start_input():
 		print("")
 		print(colored("[99] Отмена", "red"))
 		print("")
-		print(colored("[1]", "red"), colored("Беларусь +375", "blue"), colored("В РАЗРАБОТКЕ", "red"))
+		print(colored("[1]", "red"), colored("Беларусь +375", "blue"))
 		print(colored("[2]", "red"), colored("Россия +7", "cyan"))
 		print("")
 		ct = input(colored("Выберите страну: ", "green"))
 		if ct == "2":
 			break
 		elif ct == "1":
-			print("")
-			print(colored("Спам на беларусь находиться в разработке", "yellow"))
-			print("")
+			break
 		elif ct == "99":
 			return 0, 0, 0
 	while True:
@@ -572,7 +573,7 @@ def start(number, country, proxy_=None):
 	if country == "ru":
 		services_list = send.services_list
 	else:
-		services_list = None
+		services_list = send.services_list_by
 	starting_spam = True
 	circles = 0
 	circles_2 = 1
