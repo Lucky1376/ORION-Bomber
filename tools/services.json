@@ -148,7 +148,7 @@
       "beerlogapizza": {
         "url": "https://smsc.ru/sys/send.php",
         "data": "{'login': 'beerlogaa@gmail.com', 'psw': 'QWE780p', 'phones': '*+phone*', 'mes': 'code', 'call': '1', 'fmt': '3'}",
-        "response": 200,
+        "response": 201,
         "timeout": 60,
         "cookies": "https://beerlogapizza.ru/login/"
       },
@@ -157,6 +157,15 @@
         "data": "{'g-recaptcha-response': 'null','phone': '*phone3*'}",
         "response": 200,
         "timeout": 60
+      },
+      "lentaru": {
+        "url": "https://online.lenta.com/api.php",
+        "data": "{'tel': '*phone()*', 'accept': 'on', 'urlParams': ''}",
+        "response": 200,
+        "headers": {"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9", "Accept-Encoding": "gzip, deflate, br", "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7", "Cache-Control": "no-cache", "Connection": "keep-alive", "User-Agent": "", "X-Requested-With": "XMLHttpRequest"},
+        "timeout": 60,
+        "kstati": "HZF Pizdit comiti",
+        "cookies": "https://online.lenta.com"
       }
     }
   ],

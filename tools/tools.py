@@ -465,7 +465,7 @@ def FormattingResponse(status_code, service):
 		second = date.second
 	date = colored(f"{hour}:{minute}:{second}", "magenta")
 
-	status_codes = {200: colored("SUCCES", "green"),
+	status_codes = {200: colored("SUCCESS", "green"),
 					429: colored("TIME-OUT", "yellow"),
 					400: colored("TIME_OUT", "yellow"),
 					404: colored("NOT FOUND", "red"),
