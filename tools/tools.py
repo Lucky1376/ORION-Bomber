@@ -466,6 +466,7 @@ def FormattingResponse(status_code, service):
 	date = colored(f"{hour}:{minute}:{second}", "magenta")
 
 	status_codes = {200: colored("SUCCESS", "green"),
+					201: colored("SUCCESS", "green"),
 					429: colored("TIME-OUT", "yellow"),
 					400: colored("TIME_OUT", "yellow"),
 					404: colored("NOT FOUND", "red"),
@@ -671,8 +672,8 @@ def start(number, country, proxy_=None):
 											for pr in all_list["all"]:
 												ch = proxy.SPC(pr["ip"], pr["port"])
 												if ch != False:
-													proxy_ = {"ip": proxy_["ip"],
-														      "port": proxy_["port"],
+													proxy_ = {"ip": pr["ip"],
+														      "port": pr["port"],
 														      "format": ch}
 													starting = False
 													break
