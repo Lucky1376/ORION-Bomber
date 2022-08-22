@@ -186,8 +186,11 @@ class Send:
 
         # Getting site cookies (if needed)
         cookies = None
-        if self.service in self.cookie:
-            cookies = session.get(self.cookie[self.service], headers=headers).cookies
+        try:
+            if self.service in self.cookie:
+                cookies = session.get(self.cookie[self.service], headers=headers, timeout=10).cookies
+        except:
+            return False, False
 
         # fill out the request
         json_ = None
@@ -202,7 +205,7 @@ class Send:
         # send a request
         try:
             if self.service == 'pochtabank':
-                session.post('https://my.pochtabank.ru/dbo/registrationService/ib')
+                session.post('https://my.pochtabank.ru/dbo/registrationService/ib', timeout=10)
                 r = session.put(url, json=json_, timeout=10, proxies=proxy)
             elif self.service == "zdesapteka":
                 ses_id = cookies["PHPSESSID"]
@@ -211,7 +214,7 @@ class Send:
             elif self.service == "stockmann":
                 r = requests.get(url, timeout=10, proxies=proxy, headers=headers)
             elif self.service == "green":
-                site = session.get(self.cookie["green"], headers=self.default_headers).text # parse token
+                site = session.get(self.cookie["green"], headers=self.default_headers, timeout=10).text # parse token
                 soup = BeautifulSoup(site, "html.parser")
                 head = soup.find("head")
                 a = []
