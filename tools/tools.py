@@ -71,7 +71,7 @@ def clear():
 
 def banner():
 	a = open("tools/version.txt", "r")
-	ver = a.read()
+	ver = a.read().split("\n")[0]
 	a.close()
 
 	banner = colored("""
