@@ -164,8 +164,14 @@
         "response": 200,
         "headers": {"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9", "Accept-Encoding": "gzip, deflate, br", "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7", "Cache-Control": "no-cache", "Connection": "keep-alive", "User-Agent": "", "X-Requested-With": "XMLHttpRequest"},
         "timeout": 60,
-        "kstati": "HZF Pizdit comiti",
         "cookies": "https://online.lenta.com"
+      },
+      "wildberries": {
+        "url": "https://authorization.wildberries.eu/api/v2/code/request",
+        "json": "{\"contact\": \"*phone*\", \"auth_method\": \"sms\", \"lang\": \"ru\"}",
+        "response": 200,
+        "HZF": "сосет смачные пенисы. хуеглот",
+        "timeout": 60
       }
     }
   ],
@@ -220,6 +226,13 @@
         "response": 201,
         "timeout": 60,
         "cookies": "https://delivio.by/"
+      },
+      "wildberries": {
+        "url": "https://authorization.wildberries.eu/api/v2/code/request",
+        "json": "{\"contact\": \"*phone*\", \"auth_method\": \"sms\", \"lang\": \"ru\"}",
+        "response": 200,
+        "HZF": "не умеет добавлять сервисы, и легко сливаетя, и ваще он полудурок копченый",
+        "timeout": 60
       }
     }
   ]
