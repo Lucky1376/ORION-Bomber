@@ -22,7 +22,7 @@ ___
 ___
 # 🌐Установка
 + #### **Termux (Android):**
-  + `Установить` [**`Termux`**](https://trashbox.ru/files20/1578709_f6a9e6/com.termux_118.apk)
+  + `Установить` [**`Termux`**](https://t.me/orion_bomber/5)
   + `pkg upgrade -y`
   + `pkg update -y`
   + `pkg install git`
