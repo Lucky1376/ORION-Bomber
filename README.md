@@ -33,7 +33,7 @@ ___
   + `pip install -r requirements.txt`
   + `python main.py`
 
-+ #### **Windows:**
++ #### **Windows 10+:**
   + `Требуется 64 битная система`
   + `Установить Python, при установке выбрать` **`add python to PATH`**
   + `Python recommended 3.9.6:` [**`Download`**](https://drive.google.com/file/d/1-rt97BpZwgRUTZSH7sAVZNVq7jOC4gsE/view?usp=sharing)
