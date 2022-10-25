@@ -10,6 +10,7 @@ tools.ICC()
 tools.clear()
 tools.check_files()
 tools.CFU()
+tools.CTF()
 
 while True:
 	tools.clear()

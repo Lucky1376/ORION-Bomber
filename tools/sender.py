@@ -60,10 +60,26 @@ class Send:
 				                'User-Agent': None}
 
     def checktimeout(self, service):
-        time_out_ = self.time_out_
+        #time_out_ = self.time_out_
+        a = open("tools/timeout.txt", "r")
+        time_out_ = {}
+        all_ = a.read().split("\n")
+        while True:
+            try:
+                all_.remove("")
+            except:
+                break
+        for serv in all_:
+            time_out_[serv.split(":")[0]] = float(serv.split(":")[1])
+        a.close()
+        
         time_out_config = self.time_out_config
         if time_out_[service] == 0:
             time_out_[service] = time.time()
+            a = open("tools/timeout.txt", "w")
+            for key in time_out_:
+                a.write(key+":"+str(time_out_[key])+"\n")
+            a.close()
             return True
         else:
             old_time = time_out_[service]
@@ -71,6 +87,10 @@ class Send:
             try:
                 if now_time - old_time >= time_out_config[service]:
                     time_out_[service] = time.time()
+                    a = open("tools/timeout.txt", "w")
+                    for key in time_out_:
+                        a.write(key+":"+str(time_out_[key])+"\n")
+                    a.close()
                     return True
                 else:
                     return False
@@ -232,5 +252,5 @@ class Send:
                     return 200, r.text
                 else:
                     return r.status_code, r.text
-        except:
-            return False, False # https://t.me/orion_bomber
+        except Exception as e:
+            return False, e # https://t.me/orion_bomber

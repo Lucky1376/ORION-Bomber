@@ -57,10 +57,15 @@
       "b_apteka": {
         "url": "https://b-apteka.ru/lk/send_confirm_code",
         "json": "{'phone': '*phone*'}",
-        "headers": {"X-Requested-With": "XMLHttpRequest", "Connection": "keep-alive", "Pragma": "no-cache",
-                                "Cache-Control": "no-cache", "Accept-Encoding": "gzip, deflate, br",
-                                "User-Agent": "",
-                                "DNT":"1"},
+        "headers": {
+          "X-Requested-With": "XMLHttpRequest",
+          "Connection": "keep-alive",
+          "Pragma": "no-cache",
+          "Cache-Control": "no-cache",
+          "Accept-Encoding": "gzip, deflate, br",
+          "User-Agent": "",
+          "DNT": "1"
+        },
         "response": 200,
         "timeout": 60
       },
@@ -79,7 +84,15 @@
       "mt_free": {
         "url": "https://cabinet.wi-fi.ru/api/auth/by-sms",
         "data": "{'msisdn': '*mtfree*', 'g-recaptcha-response': ''}",
-        "headers": {"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9", "Accept-Encoding": "gzip, deflate, br", "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7", "App-ID": "cabinet", "Cache-Control": "no-cache", "Connection": "keep-alive", "User-Agent": ""},
+        "headers": {
+          "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+          "Accept-Encoding": "gzip, deflate, br",
+          "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+          "App-ID": "cabinet",
+          "Cache-Control": "no-cache",
+          "Connection": "keep-alive",
+          "User-Agent": ""
+        },
         "response": "json",
         "timeout": 180
       },
@@ -114,7 +127,7 @@
         "response": 200,
         "timeout": 600
       },
-      "SberUslugi":{
+      "SberUslugi": {
         "url": "https://sberuslugi.ru/api/v1/user/secret",
         "data": "{'phone': '*phone()*'}",
         "response": 200,
@@ -152,7 +165,7 @@
         "timeout": 60,
         "cookies": "https://beerlogapizza.ru/login/"
       },
-      "pizzamia":{
+      "pizzamia": {
         "url": "https://1603.smartomato.ru/account/session",
         "data": "{'g-recaptcha-response': 'null','phone': '*phone3*'}",
         "response": 200,
@@ -162,7 +175,15 @@
         "url": "https://online.lenta.com/api.php",
         "data": "{'tel': '*phone()*', 'accept': 'on', 'urlParams': ''}",
         "response": 200,
-        "headers": {"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9", "Accept-Encoding": "gzip, deflate, br", "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7", "Cache-Control": "no-cache", "Connection": "keep-alive", "User-Agent": "", "X-Requested-With": "XMLHttpRequest"},
+        "headers": {
+          "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+          "Accept-Encoding": "gzip, deflate, br",
+          "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+          "Cache-Control": "no-cache",
+          "Connection": "keep-alive",
+          "User-Agent": "",
+          "X-Requested-With": "XMLHttpRequest"
+        },
         "timeout": 60,
         "cookies": "https://online.lenta.com"
       },
@@ -170,7 +191,42 @@
         "url": "https://authorization.wildberries.eu/api/v2/code/request",
         "json": "{\"contact\": \"*phone*\", \"auth_method\": \"sms\", \"lang\": \"ru\"}",
         "response": 200,
-        "HZF": "сосет смачные пенисы. хуеглот",
+        "timeout": 60
+      },
+      "findclone": {
+        "url": "https://findclone.ru/register",
+        "data": "{'phone': '*phone*'}",
+        "response": 200,
+        "timeout": 60,
+        "GET": ""
+      },
+      "tashirpizza": {
+        "url": "https://tashirpizza.ru/ajax/mindbox_register",
+        "data": "{'phone': '*phone()*', 'fio': 'Олег Олегов Олегович', 'bd': ''}",
+        "response": 200,
+        "timeout": 60
+      },
+      "my-shop": {
+        "url": "https://my-shop.ru/cgi-bin/my_util2.pl?q=my_code_for_phone_confirmation&view_id=d51a4d42-c5e8-43ce-a24d-383a3b29f17ae821ed918",
+        "json": "{'phone_code': '7', 'phone': '*-phone*'}",
+        "response": 200,
+        "timeout": 60
+      },
+      "moneyman": {
+        "url": "https://msk.taxovichkof.ru/api/userSendSms",
+        "json": "{'username': '+7 (950) 213-5308', 'lang': 'ru', 'city': 'msk'}",
+        "response": 200,
+        "timeout": 300
+      },
+      "tinkoff": {
+        "url":  "https://www.tinkoff.ru/api/common/v1/sign_up?origin=web%2Cib5%2Cplatform&sessionid=uRdqKtttiyJYz6ShCqO076kNyTraz7pa.m1-prod-api56&wuid=8604f6d4327bf4ef2fc2b3efb36c8e35",
+        "data": "{'phone': '*phone*'}",
+        "response": 200,
+        "timeout": 60
+      },
+      "sipnetru": {
+        "url": "https://register2.sipnet.ru/cgi-bin/exchange.dll/RegisterHelper?oper=9&callmode=1&phone=*phone*",
+        "response": 200,
         "timeout": 60
       }
     }
@@ -178,13 +234,13 @@
   "by":
   [
     {
-     "telegram": {
+     "telegram_by": {
        "url": "https://my.telegram.org/auth/send_password",
        "data": "{'phone': '*+phone*'}",
        "response": 200,
        "timeout": 120
       },
-     "green": {
+     "green_by": {
        "url": "https://www.green-market.by/registration_send_sms_code",
        "data": "{'phone': '*green*'}",
        "headers": {"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9", "Accept-Encoding": "gzip, deflate, br", "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7", "Cache-Control": "no-cache", "Connection": "keep-alive", "User-Agent": "", "X-CSRF-TOKEN": "", "X-Requested-With": "XMLHttpRequest"},
@@ -192,47 +248,54 @@
        "timeout": 60,
        "cookies": "https://www.green-market.by/"
      },
-      "ok.ru": {
+      "ok.ru_by": {
         "url": "https://ok.ru/dk?cmd=AnonymRegistrationEnterPhone&st.cmd=anonymRegistrationEnterPhone&st.cmd=anonymRegistrationEnterPhone",
         "data": "{'st.r.phone': '*+phone*'}",
         "response": 200,
         "timeout": 60,
         "cookies": "https://ok.ru/"
       },
-      "sosedi": {
+      "sosedi_by": {
         "url": "https://sosedi.by/local/api/smsSend.php",
         "json": "{'phone':'*sosedi*'}",
         "response": 200,
         "timeout": 60,
         "cookies": "https://sosedi.by/"
       },
-      "av.by": {
+      "av.by_by": {
         "url": "https://api.av.by/auth/phone/sign-up",
         "json": "{\"name\":\"Олег\",\"password\":\"HifbWy523i46oO\",\"phone\":{\"country\":1,\"number\":\"*-phone*\"},\"userEula\":{\"accepted\":true}}",
         "response": 204,
         "timeout": 60,
         "cookies": "https://av.by"
       },
-      "carte": {
+      "carte_by": {
         "url": "https://carte.by/auth/",
         "data": "{'ajax': 'register', 'login': 'Olegkiller229', 'pass': 'CbivnE5316', 'phone': '*+phone*', 'code': '', 'company': 0, 'resend': 1, 'checksum': 675}",
         "response": 200,
         "timeout": 30,
         "cookies": "https://carte.by/"
       },
-      "delivio": {
+      "delivio_by": {
         "url": "https://delivio.by/be/api/register",
         "json": "{'phone': '*+phone*'}",
         "response": 201,
         "timeout": 60,
         "cookies": "https://delivio.by/"
       },
-      "wildberries": {
+      "wildberries_by": {
         "url": "https://authorization.wildberries.eu/api/v2/code/request",
         "json": "{\"contact\": \"*phone*\", \"auth_method\": \"sms\", \"lang\": \"ru\"}",
         "response": 200,
         "HZF": "не умеет добавлять сервисы, и легко сливаетя, и ваще он полудурок копченый",
         "timeout": 60
+      },
+      "findclone_by": {
+        "url": "https://findclone.ru/register",
+        "data": "{'phone': '*phone*'}",
+        "response": 200,
+        "timeout": 60,
+        "GET": ""
       }
     }
   ]

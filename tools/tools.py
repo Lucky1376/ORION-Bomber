@@ -4,7 +4,7 @@
 
 from termcolor import colored
 from datetime import datetime
-import requests as r, os, time, random, shutil, zipfile
+import requests as r, os, time, random, shutil, zipfile, webbrowser
 from sys import platform
 from tools import proxy
 from progress.bar import ChargingBar
@@ -69,10 +69,18 @@ def clear():
 		print(colored("\nИзвините наша программа не поддерживает вашу операционную систему ;(\n", "red"))
 		exit()
 
+def anim_text(text, speed, color="green"):
+	for i in text:
+		print(colored(i, color), end="", flush=True)
+		time.sleep(speed)
+
 def banner():
 	a = open("tools/version.txt", "r")
 	ver = a.read().split("\n")[0]
 	a.close()
+
+	ru_s = str(len(send.services_list))
+	by_s = str(len(send.services_list_by))
 
 	banner = colored("""
 
@@ -84,16 +92,19 @@ def banner():
 	░ ▒░▒░▒░ ░ ▒▓ ░▒▓░░▓  ░ ▒░▒░▒░ ░ ▒░   ▒ ▒ 
 	  ░ ▒ ▒░   ░▒ ░ ▒░ ▒ ░  ░ ▒ ▒░ ░ ░░   ░ ▒░
 	░ ░ ░ ▒    ░░   ░  ▒ ░░ ░ ░ ▒     ░   ░ ░ 
-	    ░ ░     ░      ░      ░ ░           ░
+	    ░ ░     ░      ░      ░ ░           ░ """, "red")
 
-	               Sms bomber                            
-	""", "red")
+	pred_info = " "*24+colored("Сервисы", "green")+"\n"
+	pred_info_ru = " "*17+colored("Россия ", "blue")+colored(ru_s, "green")+"   "
+	pred_info_by = colored("Беларусь ", "cyan")+colored(by_s, "green")+"\n"
+	pred_info = pred_info+pred_info_ru+pred_info_by
 
 	info = " "*13+colored("[", "blue")+"Developers :"+colored("Lucky", "green")+" and "+colored("LostIk", "red")
 	info_2 = " "*13+colored("[", "blue")+"Version    :"+colored(ver, "red")
 	info_3 = " "*13+colored("[", "blue")+"Telegram   :"+colored("@orion_bomber", "cyan")+colored("   <--", "green")+"\n"
 
 	print(banner)
+	print(pred_info)
 	print(info)
 	print(info_2)
 	print(info_3)
@@ -321,7 +332,7 @@ def start_input():
 
 def ICC():
 	try:
-		print(colored("Проверка интернет соединения...", "green"))
+		anim_text("Проверка интернет соединения...", speed=0.030, color="green")
 		r.get("https://google.com", timeout=5)
 		clear()
 	except Exception as es:
@@ -341,14 +352,14 @@ def CFU():
 		exit()
 	clear()
 	if in_d:
-		print(colored("Проверяем обновление...", "green"))
+		anim_text("Проверяем обновление...", speed=0.030, color="green")
 		time.sleep(0.7)
 		result = r.get("https://raw.githubusercontent.com/Lucky1376/ORION-Bomber/master/tools/version.txt")
 		last_ver = result.content.decode("utf-8")
 		a = open("tools/version.txt", "r")
 		current_ver = a.read()
 		a.close()
-		if last_ver != current_ver and platform != "win32":
+		if last_ver != current_ver:
 			clear()
 			print(colored("[!]", "magenta"), colored("Найдено новое обновление", "green"), colored(last_ver, "cyan")+colored("!", "green"))
 			print("")
@@ -361,8 +372,8 @@ def CFU():
 				how = input(colored("~# ", "red"))
 				if how == "1":
 					clear()
-					print(colored("Устанавливаю архив...", "green"))
 					if platform == "linux" or platform == "linux2":
+						print(colored("Устанавливаю архив...", "green"))
 						os.chdir("/data/data/com.termux/files/home")
 						os.system("rm -rf ORION-Bomber")
 						
@@ -396,7 +407,9 @@ def CFU():
 						os.system("python main.py")
 						exit()
 					elif platform == "win32":
-						pass
+						clear()
+						os.startfile(os.getcwd()+"/updaters/windows.exe")
+						exit()
 				elif how == "2":
 					clear()
 					break
@@ -421,30 +434,49 @@ class Logs:
 		file_error.write(f"DATE - {date}\nERROR:\n{error}")
 		file_error.close()
 
+def check_files_fn(dir_, files):
+	if dir_ != "":
+		last_dir = os.getcwd()
+		os.chdir(dir_)
+	list_ = os.listdir()
+	for f in files:
+		if f not in list_:
+			return False
+	if dir_ != "":
+		os.chdir(last_dir)
+	return True
+
 def check_files():
-	print(colored("Проверка файлов...", "green"))
-	time.sleep(1)
+	anim_text("Проверка файлов...", speed=0.030, color="green")
 	files = os.listdir()
 	list_ = ["main.py", "LICENSE", "README.md", "tools"]
 	list_2 = ["proxy.py", "sender.py", "services.json", "tools.py", "version.txt", "logs.txt", "error_logs.txt"]
+	list_3 = ["windows.exe"]
 
-	for f in list_:
-		if f not in files:
-			clear()
-			print(colored("Наша программа не нашла некоторые наши файлы", "red"))
-			print(colored("Пожалуйста установите программу заново предварительно удалив папку с этой!\n", "green"))
-			exit()
-	last_dir = os.getcwd()
-	os.chdir("tools")
-	files = os.listdir()
-	for f in list_2:
-		if f not in files:
-			clear()
-			print(colored("Наша программа не нашла некоторые наши файлы", "red"))
-			print(colored("Пожалуйста установите программу заново предварительно удалив папку с этой!\n", "green"))
-			os.chdir(last_dir)
-			exit()
-	os.chdir(last_dir)
+	def ward():
+		clear()
+		print(colored("Наша программа не нашла некоторые наши файлы", "red"))
+		print(colored("Пожалуйста установите программу заново предварительно удалив папку с этой!\n", "green"))
+		exit()
+
+	if not(check_files_fn("", list_)):
+		ward()
+	elif not(check_files_fn("tools", list_2)):
+		ward()
+	elif not(check_files_fn("updaters", list_3)):
+		ward()
+
+def CTF():
+	try:
+		a = open("tools/timeout.txt", "r")
+		a.close()
+	except:
+		a = open("tools/timeout.txt", "w")
+		for serv in send.services_list:
+			a.write(f"{serv}:0\n")
+		for serv in send.services_list_by:
+			a.write(f"{serv}:0\n")
+		a.close()
 
 def FormattingResponse(status_code, service):
 	date = datetime.now()
@@ -555,16 +587,27 @@ def start(number, country, proxy_=None):
 
 
 
-	print("")
-	print(colored("Остановка спама", "yellow"))
-	print("├"+colored("Termux", "magenta")+":", colored("На встроенной клавиатуре от Termux выбрать CTRL затем C", "cyan"))
-	print("└"+colored("Windows", "blue")+":", colored("Комбинация клавишь Ctrl+C или Ctrl+Z", "cyan"))
-	an=["10", "9", "8", "7", "6", "5", "4", "3", "2", "1"]
+	print()
+	an=["3", "2", "1"]
 	for i in an:
 		print(colored("Спам начнется через ", "red")+colored(i, "green")+" ",sep=' ',end='\r')
 		time.sleep(1)
 	clear()
+	print(colored("Остановка спама", "yellow"))
+	print("├"+colored("Termux", "magenta")+":", colored("На встроенной клавиатуре от Termux выбрать CTRL затем C", "cyan"))
+	print("└"+colored("Windows", "blue")+":", colored("Комбинация клавишь Ctrl+C или Ctrl+Z", "cyan"))
+	print()
 
+
+	if platform == "win32":
+		if random.randint(1, 3) == 2:
+			print(colored("Подпишитесь на наш", "green"), colored("Телеграм!", "cyan"))
+			print(colored("Открываю ссылку...", "yellow"))
+			webbrowser.open("https://t.me/orion_bomber", new=0, autoraise=True)
+	else:
+		print(colored("Подпишитесь на наш", "green"), colored("Телеграм!", "cyan"), colored("t.me/orion_bomber", "red"))
+		print()
+		
 	# Number formats
 	number = FormattingNumber(number, country)
 
@@ -589,7 +632,10 @@ def start(number, country, proxy_=None):
 				if sender_class.checktimeout(serv) == True:
 					if proxy_ != None:
 						result = sender_class.spam(serv, number, proxy=proxy_["format"])
-						logs.save_logs(serv, result[0])
+						if result[0] == False:
+							logs.save_logs(serv, result[0], error=str(result[1]))
+						else:
+							logs.save_logs(serv, result[0])
 						if result[0] == False:
 							# Checking the proxy before the next spam attempt
 							print(colored("Проверка прокси...", "yellow"))
@@ -699,7 +745,7 @@ def start(number, country, proxy_=None):
 										print(colored("Прокси работает, продолжаю спам!", "green"))
 						else:
 							circles += 1
-							if result[1] != False:
+							if result[0] != False:
 								if serv == "magnit":
 									if result[1]["status_code"] == 200:
 										FormattingResponse(200, serv)
@@ -711,9 +757,12 @@ def start(number, country, proxy_=None):
 								FormattingResponse(666, serv)
 					else:
 						result = sender_class.spam(serv, number)
-						logs.save_logs(serv, result[0])
+						if result[0] == False:
+							logs.save_logs(serv, result[0], error=str(result[1]))
+						else:
+							logs.save_logs(serv, result[0])
 						circles += 1
-						if result[1] != False:
+						if result[0] != False:
 							if serv == "magnit":
 								if result[1]["status_code"] == 200:
 									FormattingResponse(200, serv)
