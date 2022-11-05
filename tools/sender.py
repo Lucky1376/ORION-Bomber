@@ -110,7 +110,9 @@ class Send:
                 "*phone2*": phone[4],
                 "*phone3*": phone[5],
                 "*mtfree*": phone[6],
-                "*-phone*": phone[7]
+                "*-phone*": phone[7],
+                "*eldarado*": phone[8],
+                "*vardex*": phone[9]
             }.items():
                 if old in payload:
                     payload = payload.replace(old, new)

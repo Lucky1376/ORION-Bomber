@@ -22,6 +22,8 @@ def FormattingNumber(number, country):
 			numb_6 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + " - " + numb[8:10] + " - " + numb[10:]
 			numb_7 = numb[:2] + " ("+numb[2:]
 			numb_8 = numb[2:]
+			numb_9 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + " " + numb[8:10] + numb[10:]
+			numb_10 = numb[:2] + ' ' + numb[2:5] + ' ' + numb[5:8] + "-" + numb[8:10] + "-" + numb[10:]
 		elif numb[0:1] == "7":  # 71234567890
 			numb_1 = "+"+numb
 			numb_2 = numb
@@ -32,6 +34,8 @@ def FormattingNumber(number, country):
 			numb_6 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + " - " + numb[8:10] + " - " + numb[10:]
 			numb_7 = numb[:2] + " ("+numb[2:]
 			numb_8 = numb[2:]
+			numb_9 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + " " + numb[8:10] + numb[10:]
+			numb_10 = numb[:2] + ' ' + numb[2:5] + ' ' + numb[5:8] + "-" + numb[8:10] + "-" + numb[10:]
 		elif numb[0:1] == "8":  # 81234567890
 			numb_1 = "+7"+numb[1:]
 			numb_2 = "7"+numb[1:]
@@ -42,6 +46,8 @@ def FormattingNumber(number, country):
 			numb_6 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + " - " + numb[8:10] + " - " + numb[10:]
 			numb_7 = numb[:2] + " ("+numb[2:]
 			numb_8 = numb[2:]
+			numb_9 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + " " + numb[8:10] + numb[10:]
+			numb_10 = numb[:2] + ' ' + numb[2:5] + ' ' + numb[5:8] + "-" + numb[8:10] + "-" + numb[10:]
 	elif country == "by": # For Belarus
 		if numb[0:1] == "+": # +123456789012
 			numb_1 = numb
@@ -58,7 +64,7 @@ def FormattingNumber(number, country):
 	if country == "by":
 		return numb_1, numb_2, numb_3, numb_4, numb_5
 	elif country == "ru":
-		return numb_1, numb_2, numb_3, numb_4, numb_5, numb_6, numb_7, numb_8
+		return numb_1, numb_2, numb_3, numb_4, numb_5, numb_6, numb_7, numb_8, numb_9, numb_10
 
 def clear():
 	if platform == "linux" or platform == "linux2":
@@ -431,7 +437,7 @@ class Logs:
 	def error_logs(self, error):
 		date = datetime.now()
 		file_error = open("tools/error_logs.txt", "a")
-		file_error.write(f"DATE - {date}\nERROR:\n{error}")
+		file_error.write(f"DATE - {date}\nERROR:\n{error}\n")
 		file_error.close()
 
 def check_files_fn(dir_, files):
@@ -600,7 +606,7 @@ def start(number, country, proxy_=None):
 
 
 	if platform == "win32":
-		if random.randint(1, 3) == 2:
+		if random.randint(1, 2) == 2:
 			print(colored("Подпишитесь на наш", "green"), colored("Телеграм!", "cyan"))
 			print(colored("Открываю ссылку...", "yellow"))
 			webbrowser.open("https://t.me/orion_bomber", new=0, autoraise=True)

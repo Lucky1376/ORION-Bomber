@@ -7,7 +7,7 @@
 ###### [![geonodee](https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=Telegram)](https://t.me/orion_bomber)
 #
 # 💻Меню
-![Alt-текст](https://i.ibb.co/n34G0kp/menu.png)
+![Alt-текст](https://i.ibb.co/F6Nzt9x/1-2.png)
 ___
 # ❤️️**Без них не обошлись**
 | Метод | Описание | Ссылки|
