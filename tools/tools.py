@@ -638,6 +638,9 @@ def start(number, country, proxy_=None):
 				if sender_class.checktimeout(serv) == True:
 					if proxy_ != None:
 						result = sender_class.spam(serv, number, proxy=proxy_["format"])
+						if result[1] == "keyboard":
+							raise KeyboardInterrupt
+
 						if result[0] == False:
 							logs.save_logs(serv, result[0], error=str(result[1]))
 						else:
@@ -763,6 +766,9 @@ def start(number, country, proxy_=None):
 								FormattingResponse(666, serv)
 					else:
 						result = sender_class.spam(serv, number)
+						if result[1] == "keyboard":
+							raise KeyboardInterrupt
+
 						if result[0] == False:
 							logs.save_logs(serv, result[0], error=str(result[1]))
 						else:

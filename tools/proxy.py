@@ -1,10 +1,10 @@
 import requests, random, threading as th
 from bs4 import BeautifulSoup as BS
-from fake_useragent import UserAgent as UA
 from progress.bar import ChargingBar
+from tools.user_agents import r_ua
 
 def SPC(ip, port, login=None, password=None):
-    ua = UA().random
+    ua = r_ua()
     ipp = ip + ':' + port
     proxy_http = {'http': 'http://' + ipp}
 
@@ -146,7 +146,7 @@ class Proxy:
 		bar = ChargingBar('Парсинг', max = len(pr_b))
 
 		# User-Agent
-		ua = UA()
+		ua = r_ua()
 
 		# Summary sheet with proxy
 		itog = {}
@@ -161,7 +161,7 @@ class Proxy:
 		for ct in url_list:
 			can = False
 			try:
-				response = requests.get(url_list[ct], headers={"User-Agent": ua.random}, timeout=self.timeout)
+				response = requests.get(url_list[ct], headers={"User-Agent": ua}, timeout=self.timeout)
 				can = True
 			except:
 				pass
@@ -193,7 +193,7 @@ class Proxy:
 		# -----------------------------------------------
 		can = False
 		try:
-			response = requests.get("https://www.sslproxies.org", headers={"User-Agent": ua.random}, timeout=self.timeout)
+			response = requests.get("https://www.sslproxies.org", headers={"User-Agent": ua}, timeout=self.timeout)
 			can = True
 		except:
 			pass
@@ -230,7 +230,7 @@ class Proxy:
 		if self.unknown == True:
 			can = False
 			try:
-				response = requests.get("https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=5000&country=all&ssl=all&anonymity=all", headers={"User-Agent": ua.random}, timeout=self.timeout)
+				response = requests.get("https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=5000&country=all&ssl=all&anonymity=all", headers={"User-Agent": ua}, timeout=self.timeout)
 				can = True
 			except:
 				pass
@@ -254,7 +254,7 @@ class Proxy:
 		col_page = 1
 		can = False
 		try:
-			result = requests.get("https://proxylist.geonode.com/api/proxy-list?limit=50&page=1&sort_by=lastChecked&sort_type=desc&speed=medium&protocols=http%2Chttps", headers={"User-Agent": ua.random}, timeout=self.timeout)
+			result = requests.get("https://proxylist.geonode.com/api/proxy-list?limit=50&page=1&sort_by=lastChecked&sort_type=desc&speed=medium&protocols=http%2Chttps", headers={"User-Agent": ua}, timeout=self.timeout)
 			can = True
 		except:
 			pass
@@ -269,7 +269,7 @@ class Proxy:
 			i = 1
 			while i < col_page:
 				try:
-					response = requests.get(f"https://proxylist.geonode.com/api/proxy-list?limit=50&page={i}&sort_by=lastChecked&sort_type=desc&speed=medium&protocols=http%2Chttps", headers={"User-Agent": ua.random}, timeout=15)
+					response = requests.get(f"https://proxylist.geonode.com/api/proxy-list?limit=50&page={i}&sort_by=lastChecked&sort_type=desc&speed=medium&protocols=http%2Chttps", headers={"User-Agent": ua}, timeout=15)
 					if response.status_code == 200:
 						for pr in response.json()["data"]:
 							ip = pr["ip"]

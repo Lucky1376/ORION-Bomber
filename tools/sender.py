@@ -2,7 +2,7 @@ import json
 import time
 import requests
 from bs4 import BeautifulSoup
-from fake_useragent import UserAgent
+from tools.user_agents import r_ua
 
 # services list
 services_list = []
@@ -196,7 +196,7 @@ class Send:
             url = service["url"]
 
         # generate headers
-        ua = UserAgent().random
+        ua = r_ua()
         try:
             service["headers"]["User-Agent"] = ua
             headers = service["headers"]
@@ -254,5 +254,7 @@ class Send:
                     return 200, r.text
                 else:
                     return r.status_code, r.text
+        except KeyboardInterrupt:
+            return False, "keyboard"
         except Exception as e:
             return False, e # https://t.me/orion_bomber
