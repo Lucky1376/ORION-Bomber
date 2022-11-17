@@ -48,10 +48,13 @@ ___
 ___
 # 💰Поддержать проект:
 
-+ #### **QIWI Кошелёк**
++ #### ![logo](https://i.ibb.co/mhXq1PR/qiwi3.png)**QIWI Кошелёк**
   + [**`Перевод по никнейму`**](https://qiwi.com/n/LUCKY1376)
-  + **`2200 7302 4344 6206`** `MIR`
-  + **`4890 4947 5754 5546`** `VISA`
-+ #### **Сбер**
-  + **`2202 2024 3331 7181`** `MIR`
-  + **`5469 4500 1265 2996`** `MasterCard`
+  + **`2200 7302 4344 6206`** ![logo](https://i.ibb.co/c3RBK50/mir2.png)
+  + **`4890 4947 5754 5546`** ![logo](https://i.ibb.co/xHS2GyQ/visa2.png)
++ #### ![qiwi_logo](https://i.ibb.co/Pc8t8zH/sber2.png) **Сбер**
+  + **`2202 2024 3331 7181`** ![logo](https://i.ibb.co/c3RBK50/mir2.png)
+  + **`5469 4500 1265 2996`** ![logo](https://i.ibb.co/PrsbdwP/mastercard2.png)
++ #### ![logo](https://i.ibb.co/SnSV3sV/youmoney2.png) **Юмани**
+  + **`4100 1174 8743 5875`** `Номер Счета`
+  + **`2202 1201 0852 7850`** ![logo](https://i.ibb.co/c3RBK50/mir2.png)
