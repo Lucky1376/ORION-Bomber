@@ -67,7 +67,7 @@ def FormattingNumber(number, country):
 		return numb_1, numb_2, numb_3, numb_4, numb_5, numb_6, numb_7, numb_8, numb_9, numb_10
 
 def clear():
-	if platform == "linux" or platform == "linux2":
+	if platform == "linux" or platform == "linux2" or platform == "darwin":
 		os.system("clear")
 	elif platform == "win32":
 		os.system("cls")
@@ -80,6 +80,13 @@ def anim_text(text, speed, color="green"):
 		print(colored(i, color), end="", flush=True)
 		time.sleep(speed)
 
+def RCT(text):
+	colors = ["green", "yellow", "red", "magenta", "blue"]
+	new_text = ""
+	for i in str(text):
+		new_text += colored(i, random.choice(colors))
+	return new_text
+
 def banner():
 	a = open("tools/version.txt", "r")
 	ver = a.read().split("\n")[0]
@@ -89,27 +96,31 @@ def banner():
 	by_s = str(len(send.services_list_by))
 
 	banner = colored("""
-
-	 ▒█████   ██▀███   ██▓ ▒█████   ███▄    █ 
+	   ❆   ❆       ❆        ❆     ❆   ❆   ❆
+	❆		    ❆        ❆       ❆     ❆
+	 ▒█████   ██▀███   ██▓ ▒█████   ███▄  ❆ █ 
 	▒██▒  ██▒▓██ ▒ ██▒▓██▒▒██▒  ██▒ ██ ▀█   █ 
-	▒██░  ██▒▓██ ░▄█ ▒▒██▒▒██░  ██▒▓██  ▀█ ██▒
+	▒██░❆ ██▒▓██ ░▄█ ▒▒██▒▒██░❆ ██▒▓██  ▀█ ██▒
 	▒██   ██░▒██▀▀█▄  ░██░▒██   ██░▓██▒  ▐▌██▒
 	░ ████▓▒░░██▓ ▒██▒░██░░ ████▓▒░▒██░   ▓██░
-	░ ▒░▒░▒░ ░ ▒▓ ░▒▓░░▓  ░ ▒░▒░▒░ ░ ▒░   ▒ ▒ 
+	░ ▒░▒░▒░ ░ ▒▓ ░▒▓░░▓  ░ ▒░▒░▒░ ░ ▒░ ❆ ▒ ▒ 
 	  ░ ▒ ▒░   ░▒ ░ ▒░ ▒ ░  ░ ▒ ▒░ ░ ░░   ░ ▒░
-	░ ░ ░ ▒    ░░   ░  ▒ ░░ ░ ░ ▒     ░   ░ ░ 
-	    ░ ░     ░      ░      ░ ░           ░ """, "red")
+	░ ░ ░ ▒ ❆  ░░   ░  ▒ ░░ ░ ░ ▒     ░   ░ ░ 
+	    ░ ░     ░  ❆   ░     ❆░ ░  ❆    ❆   ░ 
+	 ❆  	❆          ❆        ❆""", "blue")
 
-	pred_info = " "*24+colored("Сервисы", "green")+"\n"
+	new_year = " "*21+RCT("Happy New Year!")
+	pred_info = "\n"+" "*24+colored("Сервисы", "green")+"\n"
 	pred_info_ru = " "*17+colored("Россия ", "blue")+colored(ru_s, "green")+"   "
 	pred_info_by = colored("Беларусь ", "cyan")+colored(by_s, "green")+"\n"
 	pred_info = pred_info+pred_info_ru+pred_info_by
 
 	info = " "*13+colored("[", "blue")+"Developers :"+colored("Lucky", "green")+" and "+colored("LostIk", "red")
-	info_2 = " "*13+colored("[", "blue")+"Version    :"+colored(ver, "red")
+	info_2 = " "*13+colored("[", "blue")+"Version    :"+colored(ver, "red")+"🎄"
 	info_3 = " "*13+colored("[", "blue")+"Telegram   :"+colored("@orion_bomber", "cyan")+colored("   <--", "green")+"\n"
 
 	print(banner)
+	print(new_year)
 	print(pred_info)
 	print(info)
 	print(info_2)
@@ -117,11 +128,11 @@ def banner():
 
 def banner_tools():
 	print(colored("[1]", "red"), colored("Начать спам", "green"))
-	print(colored("[2]", "red"), colored("FAQ Про прокси", "blue"))
-	print(colored("[3]", "red"), colored("Краткое руководство проблем", "cyan"))
-	print(colored("[4]", "red"), colored("Отказ от ответственности", "red"))
-	print(colored("[5]", "red"), colored("Поддержать разработчиков!    <---", "green"))
-	print(colored("[6]", "red"), colored("Инструкция по отправке логов", "yellow"))
+	#print(colored("[2]", "red"), colored("FAQ Про прокси", "blue"))
+	#print(colored("[3]", "red"), colored("Краткое руководство проблем", "cyan"))
+	#print(colored("[4]", "red"), colored("Отказ от ответственности", "red"))
+	print(colored("[2]", "red"), colored("Поддержать разработчиков!    <---", "green"))
+	print(colored("[3]", "red"), colored("Инструкция по отправке логов", "yellow"))
 	print(colored("\n[99]", "red"), colored("Информация", "cyan"))
 	print(colored("\n[0] Выход", "red"))
 
@@ -153,6 +164,10 @@ def donate():
 	print(colored("Сбербанк", "green"))
 	print("├"+colored("2202 2024 3331 7181", "cyan"), colored("MIR", "green"))
 	print("└"+colored("5469 4500 1265 2996", "cyan"), colored("MasterCard", "red"))
+	print("")
+	print(colored("Юмани", "blue"))
+	print("├"+colored("4100 1174 8743 5875", "cyan"), "Номер счета")
+	print("└"+colored("2202 1201 0852 7850", "cyan"), colored("MIR", "green"))
 	print("\nНажмите Enter чтобы вернуться назад")
 	input()
 
@@ -340,11 +355,132 @@ def ICC():
 	try:
 		anim_text("Проверка интернет соединения...", speed=0.030, color="green")
 		r.get("https://google.com", timeout=5)
-		clear()
 	except Exception as es:
 		clear()
 		print(colored("[!]", "red"), colored("Ваше устройство не подключено к интернету или интернет слишком слабый!", "magenta"))
 		exit()
+
+def check_moderator():
+	clear()
+	anim_text("!WARNING!", speed=0.085, color="red")
+	time.sleep(1.5)
+	clear()
+	anim_text("Эта функция предназначена только разработчикам...", speed=0.030, color="magenta")
+	time.sleep(1)
+	print()
+	anim_text("Для продолжения введите код пароль если вы знаете что вы делаете...", speed=0.022, color="cyan")
+	time.sleep(1)
+	while True:
+		print("\n")
+		print(colored("[0] Выход", "red"))
+		print()
+		try:
+			password = input(colored("~# ", "magenta"))
+		except KeyboardInterrupt:
+			return "return"
+		if password == "868535514":
+			return True
+		elif password == "0":
+			return "return"
+		else:
+			anim_text("Пароль неверный...", speed=0.030, color="red")
+			time.sleep(1)
+
+def force_update():
+	result_m = check_moderator()
+	if result_m == "return":
+		return
+	elif result_m == True:
+		result = r.get("https://raw.githubusercontent.com/Lucky1376/ORION-Bomber/master/tools/version.txt")
+		last_ver = result.content.decode("utf-8")
+
+		update_list = r.get("https://raw.githubusercontent.com/Lucky1376/ORION-Bomber/master/tools/update_list.txt")
+		update_list = update_list.content.decode("utf-8").split("\n")
+
+		clear()
+		print(colored("[!]", "magenta"), colored("Найдено новое обновление V", "green")+colored(last_ver, "cyan")+colored("!", "green"))
+		print("")
+		k = 0
+		print(colored("Что нового?", "green"))
+		for par in update_list:
+			if len(update_list)-1 == k:
+				print("└"+colored(par, "cyan"))
+			else:
+				print("├"+colored(par, "cyan"))
+			k+=1
+		print("")
+		print(colored("Желаете ли вы обновиться до актуальной версии?", "yellow"))
+		print("")
+		print(colored("[1]", "red"), colored("Да", "green"))
+		print(colored("[2]", "red"), colored("Нет", "red"))
+		print("")
+		while True:
+			how = input(colored("~# ", "red"))
+			if how == "1":
+				clear()
+				if platform == "linux" or platform == "linux2":
+					print(colored("Устанавливаю архив...", "green"))
+					os.chdir("/data/data/com.termux/files/home")
+					os.system("rm -rf ORION-Bomber")
+					
+					result = r.get("https://github.com/Lucky1376/ORION-Bomber/archive/refs/heads/master.zip")
+					
+					a = open("ORION-Bomber.zip", "wb")
+					a.write(result.content)
+					a.close()
+					
+					print(colored("Распаковка архива...", "green"))
+
+					fantasy_zip = zipfile.ZipFile("ORION-Bomber.zip")
+					fantasy_zip.extractall("ORION-Bomber")
+					fantasy_zip.close()
+					os.system("rm -rf ORION-Bomber.zip")
+
+					os.chdir("ORION-Bomber")
+					os.chdir("ORION-Bomber-master")
+					 
+					get_files = os.listdir(os.getcwd())
+					 
+					for g in get_files:
+						shutil.move(g, "/data/data/com.termux/files/home/ORION-Bomber")
+					os.chdir("/data/data/com.termux/files/home/ORION-Bomber")
+					os.system("rm -rf ORION-Bomber-master")
+
+					print(colored("Обновление прошло успешно, запускаю ORION-Bomber...", "green"))
+					time.sleep(1.5)
+
+					os.system("pip install -r requirements.txt")
+					os.system("python main.py")
+					exit()
+				elif platform == "win32":
+					clear()
+					os.startfile(os.getcwd()+"/updaters/windows.exe")
+					exit()
+				else:
+					print(colored("[!]", "red"), colored("Наша программа пока не может установить обновление на вашу операционную ситему, вам придется скачать обновление вручную. В будущем мы постораемся сделать автообновление под вашу ОС!", "magenta"))
+					print("\nНажмите Enter чтобы запустить программу на старой версии или введите 1 чтобы я открыл ссылку на репозиторий с актуальной версией")
+					if input() == "1":
+						result_open = webbrowser.open("https://github.com/Lucky1376/ORION-Bomber", new=0, autoraise=True)
+						if not(result_open):
+							clear()
+							print(colored("Мне не удалось открыть ссылку на актуальную версию на вашем устройстве ;(", "red"))
+							print("\n"+"Попробуйте открыть ее сами! "+colored("https://github.com/Lucky1376/ORION-Bomber", "green"))
+							print("\nНажмите Enter чтобы запустить программу на старой версии или введите 1 чтобы выйти")
+							if input() == "1":
+								exit()
+							else:
+								return
+						else:
+							clear()
+							print(colored("Скачивайте обновление!", "green"))
+							exit()
+					else:
+						return
+			elif how == "2":
+				clear()
+				break
+
+
 
 def CFU():
 	in_d = False
@@ -359,15 +495,29 @@ def CFU():
 	clear()
 	if in_d:
 		anim_text("Проверяем обновление...", speed=0.030, color="green")
-		time.sleep(0.7)
+		#time.sleep(0.7) ├ └
+
 		result = r.get("https://raw.githubusercontent.com/Lucky1376/ORION-Bomber/master/tools/version.txt")
 		last_ver = result.content.decode("utf-8")
+
+		update_list = r.get("https://raw.githubusercontent.com/Lucky1376/ORION-Bomber/master/tools/update_list.txt")
+		update_list = update_list.content.decode("utf-8").split("\n")
+
 		a = open("tools/version.txt", "r")
 		current_ver = a.read()
 		a.close()
 		if last_ver != current_ver:
 			clear()
-			print(colored("[!]", "magenta"), colored("Найдено новое обновление", "green"), colored(last_ver, "cyan")+colored("!", "green"))
+			print(colored("[!]", "magenta"), colored("Найдено новое обновление V", "green")+colored(last_ver, "cyan")+colored("!", "green"))
+			print("")
+			k = 0
+			print(colored("Что нового?", "green"))
+			for par in update_list:
+				if len(update_list)-1 == k:
+					print("└"+colored(par, "cyan"))
+				else:
+					print("├"+colored(par, "cyan"))
+				k+=1
 			print("")
 			print(colored("Желаете ли вы обновиться до актуальной версии?", "yellow"))
 			print("")
@@ -416,6 +566,26 @@ def CFU():
 						clear()
 						os.startfile(os.getcwd()+"/updaters/windows.exe")
 						exit()
+					else:
+						print(colored("[!]", "red"), colored("Наша программа пока не может установить обновление на вашу операционную ситему, вам придется скачать обновление вручную. В будущем мы постораемся сделать автообновление под вашу ОС!", "magenta"))
+						print("\nНажмите Enter чтобы запустить программу на старой версии или введите 1 чтобы я открыл ссылку на репозиторий с актуальной версией")
+						if input() == "1":
+							result_open = webbrowser.open("https://github.com/Lucky1376/ORION-Bomber", new=0, autoraise=True)
+							if not(result_open):
+								clear()
+								print(colored("Мне не удалось открыть ссылку на актуальную версию на вашем устройстве ;(", "red"))
+								print("\n"+"Попробуйте открыть ее сами! "+colored("https://github.com/Lucky1376/ORION-Bomber", "green"))
+								print("\nНажмите Enter чтобы запустить программу на старой версии или введите 1 чтобы выйти")
+								if input() == "1":
+									exit()
+								else:
+									return
+							else:
+								clear()
+								print(colored("Скачивайте обновление!", "green"))
+								exit()
+						else:
+							return
 				elif how == "2":
 					clear()
 					break
@@ -477,12 +647,11 @@ def CTF():
 		a = open("tools/timeout.txt", "r")
 		a.close()
 	except:
-		a = open("tools/timeout.txt", "w")
-		for serv in send.services_list:
-			a.write(f"{serv}:0\n")
-		for serv in send.services_list_by:
-			a.write(f"{serv}:0\n")
-		a.close()
+		with open("tools/timeout.txt", "w") as f:
+			for serv in send.services_list:
+				f.write(f"{serv}:0\n")
+			for serv in send.services_list_by:
+				f.write(f"{serv}:0\n")
 
 def FormattingResponse(status_code, service):
 	date = datetime.now()

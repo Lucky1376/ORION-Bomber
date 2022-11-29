@@ -37,9 +37,9 @@
       },
       "citi_link": {
         "url": "https://www.citilink.ru/registration/confirm/phone/*phone*/",
-        "data": "{'phone': '*phone*', 'ret': '1', 'smsRepeatDelay': '60', 'smsRepeatsDelay': '60', 'smsRepeatsLimit': '5', 'smsRequestToken': 't19d686d-6d80-4297-8909-b11c575627b8'}",
+        "data": "{'phone': '*phone*', 'ret': '1', 'smsRepeatDelay': '60', 'smsRepeatsDelay': '60', 'smsRepeatsLimit': '5', 'smsRequestToken': '0220c808-b9fb-408c-a383-897cd658989f'}",
         "response": 200,
-        "timeout": 60
+        "timeout": 100
       },
       "akbarsa": {
         "url": "https://www.akbars.ru/api/PhoneConfirm/",
@@ -165,22 +165,6 @@
         "response": 200,
         "timeout": 60
       },
-      "lentaru": {
-        "url": "https://online.lenta.com/api.php",
-        "data": "{'tel': '*phone()*', 'accept': 'on', 'urlParams': ''}",
-        "response": 200,
-        "headers": {
-          "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-          "Accept-Encoding": "gzip, deflate, br",
-          "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-          "Cache-Control": "no-cache",
-          "Connection": "keep-alive",
-          "User-Agent": "",
-          "X-Requested-With": "XMLHttpRequest"
-        },
-        "timeout": 60,
-        "cookies": "https://online.lenta.com"
-      },
       "wildberries": {
         "url": "https://authorization.wildberries.eu/api/v2/code/request",
         "json": "{\"contact\": \"*phone*\", \"auth_method\": \"sms\", \"lang\": \"ru\"}",
@@ -262,6 +246,52 @@
         "url": "https://register2.sipnet.ru/cgi-bin/exchange.dll/RegisterHelper?oper=9&callmode=1&phone=*phone*",
         "response": 200,
         "timeout": 60
+      },
+      "vesnashop": {
+        "url": "https://vesna.shop/bitrix/components/splash/auth/ajax.php",
+        "data": "{'type': 'auth','phone': '*vardex*','vtr': ''}",
+        "response": 200,
+        "timeout": 60,
+        "headers": {"Accept": "application/json, text/javascript, */*; q=0.01", "Accept-Encoding": "gzip, deflate, br",
+          "Accept-Language": "ru,en;q=0.9", "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8", "referer": "https://vesna.shop/", "User-Agent": "", "x-requested-with": "XMLHttpRequest"
+        }
+      },
+      "beeline": {
+        "cookies": "https://podarki.beeline.ru/",
+        "url": "https://g1.accelera.ai/api/auth/",
+        "json": "{'ctn': '*phone*', 'fingerprint': {'fingerprint': '2584445951', 'browser': 'Yandex','OS': 'Windows','osVersion': '10'}}",
+        "response": 200,
+        "timeout": 120,
+        "headers": {"Accept": "*/*", "Accept-Encoding": "gzip, deflate", "Accept-Language": "ru-RU,ru;q=0.9", "Authorization": "Key xPCYYlvB_5zKab4WztOFpDo1mngaEM889N5k7vhY", "User-Agent": ""}
+      },
+      "lentacom": {
+        "url": "https://lenta.com/api/v1/authentication/loginotp",
+        "json": "{'phoneNumber': '*-phone*', 'ksid': 'L!be0e73c0-b0cf-8a67-7047-cfebc7980a66_0'}",
+        "response": 200,
+        "timeout": 120,
+        "headers": {"Content-Type": "application/json", "Cookie": ".ASPXANONYMOUS=3tDE0AC2uvhFm3uC-YRc_KI0q9uBNLz9Ec4kmSBD7ntbWKeUN-3KHTjqJ1sVUr_LoISE6Bq1SHJ-3T15d72HHQN2qB7uygoR8LLmhS54qFI6fwVzJ2wYdFNDxHhncaTmTy0s4w2; ASP.NET_SessionId=pp3xdccr04p0f3sbbvcpnmkm; cookiesession1=678B286DYACEGIKMOQTV135799136195; qrator_msid=1661604969.016.eAzg9BjVxFAQL6MS-mc8sqefejtnimm4qo24ua0msuqf1c4ld; CustomerId=0ab9e642fada4c009fb2450befa67dfc; ShouldSetDeliveryOptions=True; DontShowCookieNotification=true; _tm_lt_sid=1661604972717.961622; _ym_uid=1661604974484496117; _ym_d=1661604974; _ym_isad=1; _gcl_au=1.1.852215224.1661604974; _ym_visorc=b; KFP_DID=81e58c9b-1e87-90a6-400e-1d6c30362daf; tmr_lvid=774e77c95e64544af8cf20944dff2c27; tmr_lvidTS=1661604976734; _ga=GA1.2.405490698.1661604977; _gid=GA1.2.694431860.1661604977; _dc_gtm_UA-327775-35=1; _gat_UA-327775-1=1; _tt_enable_cookie=1; _ttp=3446eba5-cc09-4cc8-b177-a329df01a686; flocktory-uuid=9f7056ce-8593-4b0a-b973-f7e1b0e913a3-8; _gat_UA-327775-30=1; tmr_detect=1%7C1661604983109; tmr_reqNum=8; oxxfgh=L!be0e73c0-b0cf-8a67-7047-cfebc7980a66#1#1800000#5000#1800000#44965", "User-Agent": ""}
+      },
+      "mygames": {
+        "url": "https://account.my.games/signup_phone_init/",
+        "json": "{'csrfmiddlewaretoken': '','client_id': 'games.my.com','continue': 'https://store.my.games/','lang': 'ru_RU','adId': '0','phone': '*phone*','password': 'zku-SmR-c6k-sg6','method': 'phone'}",
+        "response": 200,
+        "timeout": 300,
+        "headers": {
+          "Content-Type": "application/json", "cookie": "_ym_uid=1654025467684831506; _ym_d=1654025467; _gcl_au=1.1.977496090.1654025467; _ym_visorc=w; _ym_isad=1; tmr_lvid=1f2ee5766691696cc38805c612b2b44d; tmr_lvidTS=1654025473108; _ga=GA1.2.563371938.1654025476; _gid=GA1.2.1260702696.1654025476; __cmpconsentx36623=BPZ4E9UPZ4E9UAfJvBRUDXAAAABCqABAhUA; __cmpcccx36623=aBPZ4E9UgAwAzADcAoAAIAAwADgAXAA0AB4AQ4BGgHEgWBABGDEA; _gat_UA-141226752-1=1; tmr_reqNum=5; amc_lang=ru_RU", "User-Agent": ""}
+      },
+      "apteka-ot-sklada": {
+        "url": "https://apteka-ot-sklada.ru/api/auth/request",
+        "json": "{'phone': '*phone*'}",
+        "headers": {"Cookie": "view=cells; rrpvid=182985917812810; _ym_uid=1669397180778917572; _ym_d=1669397180; rcuid=62f1473f2534d0f27d07c026; _gid=GA1.2.1728524294.1669397180; _gat_gtag_UA_65450830_1=1; _ym_isad=1; _userGUID=0:lawrz8ev:UsfWVO0CgBe11ZeAri~XTvEKs~tt6Rs1; dSesn=50a7f5f6-15e3-8c2e-6d20-bb38a05cedb1; _dvs=0:lawrz8ev:mJriWOB42pmlP8KgjY8hx~ZuJyQlg3VG; _ym_visorc=b; tmr_lvid=fa4817f671d93bd212f0cff6b80fec1d; tmr_lvidTS=1669397180605; mark=3a6e6f49-3648-4ab4-ac78-fad19282326a; _ga_6C350KZVLV=GS1.1.1669397181.1.0.1669397181.0.0.0; _ga=GA1.1.1801205636.1669397180; tmr_detect=1%7C1669397181519; rrwpswu=true; city=41", "User-Agent": ""},
+        "timeout": 30,
+        "response": 200
+      },
+      "smartmed": {
+        "url": "https://online.smartmed.pro/personal/api/users/register/v2",
+        "json": "{'address': 'null', 'birthday': '1991-11-11','email': 'dasdbt325@mail.ru', 'firstName': 'Олег','gender': '1','lastName': 'олегович','password': '1234nyrmyx','patientTypeForRegistration': '1','patronymic': 'Олег','phone': '*phone*', 'termsOfUse': [{'code': '1','value': 'true'}],'withoutPatronymic': 'false'}",
+        "headers": {"Application-Version": "2.2.0", "Content-Type": "application/json", "Timezone-Offset": "300", "User-Agent": ""},
+        "response": 200,
+        "timeout": 60
       }
     }
   ],
@@ -330,6 +360,14 @@
         "response": 200,
         "timeout": 60,
         "GET": ""
+      },
+      "mygames_by": {
+        "url": "https://account.my.games/signup_phone_init/",
+        "json": "{'csrfmiddlewaretoken': '41r1HINGrjawyMvEtmxnxUIKhPPaYO88EEcCrS39GlFS0qjpSfDPrQwynsf9AgnE', 'continue': 'https://account.my.games/profile/userinfo/', 'lang': 'ru_RU', 'adId': '0', 'phone': '*phone*', 'password': 'aVWwv352', 'method': 'phone'}",
+        "response": 200,
+        "timeout": 300,
+        "headers": {
+          "Content-Type": "application/json", "cookie": "tmr_lvid=8486d72df1bd0454f40766848fee4a87; tmr_lvidTS=1669395712200; _gcl_au=1.1.429924486.1669395712; _ym_uid=1669395712518165517; _ym_d=1669395712; _ym_isad=1; _ga=GA1.2.1385546992.1669395713; _gid=GA1.2.1310932677.1669395713; _ym_visorc=b; __cmpconsentx36623=BPjCZIxPjCZIxAfJvBRUDXAAAAAAAA; __cmpcccx36623=aBPjCZIxgAgAzADAAuA4kCwIAIwYgA; csrftoken=41r1HINGrjawyMvEtmxnxUIKhPPaYO88EEcCrS39GlFS0qjpSfDPrQwynsf9AgnE; amc_lang=ru_RU; act=1eG9Q4dehyq9twI0", "User-Agent": ""}
       }
     }
   ]
