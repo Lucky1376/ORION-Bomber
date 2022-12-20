@@ -4,7 +4,7 @@
 
 from termcolor import colored
 from datetime import datetime
-import requests as r, os, time, random, shutil, zipfile, webbrowser
+import requests as r, os, time, random, shutil, zipfile, webbrowser, traceback
 from sys import platform
 from tools import proxy
 from progress.bar import ChargingBar
@@ -24,6 +24,7 @@ def FormattingNumber(number, country):
 			numb_8 = numb[2:]
 			numb_9 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + " " + numb[8:10] + numb[10:]
 			numb_10 = numb[:2] + ' ' + numb[2:5] + ' ' + numb[5:8] + "-" + numb[8:10] + "-" + numb[10:]
+			numb_11 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:]
 		elif numb[0:1] == "7":  # 71234567890
 			numb_1 = "+"+numb
 			numb_2 = numb
@@ -36,6 +37,7 @@ def FormattingNumber(number, country):
 			numb_8 = numb[2:]
 			numb_9 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + " " + numb[8:10] + numb[10:]
 			numb_10 = numb[:2] + ' ' + numb[2:5] + ' ' + numb[5:8] + "-" + numb[8:10] + "-" + numb[10:]
+			numb_11 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:]
 		elif numb[0:1] == "8":  # 81234567890
 			numb_1 = "+7"+numb[1:]
 			numb_2 = "7"+numb[1:]
@@ -48,6 +50,7 @@ def FormattingNumber(number, country):
 			numb_8 = numb[2:]
 			numb_9 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:8] + " " + numb[8:10] + numb[10:]
 			numb_10 = numb[:2] + ' ' + numb[2:5] + ' ' + numb[5:8] + "-" + numb[8:10] + "-" + numb[10:]
+			numb_11 = numb[:2] + " (" + numb[2:5] + ") " + numb[5:]
 	elif country == "by": # For Belarus
 		if numb[0:1] == "+": # +123456789012
 			numb_1 = numb
@@ -55,16 +58,18 @@ def FormattingNumber(number, country):
 			numb_3 = numb[4:]
 			numb_4 = numb[:4] + ' (' + numb[4:6] + ") " + numb[6:9] + '-' + numb[9:11] + '-' + numb[11:13]
 			numb_5 = numb[:4] + ' (' + numb[4:6] + ") " + numb[6:9] +numb[9:11] +numb[11:13]
+			numb_6 = numb[:4] + ' ' + numb[4:6] + " " + numb[6:9] + ' ' + numb[9:11] + ' ' + numb[11:13]
 		elif numb[0:1] == "3" or numb[0:3] == "375": # 123456789012
 			numb_1 = "+"+numb
 			numb_2 = numb
 			numb_3 = numb[3:]
 			numb_4 = '+' + numb[:3] + ' (' + numb[3:5] + ") " + numb[5:8] + '-' + numb[8:10] + '-' + numb[10:12]
 			numb_5 = numb_1[:4] + ' (' + numb_1[4:6] + ") " + numb_1[6:9] +numb_1[9:11] +numb_1[11:13]
+			numb_6 = numb_1[:4] + ' ' + numb_1[4:6] + " " + numb_1[6:9] + ' ' + numb_1[9:11] + ' ' + numb_1[11:13]
 	if country == "by":
-		return numb_1, numb_2, numb_3, numb_4, numb_5
+		return numb_1, numb_2, numb_3, numb_4, numb_5, numb_6
 	elif country == "ru":
-		return numb_1, numb_2, numb_3, numb_4, numb_5, numb_6, numb_7, numb_8, numb_9, numb_10
+		return numb_1, numb_2, numb_3, numb_4, numb_5, numb_6, numb_7, numb_8, numb_9, numb_10, numb_11
 
 def clear():
 	if platform == "linux" or platform == "linux2" or platform == "darwin":
@@ -81,10 +86,14 @@ def anim_text(text, speed, color="green"):
 		time.sleep(speed)
 
 def RCT(text):
+	last_color = None
 	colors = ["green", "yellow", "red", "magenta", "blue"]
 	new_text = ""
 	for i in str(text):
-		new_text += colored(i, random.choice(colors))
+		new_color = random.choice(colors)
+		while new_color == last_color:
+			new_color = random.choice(colors)
+		new_text += colored(i, new_color)
 	return new_text
 
 def banner():
@@ -128,29 +137,10 @@ def banner():
 
 def banner_tools():
 	print(colored("[1]", "red"), colored("Начать спам", "green"))
-	#print(colored("[2]", "red"), colored("FAQ Про прокси", "blue"))
-	#print(colored("[3]", "red"), colored("Краткое руководство проблем", "cyan"))
-	#print(colored("[4]", "red"), colored("Отказ от ответственности", "red"))
 	print(colored("[2]", "red"), colored("Поддержать разработчиков!    <---", "green"))
 	print(colored("[3]", "red"), colored("Инструкция по отправке логов", "yellow"))
 	print(colored("\n[99]", "red"), colored("Информация", "cyan"))
 	print(colored("\n[0] Выход", "red"))
-
-def quick_guide():
-	print("")
-	print(colored("В нашем бомбере спам может постепенно ухудшаться из-за того что на один и тот же номер поступает очень много запросов на отправку смс.", "green"))
-	print(colored("Не пытайтесь оставить спам на всю ночь на один и тот же номер, вы просто заставите сервисы заблокировать данный номер у себя в базе и никакие прокси тут уже не помогут.", "green"))
-	print(colored("Достаточно 2-3 круга на один номер раз в сутки чтобы доставить не малое количество смс на один номер.", "green"))
-	print(colored("Не будьте жадны и слишком мстительны, тогда вы сможете отправлять смс на один и тот же номер постоянно.", "green"))
-	print("\nНажмите Enter чтобы вернуться назад")
-	input()
-
-def disclaimer():
-	print("")
-	print(colored("Разработчики команды ORION не несут ответственность за доставленный моральный или физический ущерб вашей жертве.", "green"))
-	print(colored("Пользуясь данной программой вы автоматически соглашаетесь на это и берете всю ответственность на себя", "green"))
-	print("\nНажмите Enter чтобы вернуться назад")
-	input()
 
 def donate():
 	print("")
@@ -171,27 +161,6 @@ def donate():
 	print("\nНажмите Enter чтобы вернуться назад")
 	input()
 
-def faq_proxy():
-	print("")
-	print(colored("Почему с прокси такой медленный спам и такая частая проверка?", "cyan"))
-	print(colored("Наш парсер берет прокси с общедоступных сервисов, конечно не только мы так делаем и соотвественно не только мы пользуемся этими прокси.", "green"))
-	print(colored("Также на данных сервисах очень мало довольно быстрых и анонимных прокси что позволяло бы улучшить спам с ними.", "green"))
-	print(colored("Частая проверка возникает из-за не стабильности этих прокси, часто они просто перестают работать и программа берет следующий из списка.", "green"))
-	print("")
-	print(colored("Почему нельзя просто брать прокси любой страны а не только номера которого ввели?", "cyan"))
-	print(colored("Не получиться использовать допустим канадские прокси с российскими сервисами с доменом .ru", "green"))
-	print(colored("Если на сайте указан домен данной страны то и прокси должны быть этой же страны.", "green"))
-	print(colored("Сервисы с доменом своей страны просто не пустят наш запрос с прокси иной страны.", "green"))
-	print("")
-	print(colored("Почему нельзя просто подключить больше сервисов для прокси?", "cyan"))
-	print(colored("90% Сервисов с бесплатными прокси просто воруют их друг у друга и из-за этого просто не получиться получить больший список.", "green"))
-	print(colored("Мы стараемся искать хорошие сервисы с бесплатными прокси которые не воруют друг у другу и удобны в парсинге либо имеют свой API.", "green"))
-	print("")
-	print("")
-	print(colored("Советуем вам использовать ваши собственные покупные прокси если хотите сократить блокировку вашего IP у сервисов и иметь хорошую скорость спама", "green"))
-	print("\nНажмите Enter чтобы вернуться назад")
-	input()
-
 def inst_logs():
 	# Checking File System Access
 	try:
@@ -203,7 +172,7 @@ def inst_logs():
 			print("")
 			print("\nНажмите Enter чтобы вернуться назад")
 			input()
-		elif platform == "win32":
+		elif platform == "win32" or platform == "darwin":
 			print("")
 			print(colored("Пожалуйста отправьте нашему боту в телеграм", "green"), colored("https://t.me/orion_feedback_bot", "cyan"), colored("поочередно файлы", "green"), colored("logs.txt error_logs.txt", "cyan"), colored("из папки", "green"), colored("tools", "cyan"))
 			print("")
@@ -220,10 +189,10 @@ def inst_logs():
 		input()
 
 def clear_logs():
-	a = open("tools/logs.txt", "w")
-	a.close()
-	a = open("tools/error_logs.txt", "w")
-	a.close()
+	with open("tools/logs.txt", "w"):
+		pass
+	with open("tools/error_logs.txt", "w"):
+		pass
 	print("")
 	print(colored("Логи успешно были очищены", "green"))
 	print("\nНажмите Enter чтобы вернуться назад")
@@ -231,8 +200,8 @@ def clear_logs():
 
 def banner_info():
 	print(colored("\nТелеграм", "cyan"))
-	print("├"+colored("Lucky", "green")+":", colored("https://t.me/Lucky1376", "cyan"))
-	print("├"+colored("LostIk", "red")+":", colored("https://t.me/LostIk31", "cyan"))
+	print("├"+colored("Lucky", "green")+":", colored("https://t.me/lolzru", "cyan"))
+	print("├"+colored("LostIk", "red")+":", colored("https://t.me/lolzby", "cyan"))
 	print("└"+colored("Канал", "cyan")+":", colored("https://t.me/orion_bomber", "cyan"))
 	print("\nНажмите Enter чтобы вернуться назад")
 	input()
@@ -254,8 +223,8 @@ def start_input():
 					"2": "+7"}
 	country_code_2 = {"1": "by",
 					  "2": "ru"}
+	clear()
 	while True:
-		print("")
 		print(colored("[99] Отмена", "red"))
 		print("")
 		print(colored("[1]", "red"), colored("Беларусь +375", "blue"))
@@ -268,22 +237,30 @@ def start_input():
 			break
 		elif ct == "99":
 			return 0, 0, 0
+		else:
+			clear()
+			print(colored("Новая страна", "magenta"), colored(ct, "cyan")+colored("!", "magenta"))
+			print()
+	clear()
 	while True:
-		print("")
 		print(colored("[99] Отмена", "red"))
-		print("")
+		print()
 		numb = input(colored("Введите номер без кода страны "+country_code[ct]+" ", "green"))
 		if number_ckeck(numb):
 			break
-		elif numb == "99":
+		else:
+			clear()
+			print(colored("Не очень похоже на номер телефона...", "magenta"))
+			print()
+		if numb == "99":
 			return 0, 0, 0
+	clear()
 	while True:
-		print("")
 		print(colored("[99] Отмена", "red"))
-		print("")
+		print()
 		print(colored("[1]", "red"), colored("Да", "green"))
 		print(colored("[2]", "red"), colored("Нет", "red"))
-		print("")
+		print()
 		pr = input(colored("Использовать прокси?: ", "green"))
 		if pr in ["1", "2"]:
 			if pr == "1":
@@ -293,26 +270,30 @@ def start_input():
 			break
 		elif pr == "99":
 			return 0, 0, 0
+		else:
+			clear()
+			print(colored("Выбери один из вариантов...", "magenta"))
+			print()
+	clear()
 	if pr != None:
 		while True:
-			print("")
 			print(colored("[99] Отмена", "red"))
-			print("")
+			print()
 			print(colored("[1]", "red"), colored("Общедоступный прокси", "yellow"))
 			print("└"+colored("Общедоступный прокси используют все пользователи ORION-Bomber", "cyan"))
-			print("")
+			print()
 			print(colored("[2]", "red"), colored("Свой прокси", "green"))
 			print("└"+colored("Ваш прокси обязательно должен иметь протокол HTTP или HTTPS с поддержкой ipv4 и страну вашего номера", "cyan"))
-			print("")
+			print()
 			who_pr = input("Вариант: ")
 			if who_pr in ["1", "2"]:
 				if who_pr == "2":
-					print("")
+					print()
 					print(colored("[99] Отмена", "red"))
-					print("")
+					print()
 					print(colored("Введите Ip и Port и логин и пароль если прокси частный", "green"))
 					print("└"+colored("Пример:\n├123.45.678.910:8080\n└123.45.678.910:8080:LOGIN:PASSWORD", "cyan"))
-					print("")
+					print()
 					new_pr = input(colored("~# ", "red"))
 					
 					if new_pr == "99":
@@ -348,12 +329,16 @@ def start_input():
 					break
 			elif who_pr == "99":
 				return 0, 0, 0
+			else:
+				clear()
+				print(colored("К сожалению придется выбрать а не писать", "magenta"), colored(who_pr, "cyan"))
+				print()
 
 	return country_code[ct]+numb, country_code_2[ct], pr
 
 def ICC():
 	try:
-		anim_text("Проверка интернет соединения...", speed=0.030, color="green")
+		anim_text("Проверка интернет соединения...", speed=0.02, color="green")
 		r.get("https://google.com", timeout=5)
 	except Exception as es:
 		clear()
@@ -494,8 +479,8 @@ def CFU():
 		exit()
 	clear()
 	if in_d:
-		anim_text("Проверяем обновление...", speed=0.030, color="green")
-		#time.sleep(0.7) ├ └
+		anim_text("Проверяем обновление...", speed=0.02, color="green")
+		# ├ └
 
 		result = r.get("https://raw.githubusercontent.com/Lucky1376/ORION-Bomber/master/tools/version.txt")
 		last_ver = result.content.decode("utf-8")
@@ -600,15 +585,13 @@ class Logs:
 		date = datetime.now()
 		if status_code in [666, False]:
 			status_code = "Unknown"
-		file = open("tools/logs.txt", "a")
-		file.write(f"DATE - {date}\nService - {service}\nStatus_code - {status_code}\nERROR:\n{error}\n\n\n")
-		file.close()
+		with open("tools/logs.txt", "a", encoding="utf-8") as f:
+			f.write(f"DATE - {date}\nService - {service}\nStatus_code - {status_code}\nERROR:\n{error}\n\n\n")
 
 	def error_logs(self, error):
 		date = datetime.now()
-		file_error = open("tools/error_logs.txt", "a")
-		file_error.write(f"DATE - {date}\nERROR:\n{error}\n")
-		file_error.close()
+		with open("tools/error_logs.txt", "a", encoding="utf-8") as f:
+			f.write(f"DATE - {date}\nERROR:\n{error}\n")
 
 def check_files_fn(dir_, files):
 	if dir_ != "":
@@ -623,7 +606,7 @@ def check_files_fn(dir_, files):
 	return True
 
 def check_files():
-	anim_text("Проверка файлов...", speed=0.030, color="green")
+	anim_text("Проверка файлов...", speed=0.02, color="green")
 	files = os.listdir()
 	list_ = ["main.py", "LICENSE", "README.md", "tools"]
 	list_2 = ["proxy.py", "sender.py", "services.json", "tools.py", "version.txt", "logs.txt", "error_logs.txt"]
@@ -644,8 +627,10 @@ def check_files():
 
 def CTF():
 	try:
-		a = open("tools/timeout.txt", "r")
-		a.close()
+		with open("tools/timeout.txt", "r") as f:
+			# Checking all services in the file
+			if len(f.read().split()) < len(send.services_list + send.services_list_by):
+				1/0
 	except:
 		with open("tools/timeout.txt", "w") as f:
 			for serv in send.services_list:
@@ -777,7 +762,7 @@ def start(number, country, proxy_=None):
 	if platform == "win32":
 		if random.randint(1, 2) == 2:
 			print(colored("Подпишитесь на наш", "green"), colored("Телеграм!", "cyan"))
-			print(colored("Открываю ссылку...", "yellow"))
+			print(colored("Открываю ссылку...\n", "yellow"))
 			webbrowser.open("https://t.me/orion_bomber", new=0, autoraise=True)
 	else:
 		print(colored("Подпишитесь на наш", "green"), colored("Телеграм!", "cyan"), colored("t.me/orion_bomber", "red"))
@@ -967,7 +952,7 @@ def start(number, country, proxy_=None):
 			starting_spam = False
 			print("\n")
 			print(colored("Из-за неизвестной ошибки наша программа выдала ошибку при спаме\n", "yellow"))
-			logs.error_logs(str(e))
+			logs.error_logs(traceback.format_exc())
 			print(colored("Данная ошибка была сохранена в логи", "green"))
 			print(colored("Пожалуйста отправьте нам файл с логами по инструкции в главном меню чтобы мы могли улучшать наш проект с вашей помощью", "green"))
 			print("\nНажмите Enter чтобы вернуть назад")

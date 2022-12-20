@@ -3,7 +3,20 @@ from tools import proxy
 from termcolor import colored
 import requests
 
+#   ____  ___  ________  _  __
+#  / __ \/ _ \/  _/ __ \/ |/ /
+# / /_/ / , _// // /_/ /    / 
+# \____/_/|_/___/\____/_/|_/  
+# 
+#  https://t.me/orion_bomber                            
+
 # Why are you reading this?
+# Better subscribe to Telegram - https://t.me/orion_bomber
+
+# There are 1592 lines in this project,
+# if you count user_agent.py and services.json,
+# then there will be 2267 lines,
+# Wow, right?
 
 tools.clear()
 tools.ICC()
@@ -30,12 +43,6 @@ while True:
 		break
 	elif tool == "99":
 		tools.banner_info()
-	#elif tool == "2":
-		#tools.faq_proxy()
-	#elif tool == "3":
-		#tools.quick_guide()
-	#elif tool == "4":
-		#tools.disclaimer()
 	elif tool == "2":
 		tools.donate()
 	elif tool == "3":

@@ -1,6 +1,4 @@
-import json
-import time
-import requests
+import json, time, requests, traceback
 from bs4 import BeautifulSoup
 from tools.user_agents import r_ua
 
@@ -112,7 +110,8 @@ class Send:
                 "*mtfree*": phone[6],
                 "*-phone*": phone[7],
                 "*eldarado*": phone[8],
-                "*vardex*": phone[9]
+                "*vardex*": phone[9],
+                "*mf*": phone[10]
             }.items():
                 if old in payload:
                     payload = payload.replace(old, new)
@@ -125,7 +124,9 @@ class Send:
                 "*phone*": phone[1],
                 "*-phone*": phone[2],
                 "*green*": phone[3],
-                "*sosedi*": phone[4]
+                "*mt*": phone[3][1:4] + phone[3][5:],
+                "*sosedi*": phone[4],
+                "*+phone_*": phone[5]
             }.items():
                 if old in payload:
                     payload = payload.replace(old, new)
@@ -236,7 +237,7 @@ class Send:
             elif self.service == "stockmann":
                 r = requests.get(url, timeout=10, proxies=proxy, headers=headers)
             elif self.service == "green":
-                site = session.get(self.cookie["green"], headers=self.default_headers, timeout=10).text # parse token
+                site = session.get(self.cookie["green"], headers=self.default_headers, timeout=15).text # parse token
                 soup = BeautifulSoup(site, "html.parser")
                 head = soup.find("head")
                 a = []
@@ -244,9 +245,9 @@ class Send:
                     a.append(i)
                 token = str(a[7]).split('"')[1]
                 headers["X-CSRF-TOKEN"] = token
-                r = session.post(url, data, headers=headers, timeout=10, proxies=proxy)
+                r = session.post(url, data, headers=headers, timeout=15, proxies=proxy)
             else:
-                r = session.post(url, json=json_, data=data, timeout=10, proxies=proxy, cookies=cookies, headers=headers)
+                r = session.post(url, json=json_, data=data, timeout=15, proxies=proxy, cookies=cookies, headers=headers)
             if self.response_services[self.service] == "json":
                 return r.status_code, r.json()
             else:
@@ -257,4 +258,4 @@ class Send:
         except KeyboardInterrupt:
             return False, "keyboard"
         except Exception as e:
-            return False, e # https://t.me/orion_bomber
+            return False, traceback.format_exc() # https://t.me/orion_bomber

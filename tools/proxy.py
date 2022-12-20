@@ -1,4 +1,4 @@
-import requests, random, threading as th
+import requests, random, time, threading as th
 from bs4 import BeautifulSoup as BS
 from progress.bar import ChargingBar
 from tools.user_agents import r_ua
@@ -141,15 +141,69 @@ class Proxy:
 
 
 	def get(self):
-		# Progress bar
-		pr_b = [1, 2, 3, 4]
-		bar = ChargingBar('Парсинг', max = len(pr_b))
-
 		# User-Agent
 		ua = r_ua()
 
 		# Summary sheet with proxy
 		itog = {}
+
+
+		# -----------------------------------------------
+
+		itog_4 = {}
+
+		# https://proxylist.geonode.com
+		# -----------------------------------------------
+		"""Counting the number of pages on the service"""
+		col_page = 1
+		can = False
+		try:
+			result = requests.get("https://proxylist.geonode.com/api/proxy-list?limit=50&page=1&sort_by=lastChecked&sort_type=desc&speed=medium&protocols=http%2Chttps", headers={"User-Agent": ua}, timeout=self.timeout)
+			can = True
+		except:
+			pass
+		if can == True:
+			if result.json()["total"] / 50 > result.json()["total"] // 50:
+				col_page += result.json()["total"] // 50 + 1
+			else:
+				col_page += result.json()["total"] // 50
+			# Progress bar
+			pr_b = list(range(1, col_page+3))
+			bar = ChargingBar('Парсинг', max = len(pr_b))
+		else:
+			# Progress bar
+			pr_b = list(range(1, 4))
+			bar = ChargingBar('Парсинг', max = len(pr_b))
+		
+		"""Парсинг"""
+		if can == True:
+			i = 1
+			while i < col_page:
+				try:
+					response = requests.get(f"https://proxylist.geonode.com/api/proxy-list?limit=50&page={i}&sort_by=lastChecked&sort_type=desc&speed=medium&protocols=http%2Chttps", headers={"User-Agent": ua}, timeout=15)
+					if response.status_code == 200:
+						for pr in response.json()["data"]:
+							ip = pr["ip"]
+							port = pr["port"]
+							ct = pr["country"].lower()
+							if ct in self.country:
+								if ct in itog_4:
+									itog_4[ct].append({"ip": ip,
+													   "port": port})
+								else:
+									itog_4[ct] = []
+									itog_4[ct].append({"ip": ip,
+													   "port": port})
+					i+=1
+				except:
+					i+=1
+				bar.next()
+			try:
+				self.list_4 = itog_4
+			except:
+				pass
+		# -----------------------------------------------
+
 
 		# https://hidemy.name
 		# -----------------------------------------------
@@ -244,57 +298,9 @@ class Proxy:
 										  "port": port})
 			self.list_3 = itog_3
 		bar.next()
-		# -----------------------------------------------
 
-		itog_4 = {}
-
-		# https://proxylist.geonode.com
-		# -----------------------------------------------
-		"""Counting the number of pages on the service"""
-		col_page = 1
-		can = False
-		try:
-			result = requests.get("https://proxylist.geonode.com/api/proxy-list?limit=50&page=1&sort_by=lastChecked&sort_type=desc&speed=medium&protocols=http%2Chttps", headers={"User-Agent": ua}, timeout=self.timeout)
-			can = True
-		except:
-			pass
-		if can == True:
-			if result.json()["total"] / 50 > result.json()["total"] // 50:
-				col_page += result.json()["total"] // 50 + 1
-			else:
-				col_page += result.json()["total"] // 50
-		
-		"""Парсинг"""
-		if can == True:
-			i = 1
-			while i < col_page:
-				try:
-					response = requests.get(f"https://proxylist.geonode.com/api/proxy-list?limit=50&page={i}&sort_by=lastChecked&sort_type=desc&speed=medium&protocols=http%2Chttps", headers={"User-Agent": ua}, timeout=15)
-					if response.status_code == 200:
-						for pr in response.json()["data"]:
-							ip = pr["ip"]
-							port = pr["port"]
-							ct = pr["country"].lower()
-							if ct in self.country:
-								if ct in itog_4:
-									itog_4[ct].append({"ip": ip,
-													   "port": port})
-								else:
-									itog_4[ct] = []
-									itog_4[ct].append({"ip": ip,
-													   "port": port})
-					i+=1
-				except:
-					i+=1
-			try:
-				self.list_4 = itog_4
-				bar.next()
-				bar.finish()
-			except:
-				bar.next()
-				bar.finish()
-		# -----------------------------------------------
-
+		time.sleep(1)
+		bar.finish()
 
 		# -----------------------------------------------
 		"""Formation into one dictionary"""

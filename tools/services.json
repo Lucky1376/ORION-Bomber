@@ -144,7 +144,7 @@
         "data": "{'st.r.phone': '*phone*'}",
         "response": 200,
         "timeout": 60,
-        "cookies": "https://ok.ru/"
+        "cookies": "https://ok.ru/dk?st.cmd=anonymRegistrationEnterCode"
       },
       "citystar": {
         "url": "https://citystarwear.com/bitrix/templates/bspc/php/bs.auth.sms/templates/pc/handlers.php",
@@ -292,6 +292,13 @@
         "headers": {"Application-Version": "2.2.0", "Content-Type": "application/json", "Timezone-Offset": "300", "User-Agent": ""},
         "response": 200,
         "timeout": 60
+      },
+      "markformelle": {
+        "url": "https://markformelle.by/local/templates/markformelle/components/bitrix/system.auth.form/mf/ajax.php",
+        "data": "{'phone': '*mf*'}",
+        "response": 200,
+        "timeout": 60,
+        "headers": {"cookie": "PHPSESSID=iUGzfSXr2o4pOFTcd5gzhZJnqUvDf4Fn; BITRIX_SM_MF2_USER_REGIONS=3280%2C%D0%9C%D0%B8%D0%BD%D1%81%D0%BA; BITRIX_SM_MF2_USER_COORDS=53.902284%2C27.561831; BITRIX_SM_MF2_SALE_UID=90c4032cc80bc13d54658e6ea3e55ef5; scandit-device-id=aa64e69eac05a96945918b4150a89b49a1f5debf; BITRIX_CONVERSION_CONTEXT_s1=%7B%22ID%22%3A1%2C%22EXPIRE%22%3A1669928340%2C%22UNIQUE%22%3A%5B%22conversion_visit_day%22%5D%7D; _gid=GA1.2.236219911.1669903257; tmr_lvid=e9202c8689ad8883d48355109dfffc4c; tmr_lvidTS=1669903256680; _ym_uid=1669903257950448967; _ym_d=1669903257; tmr_detect=1%7C1669903256740; _ga_HTV7DZDW4N=GS1.1.1669903256.1.0.1669903256.60.0.0; _ga=GA1.1.711413119.1669903257; _ym_isad=1; popmechanic_sbjs_migrations=popmechanic_1418474375998%3D1%7C%7C%7C1471519752600%3D1%7C%7C%7C1471519752605%3D1; _ym_visorc=b; mindboxDeviceUUID=9fd516ae-7463-4062-bcad-bc1164f12df0; directCrm-session=%7B%22deviceGuid%22%3A%229fd516ae-7463-4062-bcad-bc1164f12df0%22%7D", "User-Agent": ""}
       }
     }
   ],
@@ -307,17 +314,15 @@
      "green_by": {
        "url": "https://www.green-market.by/registration_send_sms_code",
        "data": "{'phone': '*green*'}",
-       "headers": {"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9", "Accept-Encoding": "gzip, deflate, br", "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7", "Cache-Control": "no-cache", "Connection": "keep-alive", "User-Agent": "", "X-CSRF-TOKEN": "", "X-Requested-With": "XMLHttpRequest"},
+       "headers": {"cookie": "_ym_uid=1660466550500039604; _ym_d=1660466550; _gcl_au=1.1.749903211.1669834924; XSRF-TOKEN=eyJpdiI6Imc1MXVQc3ZNVnJpWnk1bWtZRFBnakE9PSIsInZhbHVlIjoiYzRCOEIwcEYyNDkrRUFJOFZqem1EaUtXUWtwVkNmSHYxRGV0XC9JNnNhaGlFS3N3RnY2MU52eCtUTWt3SnJpU3gwejR5N3BDSE1NeFRYQ1ZkUisyOEZRPT0iLCJtYWMiOiI1MDVkNjQ3YWVlZTQ2N2Y3ZmQ1MjQwNzFhODE4MTRhYmNlMjRjMjRiZDIwNDM5Y2FhMDBmNTc1MzE4OTg1ZDkzIn0%3D; laravel_session=eyJpdiI6InBiWmxwdGhKU3BRSlFpUmFIS1hUeVE9PSIsInZhbHVlIjoiazRUS1hodUFJaEdXYkxCSUQrTmtkMnJhOTNpNDRTNlJaSjhORGVscHVWRGpsMmt0ZkxqWGRnWUk5RFA1K0pMOEgxN1h5aEdnOFZwS0R0UHVDaUlDY3c9PSIsIm1hYyI6ImE5NTgyOGQ2MzdjOTcwMDE1NzFjNTA2YWU3Njg5ZTYwNjVlNmY5ODQyZmRiZTY5MWZmNDNmNmQyMDNiMTcwZmYifQ%3D%3D; _ga_024VM2PWCV=GS1.1.1671380139.5.0.1671380139.60.0.0; tmr_lvid=759c767ba9dc705ff99c4e1f882fd55a; tmr_lvidTS=1671380139344; _gid=GA1.2.1239355048.1671380139; _gat_UA-186421723-1=1; _ym_isad=1; _ga_8WJCERSNCD=GS1.1.1671380139.5.0.1671380139.0.0.0; _ga=GA1.1.1869732229.1660466550; _ym_visorc=w; tmr_detect=0%7C1671380142356", "x-csrf-token": "KcNE5q8qTeuPARJLwF0ZJaY8L0sPHU6BMLB5fRP3", "x-requested-with": "XMLHttpRequest", "User-Agent": ""},
        "response": 200,
-       "timeout": 60,
-       "cookies": "https://www.green-market.by/"
+       "timeout": 60
      },
       "ok.ru_by": {
         "url": "https://ok.ru/dk?cmd=AnonymRegistrationEnterPhone&st.cmd=anonymRegistrationEnterPhone&st.cmd=anonymRegistrationEnterPhone",
         "data": "{'st.r.phone': '*+phone*'}",
         "response": 200,
-        "timeout": 60,
-        "cookies": "https://ok.ru/"
+        "timeout": 60
       },
       "sosedi_by": {
         "url": "https://sosedi.by/local/api/smsSend.php",
@@ -368,6 +373,44 @@
         "timeout": 300,
         "headers": {
           "Content-Type": "application/json", "cookie": "tmr_lvid=8486d72df1bd0454f40766848fee4a87; tmr_lvidTS=1669395712200; _gcl_au=1.1.429924486.1669395712; _ym_uid=1669395712518165517; _ym_d=1669395712; _ym_isad=1; _ga=GA1.2.1385546992.1669395713; _gid=GA1.2.1310932677.1669395713; _ym_visorc=b; __cmpconsentx36623=BPjCZIxPjCZIxAfJvBRUDXAAAAAAAA; __cmpcccx36623=aBPjCZIxgAgAzADAAuA4kCwIAIwYgA; csrftoken=41r1HINGrjawyMvEtmxnxUIKhPPaYO88EEcCrS39GlFS0qjpSfDPrQwynsf9AgnE; amc_lang=ru_RU; act=1eG9Q4dehyq9twI0", "User-Agent": ""}
+      },
+      "tinder_by": {
+        "url": "https://api.gotinder.com/v2/auth/sms/send?auth_type=sms&locale=ru",
+        "data": "{'phone_number': *phone*}",
+        "response": 200,
+        "timeout": 60
+      },
+      "markformelle_by": {
+        "url": "https://markformelle.by/local/templates/markformelle/components/bitrix/system.auth.form/mf/ajax.php",
+        "data": "{'phone': '*sosedi*'}",
+        "response": 200,
+        "timeout": 60,
+        "headers": {"cookie": "PHPSESSID=iUGzfSXr2o4pOFTcd5gzhZJnqUvDf4Fn; BITRIX_SM_MF2_USER_REGIONS=3280%2C%D0%9C%D0%B8%D0%BD%D1%81%D0%BA; BITRIX_SM_MF2_USER_COORDS=53.902284%2C27.561831; BITRIX_SM_MF2_SALE_UID=90c4032cc80bc13d54658e6ea3e55ef5; scandit-device-id=aa64e69eac05a96945918b4150a89b49a1f5debf; BITRIX_CONVERSION_CONTEXT_s1=%7B%22ID%22%3A1%2C%22EXPIRE%22%3A1669928340%2C%22UNIQUE%22%3A%5B%22conversion_visit_day%22%5D%7D; _gid=GA1.2.236219911.1669903257; tmr_lvid=e9202c8689ad8883d48355109dfffc4c; tmr_lvidTS=1669903256680; _ym_uid=1669903257950448967; _ym_d=1669903257; tmr_detect=1%7C1669903256740; _ga_HTV7DZDW4N=GS1.1.1669903256.1.0.1669903256.60.0.0; _ga=GA1.1.711413119.1669903257; _ym_isad=1; popmechanic_sbjs_migrations=popmechanic_1418474375998%3D1%7C%7C%7C1471519752600%3D1%7C%7C%7C1471519752605%3D1; _ym_visorc=b; mindboxDeviceUUID=9fd516ae-7463-4062-bcad-bc1164f12df0; directCrm-session=%7B%22deviceGuid%22%3A%229fd516ae-7463-4062-bcad-bc1164f12df0%22%7D", "User-Agent": ""}
+      },
+      "marko_by": {
+        "url": "https://www.marko.by/ajax/registerSendConfirmCode.php",
+        "data": "{'form_data': 'first_name=&last_name=&email=&phone=*green*&sms_code=&password=&password_confirm='}",
+        "response": 200,
+        "timeout": 60,
+        "headers": {"cookie": "PHPSESSID=OGHwyjmZ4jsyPyWfErJme3Tn75qdcDUw; BITRIX_SM_GUEST_ID=4982561; BITRIX_SM_LAST_VISIT=01.12.2022%2018%3A13%3A38; _ym_uid=1669907635980844980; _ym_d=1669907635; _ym_isad=1; tmr_lvid=f24f5d4c22daf9384c11f8912301367b; tmr_lvidTS=1669907635199; _ym_visorc=w; tmr_detect=1%7C1669907635256; _ga=GA1.2.1763832215.1669907635; _gid=GA1.2.29531158.1669907635; _gat_UA-161894876-1=1; BX_USER_ID=5e66c0741eefeeba48abfe666e49687a", "User-Agent": "", "x-requested-with": "XMLHttpRequest"}
+      },
+      "megatop_by": {
+        "url": "https://admin.megatop.by/api/v1/user/verify-phone",
+        "json": "{'phone': '*mt*', 'code': 'f323ae6b9214bae1ceecfbd876a60edd'}",
+        "response": 200,
+        "timeout": 60
+      },
+      "amihome_by": {
+        "url": "https://amihome.by/bitrix/services/main/ajax.php?action=likeit%3Apro.api.register.createcode",
+        "data": "{'sessid': 'b22504d3c451b30338d0209d2958d661', 'phone': '*+phone_*'}",
+        "response": 200,
+        "timeout": 60
+      },
+      "youla_by": {
+        "url": "https://youla.ru/web-api/auth/request_code",
+        "data": "{'phone': '*+phone*'}",
+        "response": 200,
+        "timeout": 60
       }
     }
   ]
