@@ -224,19 +224,22 @@ class Proxy:
 
 				html = BS(response.content, "html.parser")
 
-				all_list_bs = html.find("div", class_="table_block").find("tbody")
+				try:
+					all_list_bs = html.find("div", class_="table_block").find("tbody")
 
-				pred_itog = []
-				for tr in all_list_bs:
-					for td in tr:
-						try:
-							pred_itog.append(td.text.replace(" ", ""))
-						except:
-							continue
-					if len(pred_itog) > 0:
-						itog[ct].append({"ip": pred_itog[0],
-										 "port": pred_itog[1]})
 					pred_itog = []
+					for tr in all_list_bs:
+						for td in tr:
+							try:
+								pred_itog.append(td.text.replace(" ", ""))
+							except:
+								continue
+						if len(pred_itog) > 0:
+							itog[ct].append({"ip": pred_itog[0],
+											 "port": pred_itog[1]})
+						pred_itog = []
+				except:
+					pass
 		self.list = itog
 		bar.next()
 		# -----------------------------------------------

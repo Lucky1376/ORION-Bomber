@@ -910,10 +910,13 @@ def start(number, country, proxy_=None):
 							circles += 1
 							if result[0] != False:
 								if serv == "magnit":
-									if result[1]["status_code"] == 200:
-										FormattingResponse(200, serv)
-									elif result[1]["status_code"] == 422:
-										FormattingResponse(429, serv)
+									if type(result[1]) == dict:
+										if result[1]["status_code"] == 200:
+											FormattingResponse(200, serv)
+										elif result[1]["status_code"] == 422:
+											FormattingResponse(429, serv)
+									else:
+										FormattingResponse(result[0], serv)
 								else:
 									FormattingResponse(result[0], serv)
 							else:
@@ -930,10 +933,13 @@ def start(number, country, proxy_=None):
 						circles += 1
 						if result[0] != False:
 							if serv == "magnit":
-								if result[1]["status_code"] == 200:
-									FormattingResponse(200, serv)
-								elif result[1]["status_code"] == 422:
-									FormattingResponse(429, serv)
+								if type(result[1]) == dict:
+									if result[1]["status_code"] == 200:
+										FormattingResponse(200, serv)
+									elif result[1]["status_code"] == 422:
+										FormattingResponse(429, serv)
+								else:
+									FormattingResponse(result[0], serv)
 							else:
 								FormattingResponse(result[0], serv)
 						else:
