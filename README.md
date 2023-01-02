@@ -2,7 +2,9 @@
 
 # 💣ORION-Bomber💫
 ##### Всю свежую информацию о данном проекте можно найти только в этом Телеграм канале
-###### [![geonodee](https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=Telegram)](https://t.me/orion_bomber)
+###### [![CHANNEL](https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=Telegram)](https://t.me/orion_bomber)
+___
+##### [![BOT](https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=Telegram)](https://t.me/orion_smsbomber_bot) [**`БОТ`**](https://t.me/orion_smsbomber_bot)
 ___
 # 💻Меню
 ![Alt-текст](https://i.ibb.co/0qx5Yhk/n-menu.png)
@@ -14,11 +16,14 @@ ___
 | `proxy checking` | **Ресурс который использовался для проверки `прокси`** | [`icanhazip`](http://icanhazip.com) |
 
 ___
-# ⬇️Нужна помощь? Пиши нам!⬇️
+# ⬇️**Нужна помощь? Пиши нам!⬇**️
 ## [**`Телеграм канал`**](https://t.me/orion_bomber) `или` [**`FeedBack BOT`**](https://t.me/orion_feedback_bot)
 ___
+# 💡Наш Sms Bomber есть в Telegram
+## [**`ORION SmsBomber BOT`**](https://t.me/orion_smsbomber_bot)
+___
 # 🌐Установка
-+ #### **Termux (Android):**
++ #### **Termux (Android)**
   + `Установить` [**`Termux`**](https://t.me/orion_bomber/5)
   + `pkg upgrade -y`
   + `pkg update -y`
@@ -29,12 +34,17 @@ ___
   + `cd ORION-Bomber`
   + `pip install -r requirements.txt`
   + `python main.py`
-+ #### **Перезапуск (Android - Termux):**
++ #### **Перезапуск (Android - Termux)**
   + `cd`
   + `cd ORION-Bomber`
   + `python main.py`
 ___
-+ #### **Windows 10+:**
++ #### **IOS (IPhone)**
+  + `Открываем` **`Telegram`**
+  + `Заходим в Бота` [**`@orion_smsbomber_bot`**](https://t.me/orion_smsbomber_bot)
+  + `Жмем` **`Старт`**
+___
++ #### **Windows 10+**
   + `Требуется 64 битная система`
   + `Установить Python, при установке обязательно выбрать` **`add python to PATH`**
   + `Python recommended 3.9.6:` [**`Download`**](https://drive.google.com/file/d/1-rt97BpZwgRUTZSH7sAVZNVq7jOC4gsE/view?usp=sharing)
