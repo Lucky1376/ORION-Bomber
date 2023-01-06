@@ -8,7 +8,7 @@ import requests
 # / /_/ / , _// // /_/ /    / 
 # \____/_/|_/___/\____/_/|_/  
 # 
-#  https://t.me/orion_bomber                            
+#  https://t.me/orion_bomber | https://t.me/orion_smsbomber_bot                            
 
 # Why are you reading this?
 # Better subscribe to Telegram - https://t.me/orion_bomber
@@ -47,6 +47,8 @@ while True:
 		tools.donate()
 	elif tool == "3":
 		tools.inst_logs()
+	elif tool.lower() == "4":
+		tools.telebot()
 	elif tool.lower() == "clear logs":
 		tools.clear_logs()
 	elif tool.lower() == "update":

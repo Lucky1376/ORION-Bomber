@@ -139,6 +139,7 @@ def banner_tools():
 	print(colored("[1]", "red"), colored("Начать спам", "green"))
 	print(colored("[2]", "red"), colored("Поддержать разработчиков!    <---", "green"))
 	print(colored("[3]", "red"), colored("Инструкция по отправке логов", "yellow"))
+	print(colored("[4]", "red"), colored("Попробуй", "green"), colored("в", "yellow"), colored("Telegram", "cyan")+colored("!", "yellow"), colored("   <---", "cyan"))
 	print(colored("\n[99]", "red"), colored("Информация", "cyan"))
 	print(colored("\n[0] Выход", "red"))
 
@@ -344,6 +345,19 @@ def ICC():
 		clear()
 		print(colored("[!]", "red"), colored("Ваше устройство не подключено к интернету или интернет слишком слабый!", "magenta"))
 		exit()
+
+def telebot():
+	if platform in ["darwin", "win32"]:
+		print(colored("Открываю ссылку!", "green"))
+		webbrowser.open("https://t.me/orion_smsbomber_bot", new=0, autoraise=True)
+		print("\nНажмите Enter чтобы вернуть назад")
+		input()
+	else:
+		print()
+		print(colored(" Попробуй данный Sms Bomber в новом", "yellow"), colored("Telegram", "cyan"), colored("Боте", "green")+colored("!", "yellow"))
+		print(colored("\n         ---> ", "magenta"), colored("@orion_smsbomber_bot", "cyan"), colored(" <---", "magenta"))
+		print("\n\nНажмите Enter чтобы вернуть назад")
+		input()
 
 def check_moderator():
 	clear()
