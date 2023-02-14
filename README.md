@@ -7,7 +7,7 @@ ___
 ##### [![BOT](https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=Telegram)](https://t.me/orion_smsbomber_bot) [**`БОТ`**](https://t.me/orion_smsbomber_bot)
 ___
 # 💻Меню
-![Alt-текст](https://i.ibb.co/0qx5Yhk/n-menu.png)
+![Alt-текст](https://i.ibb.co/km3hM3B/n-menuu.png)
 ___
 # ❤️️**Без них не обошлись**
 | Метод | Описание | Ссылки|

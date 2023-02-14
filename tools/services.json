@@ -97,12 +97,6 @@
         "timeout": 600,
         "cookies": "https://megafon.tv/"
       },
-      "moezdorovie": {
-        "url": "https://moezdorovie.ru/rpc/?method=auth.GetCode",
-        "json": "{'jsonrpc':'2.0','id':40,'method':'auth.GetCode','params':{'phone':'*-phone*','mustExist':false, 'sendRealSms':true}}",
-        "response": 200,
-        "timeout": 300
-      },
       "totopizza": {
         "url": "https://api.totopizza.ru/graphql",
         "json": "{\"operationName\":\"requestPhoneCodeAuth\",\"query\":\"\\n  mutation requestPhoneCodeAuth($telephone:String!) {\\n    requestPhoneCodeAuth(telephone:$telephone)\\n  }\\n\",\"variables\":{\"telephone\":\"*phone2*\"}}",
@@ -146,12 +140,6 @@
         "timeout": 60,
         "cookies": "https://ok.ru/dk?st.cmd=anonymRegistrationEnterCode"
       },
-      "citystar": {
-        "url": "https://citystarwear.com/bitrix/templates/bspc/php/bs.auth.sms/templates/pc/handlers.php",
-        "data": "{'hdlr': 'bsSendCodeAuth','bshsmsk': 'h5Plm22xoaFs9YTp', 'phone': '*-phone*', 'xemail': '', 'xphone': ''}",
-        "response": 200,
-        "timeout": 180
-      },
       "beerlogapizza": {
         "url": "https://smsc.ru/sys/send.php",
         "data": "{'login': 'beerlogaa@gmail.com', 'psw': 'QWE780p', 'phones': '*+phone*', 'mes': 'code', 'call': '1', 'fmt': '3'}",
@@ -159,24 +147,11 @@
         "timeout": 60,
         "cookies": "https://beerlogapizza.ru/login/"
       },
-      "pizzamia": {
-        "url": "https://1603.smartomato.ru/account/session",
-        "data": "{'g-recaptcha-response': 'null','phone': '*phone3*'}",
-        "response": 200,
-        "timeout": 60
-      },
       "wildberries": {
         "url": "https://authorization.wildberries.eu/api/v2/code/request",
         "json": "{\"contact\": \"*phone*\", \"auth_method\": \"sms\", \"lang\": \"ru\"}",
         "response": 200,
         "timeout": 60
-      },
-      "findclone": {
-        "url": "https://findclone.ru/register",
-        "data": "{'phone': '*phone*'}",
-        "response": 200,
-        "timeout": 60,
-        "GET": ""
       },
       "tashirpizza": {
         "url": "https://tashirpizza.ru/ajax/mindbox_register",
@@ -199,12 +174,6 @@
       "magnitapteka": {
         "url": "https://apteka.magnit.ru/api/personal/auth/code/",
         "data": "{'phone': '*phone*'}",
-        "response": 200,
-        "timeout": 60
-      },
-      "eldorado": {
-        "url": "https://www.eldorado.ru/_ajax/spa/auth/v2/auth_with_login.php",
-        "json": "{'user_login': '*eldarado*'}",
         "response": 200,
         "timeout": 60
       },
@@ -242,11 +211,6 @@
         "response": 200,
         "timeout": 60
       },
-      "sipnetru": {
-        "url": "https://register2.sipnet.ru/cgi-bin/exchange.dll/RegisterHelper?oper=9&callmode=1&phone=*phone*",
-        "response": 200,
-        "timeout": 60
-      },
       "vesnashop": {
         "url": "https://vesna.shop/bitrix/components/splash/auth/ajax.php",
         "data": "{'type': 'auth','phone': '*vardex*','vtr': ''}",
@@ -255,14 +219,6 @@
         "headers": {"Accept": "application/json, text/javascript, */*; q=0.01", "Accept-Encoding": "gzip, deflate, br",
           "Accept-Language": "ru,en;q=0.9", "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8", "referer": "https://vesna.shop/", "User-Agent": "", "x-requested-with": "XMLHttpRequest"
         }
-      },
-      "beeline": {
-        "cookies": "https://podarki.beeline.ru/",
-        "url": "https://g1.accelera.ai/api/auth/",
-        "json": "{'ctn': '*phone*', 'fingerprint': {'fingerprint': '2584445951', 'browser': 'Yandex','OS': 'Windows','osVersion': '10'}}",
-        "response": 200,
-        "timeout": 120,
-        "headers": {"Accept": "*/*", "Accept-Encoding": "gzip, deflate", "Accept-Language": "ru-RU,ru;q=0.9", "Authorization": "Key xPCYYlvB_5zKab4WztOFpDo1mngaEM889N5k7vhY", "User-Agent": ""}
       },
       "lentacom": {
         "url": "https://lenta.com/api/v1/authentication/loginotp",
@@ -285,13 +241,6 @@
         "headers": {"Cookie": "view=cells; rrpvid=182985917812810; _ym_uid=1669397180778917572; _ym_d=1669397180; rcuid=62f1473f2534d0f27d07c026; _gid=GA1.2.1728524294.1669397180; _gat_gtag_UA_65450830_1=1; _ym_isad=1; _userGUID=0:lawrz8ev:UsfWVO0CgBe11ZeAri~XTvEKs~tt6Rs1; dSesn=50a7f5f6-15e3-8c2e-6d20-bb38a05cedb1; _dvs=0:lawrz8ev:mJriWOB42pmlP8KgjY8hx~ZuJyQlg3VG; _ym_visorc=b; tmr_lvid=fa4817f671d93bd212f0cff6b80fec1d; tmr_lvidTS=1669397180605; mark=3a6e6f49-3648-4ab4-ac78-fad19282326a; _ga_6C350KZVLV=GS1.1.1669397181.1.0.1669397181.0.0.0; _ga=GA1.1.1801205636.1669397180; tmr_detect=1%7C1669397181519; rrwpswu=true; city=41", "User-Agent": ""},
         "timeout": 30,
         "response": 200
-      },
-      "smartmed": {
-        "url": "https://online.smartmed.pro/personal/api/users/register/v2",
-        "json": "{'address': 'null', 'birthday': '1991-11-11','email': 'dasdbt325@mail.ru', 'firstName': 'Олег','gender': '1','lastName': 'олегович','password': '1234nyrmyx','patientTypeForRegistration': '1','patronymic': 'Олег','phone': '*phone*', 'termsOfUse': [{'code': '1','value': 'true'}],'withoutPatronymic': 'false'}",
-        "headers": {"Application-Version": "2.2.0", "Content-Type": "application/json", "Timezone-Offset": "300", "User-Agent": ""},
-        "response": 200,
-        "timeout": 60
       },
       "markformelle": {
         "url": "https://markformelle.by/local/templates/markformelle/components/bitrix/system.auth.form/mf/ajax.php",
