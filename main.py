@@ -1,7 +1,7 @@
-from tools import tools
-from tools import proxy
-from termcolor import colored
 import requests
+from termcolor import colored
+
+from tools import proxy, tools
 
 #   ____  ___  ________  _  __
 #  / __ \/ _ \/  _/ __ \/ |/ /

@@ -1,5 +1,10 @@
-import json, time, requests, traceback
+import json
+import time
+import traceback
+
+import requests
 from bs4 import BeautifulSoup
+
 from tools.user_agents import r_ua
 
 # services list
