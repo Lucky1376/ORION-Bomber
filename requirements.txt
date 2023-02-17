@@ -1,5 +1,11 @@
-requests
-termcolor
-progress
-beautifulsoup4
-datetime
+beautifulsoup4==4.11.2
+DateTime==5.0
+idna==3.4
+progress==1.6
+progress-bar==8
+pytz==2022.7.1
+requests==2.28.2
+soupsieve==2.4
+termcolor==2.2.0
+urllib3==1.26.14
+zope.interface==5.5.2
