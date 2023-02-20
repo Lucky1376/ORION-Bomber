@@ -2,9 +2,9 @@
 
 # 💣ORION-Bomber💫
 ##### Всю свежую информацию о данном проекте можно найти только в этом Телеграм канале
-###### [![CHANNEL](https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=Telegram)](https://t.me/orion_bomber)
+###### [![CHANNEL](https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=Telegram)](https://t.me/orionbomber)
 ___
-##### [![BOT](https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=Telegram)](https://t.me/orion_smsbomber_bot) [**`БОТ`**](https://t.me/orion_smsbomber_bot)
+##### [![BOT](https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=Telegram)](https://t.me/orion_sms_bomber_bot) [**`БОТ`**](https://t.me/orion_sms_bomber_bot)
 ___
 # 💻Меню
 ![Alt-текст](https://i.ibb.co/km3hM3B/n-menuu.png)
@@ -17,14 +17,14 @@ ___
 
 ___
 # ⬇️**Нужна помощь? Пиши нам!⬇**️
-## [**`Телеграм канал`**](https://t.me/orion_bomber) `или` [**`FeedBack BOT`**](https://t.me/orion_feedback_bot)
+## [**`Телеграм канал`**](https://t.me/orionbomber) `или` [**`FeedBack BOT`**](https://t.me/orion_feedback_bot)
 ___
 # 💡Наш Sms Bomber есть в Telegram
-## [**`ORION SmsBomber BOT`**](https://t.me/orion_smsbomber_bot)
+## [**`ORION SmsBomber BOT`**](https://t.me/orion_sms_bomber_bot)
 ___
 # 🌐Установка
 + #### **Termux (Android)**
-  + `Установить` [**`Termux`**](https://t.me/orion_bomber/5)
+  + `Установить` [**Termux**](https://f-droid.org/repo/com.termux_118.apk)
   + `pkg upgrade -y`
   + `pkg update -y`
   + `pkg install git`
@@ -41,7 +41,7 @@ ___
 ___
 + #### **IOS (IPhone)**
   + `Открываем` **`Telegram`**
-  + `Заходим в Бота` [**`@orion_smsbomber_bot`**](https://t.me/orion_smsbomber_bot)
+  + `Заходим в Бота` [**`@orion_sms_bomber_bot`**](https://t.me/orion_smsbomber_bot)
   + `Жмем` **`Старт`**
 ___
 + #### **Windows 10+**
