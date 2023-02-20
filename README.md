@@ -41,7 +41,7 @@ ___
 ___
 + #### **IOS (IPhone)**
   + `Открываем` **`Telegram`**
-  + `Заходим в Бота` [**`@orion_sms_bomber_bot`**](https://t.me/orion_smsbomber_bot)
+  + `Заходим в Бота` [**`@orion_sms_bomber_bot`**](https://t.me/orion_sms_bomber_bot)
   + `Жмем` **`Старт`**
 ___
 + #### **Windows 10+**
