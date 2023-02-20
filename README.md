@@ -24,7 +24,7 @@ ___
 ___
 # 🌐Установка
 + #### **Termux (Android)**
-  + `Установить` [**Termux**](https://f-droid.org/repo/com.termux_118.apk)
+  + `Установить` [**`Termux`**](https://f-droid.org/repo/com.termux_118.apk)
   + `pkg upgrade -y`
   + `pkg update -y`
   + `pkg install git`
