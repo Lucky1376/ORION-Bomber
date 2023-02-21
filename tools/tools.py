@@ -123,7 +123,7 @@ def banner():
 
 	info = " "*13+colored("[", "blue")+"Developers :"+colored("Lucky", "green")+" and "+colored("LostIk", "red")
 	info_2 = " "*13+colored("[", "blue")+"Version    :"+colored(ver, "red")
-	info_3 = " "*13+colored("[", "blue")+"Telegram   :"+colored("@orion_bomber", "cyan")+colored("   <--", "green")+"\n"
+	info_3 = " "*13+colored("[", "blue")+"Telegram   :"+colored("@orionbomber", "cyan")+colored("   <--", "green")+"\n"
 
 	print(banner)
 	print(pred_info)
@@ -165,13 +165,13 @@ def inst_logs():
 			shutil.copyfile('tools/logs.txt', '/storage/emulated/0/Download/logs.txt')
 			shutil.copyfile('tools/error_logs.txt', '/storage/emulated/0/Download/error_logs.txt')
 			print(colored("Файлы", "green"), colored("logs.txt error_logs.txt", "cyan"), colored("были сохранены в папку Download на вашем устройстве", "green"))
-			print(colored("Пожалуйста отправьте поочередно эти 2 файла нашему боту в телеграм", "green"), colored("https://t.me/orion_feedback_bot", "cyan"))
+			print(colored("Пожалуйста отправьте поочередно эти 2 файла в наш чат телеграм", "green"), colored("https://t.me/+xWLy0dl5IsQ5YzYy", "cyan"))
 			print("")
 			print("\nНажмите Enter чтобы вернуться назад")
 			input()
 		elif platform == "win32" or platform == "darwin":
 			print("")
-			print(colored("Пожалуйста отправьте нашему боту в телеграм", "green"), colored("https://t.me/orion_feedback_bot", "cyan"), colored("поочередно файлы", "green"), colored("logs.txt error_logs.txt", "cyan"), colored("из папки", "green"), colored("tools", "cyan"))
+			print(colored("Пожалуйста отправьте в наш чат телеграм", "green"), colored("https://t.me/+xWLy0dl5IsQ5YzYy", "cyan"), colored("поочередно файлы", "green"), colored("logs.txt error_logs.txt", "cyan"), colored("из папки", "green"), colored("tools", "cyan"))
 			print("")
 			print("\nНажмите Enter чтобы вернуться назад")
 			input()
@@ -180,7 +180,7 @@ def inst_logs():
 		print(colored("Мы не смогли переместить файлы в нужную директорию", "yellow"))
 		print(colored("Возможно у вас для Термукса в настройках разрешения приложению не доступны Файлы и медиаконтент", "yellow"))
 		print(colored("Пожалуйста разрешите Термуксу в настройках все нужные разрешения и повторите попытку"))
-		print(colored("За помощью по данному вопросу пишите в нашего бота в телеграм"), colored("https://t.me/orion_feedback_bot", "cyan"))
+		print(colored("За помощью по данному вопросу пишите в наш чат телеграм"), colored("https://t.me/+xWLy0dl5IsQ5YzYy", "cyan"))
 		print("")
 		print("\nНажмите Enter чтобы вернуться назад")
 		input()
@@ -197,9 +197,9 @@ def clear_logs():
 
 def banner_info():
 	print(colored("\nТелеграм", "cyan"))
-	print("├"+colored("Lucky", "green")+":", colored("https://t.me/lolzru", "cyan"))
+	print("├"+colored("Lucky", "green")+":", colored("https://t.me/rlzza", "cyan"))
 	print("├"+colored("LostIk", "red")+":", colored("https://t.me/lolzby", "cyan"))
-	print("└"+colored("Канал", "cyan")+":", colored("https://t.me/orion_bomber", "cyan"))
+	print("└"+colored("Канал", "cyan")+":", colored("https://t.me/orionbomber", "cyan"))
 	print("\nНажмите Enter чтобы вернуться назад")
 	input()
 
@@ -345,13 +345,13 @@ def ICC():
 def telebot():
 	if platform in ["darwin", "win32"]:
 		print(colored("Открываю ссылку!", "green"))
-		webbrowser.open("https://t.me/orion_smsbomber_bot", new=0, autoraise=True)
+		webbrowser.open("https://t.me/orion_sms_bomber_bot", new=0, autoraise=True)
 		print("\nНажмите Enter чтобы вернуть назад")
 		input()
 	else:
 		print()
 		print(colored(" Попробуй данный Sms Bomber в новом", "yellow"), colored("Telegram", "cyan"), colored("Боте", "green")+colored("!", "yellow"))
-		print(colored("\n         ---> ", "magenta"), colored("@orion_smsbomber_bot", "cyan"), colored(" <---", "magenta"))
+		print(colored("\n         ---> ", "magenta"), colored("@orion_sms_bomber_bot", "cyan"), colored(" <---", "magenta"))
 		print("\n\nНажмите Enter чтобы вернуть назад")
 		input()
 
@@ -773,9 +773,9 @@ def start(number, country, proxy_=None):
 		if random.randint(1, 2) == 2:
 			print(colored("Подпишитесь на наш", "green"), colored("Телеграм!", "cyan"))
 			print(colored("Открываю ссылку...\n", "yellow"))
-			webbrowser.open("https://t.me/orion_bomber", new=0, autoraise=True)
+			webbrowser.open("https://t.me/orionbomber", new=0, autoraise=True)
 	else:
-		print(colored("Подпишитесь на наш", "green"), colored("Телеграм!", "cyan"), colored("t.me/orion_bomber", "red"))
+		print(colored("Подпишитесь на наш", "green"), colored("Телеграм!", "cyan"), colored("t.me/orionbomber", "red"))
 		print()
 		
 	# Number formats
