@@ -345,7 +345,7 @@ def ICC():
 def telebot():
 	if platform in ["darwin", "win32"]:
 		print(colored("Открываю ссылку!", "green"))
-		webbrowser.open("https://t.me/orion_sms_bomber_bot", new=0, autoraise=True)
+		webbrowser.open("https://t.me/orion_bomber_bot", new=0, autoraise=True)
 		print("\nНажмите Enter чтобы вернуть назад")
 		input()
 	else:
