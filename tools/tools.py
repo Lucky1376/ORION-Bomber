@@ -351,7 +351,7 @@ def telebot():
 	else:
 		print()
 		print(colored(" Попробуй данный Sms Bomber в новом", "yellow"), colored("Telegram", "cyan"), colored("Боте", "green")+colored("!", "yellow"))
-		print(colored("\n         ---> ", "magenta"), colored("@orion_sms_bomber_bot", "cyan"), colored(" <---", "magenta"))
+		print(colored("\n         ---> ", "magenta"), colored("@orion_bomber_bot", "cyan"), colored(" <---", "magenta"))
 		print("\n\nНажмите Enter чтобы вернуть назад")
 		input()
 

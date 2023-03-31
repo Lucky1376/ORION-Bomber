@@ -31,7 +31,7 @@ while True:
 	tools.banner_tools()
 
 	try:
-		tool = input(colored("\n~# ", "blue"))
+		tool = input(colored("\n~# ", "red"))
 	except KeyboardInterrupt:
 		continue
 	if tool == "1":
