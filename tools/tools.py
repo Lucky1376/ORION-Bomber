@@ -345,13 +345,13 @@ def ICC():
 def telebot():
 	if platform in ["darwin", "win32"]:
 		print(colored("Открываю ссылку!", "green"))
-		webbrowser.open("https://t.me/orion_bomber_bot", new=0, autoraise=True)
+		webbrowser.open("https://t.me/orionbomb_bot", new=0, autoraise=True)
 		print("\nНажмите Enter чтобы вернуть назад")
 		input()
 	else:
 		print()
 		print(colored(" Попробуй данный Sms Bomber в новом", "yellow"), colored("Telegram", "cyan"), colored("Боте", "green")+colored("!", "yellow"))
-		print(colored("\n         ---> ", "magenta"), colored("@orion_bomber_bot", "cyan"), colored(" <---", "magenta"))
+		print(colored("\n         ---> ", "magenta"), colored("@orionbomb_bot", "cyan"), colored(" <---", "magenta"))
 		print("\n\nНажмите Enter чтобы вернуть назад")
 		input()
 
