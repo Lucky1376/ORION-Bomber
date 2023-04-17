@@ -135,7 +135,7 @@ def banner_tools():
 	print(colored("[1]", "red"), colored("Начать спам", "green"))
 	print(colored("[2]", "red"), colored("Поддержать разработчиков!    <---", "green"))
 	print(colored("[3]", "red"), colored("Инструкция по отправке логов", "yellow"))
-	print(colored("[4]", "red"), colored("Попробуй", "green"), colored("в", "yellow"), colored("Telegram", "cyan")+colored("!", "yellow"), colored("   <---", "cyan"))
+	#print(colored("[4]", "red"), colored("Попробуй", "green"), colored("в", "yellow"), colored("Telegram", "cyan")+colored("!", "yellow"), colored("   <---", "cyan"))
 	print(colored("\n[99]", "red"), colored("Информация", "cyan"))
 	print(colored("\n[0] Выход", "red"))
 

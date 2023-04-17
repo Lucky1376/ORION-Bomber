@@ -4,8 +4,6 @@
 ##### Всю свежую информацию о данном проекте можно найти только в этом Телеграм канале
 ###### [![CHANNEL](https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=Telegram)](https://t.me/orionbomber)
 ___
-##### [![BOT](https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=Telegram)](https://t.me/orionbomb_bot) [**`БОТ`**](https://t.me/orion_bomber_bot)
-___
 # 💻Меню
 ![Alt-текст](https://i.ibb.co/km3hM3B/n-menuu.png)
 ___
@@ -17,10 +15,7 @@ ___
 
 ___
 # ⬇️**Нужна помощь? Пиши нам!⬇**️
-## [**`Телеграм канал`**](https://t.me/orionbomber) `или` [**`FeedBack BOT`**](https://t.me/orion_feedback_bot)
-___
-# 💡Наш Sms Bomber есть в Telegram
-## [**`ORION SmsBomber BOT`**](https://t.me/orionbomb_bot)
+## [**`Телеграм канал`**](https://t.me/orionbomber) `или` [**`Чат`**](https://t.me/+xWLy0dl5IsQ5YzYy)
 ___
 # 🌐Установка
 + #### **Termux (Android)**
@@ -38,11 +33,6 @@ ___
   + `cd`
   + `cd ORION-Bomber`
   + `python main.py`
-___
-+ #### **IOS (IPhone)**
-  + `Открываем` **`Telegram`**
-  + `Заходим в Бота` [**`@orion_sms_bomber_bot`**](https://t.me/orionbomb_bot)
-  + `Жмем` **`Старт`**
 ___
 + #### **Windows 10+**
   + `Требуется 64 битная система`
