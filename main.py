@@ -8,12 +8,12 @@ import requests
 # / /_/ / , _// // /_/ /    / 
 # \____/_/|_/___/\____/_/|_/  
 # 
-#  https://t.me/orion_bomber | https://t.me/orion_smsbomber_bot                            
+#  https://t.me/orionbomber | https://t.me/orion_cloud_bot                          
 
 # Why are you reading this?
-# Better subscribe to Telegram - https://t.me/orion_bomber
+# Better subscribe to Telegram - https://t.me/orionbomber
 
-# There are 1592 lines in this project,
+# There are 1500+ lines in this project,
 # if you count user_agent.py and services.json,
 # then there will be 2267 lines,
 # Wow, right?
@@ -45,10 +45,10 @@ while True:
 		tools.banner_info()
 	elif tool == "2":
 		tools.donate()
-	elif tool == "3":
-		tools.inst_logs()
-	elif tool.lower() == "4":
-		tools.telebot()
+	#elif tool == "3":
+		#tools.inst_logs()
+	elif tool.lower() == "3":
+		tools.app()
 	elif tool.lower() == "clear logs":
 		tools.clear_logs()
 	elif tool.lower() == "update":

@@ -5,7 +5,7 @@
 ###### [![CHANNEL](https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=Telegram)](https://t.me/orionbomber)
 ___
 # 💻Меню
-![Alt-текст](https://i.ibb.co/ykcmrHp/none.png)
+![Alt-текст](https://i.ibb.co/5xM738F/new-img.png)
 ___
 # ❤️️**Без них не обошлись**
 | Метод | Описание | Ссылки|

@@ -123,38 +123,41 @@ def banner():
 
 	info = " "*13+colored("[", "blue")+"Developers :"+colored("rizza", "green")+" and "+colored("LostIk", "red")
 	info_2 = " "*13+colored("[", "blue")+"Version    :"+colored(ver, "red")
-	info_3 = " "*13+colored("[", "blue")+"Telegram   :"+colored("@orionbomber", "cyan")+colored("   <--", "green")+"\n"
+	info_3 = " "*13+colored("[", "blue")+"Telegram   :"+colored("@orionbomber", "cyan")+colored("   <--", "green")
+	info_4 = "\n"+" "*12+colored("Программа больше не поддерживается!", "red")+"\n"
 
 	print(banner)
 	print(pred_info)
 	print(info)
 	print(info_2)
 	print(info_3)
+	print(info_4)
 
 def banner_tools():
 	print(colored("[1]", "red"), colored("Начать спам", "green"))
 	print(colored("[2]", "red"), colored("Поддержать разработчиков!    <---", "green"))
-	print(colored("[3]", "red"), colored("Инструкция по отправке логов", "yellow"))
+	print(colored("[3]", "red"), colored("Android приложение", "magenta"))
+	#print(colored("[3]", "red"), colored("Инструкция по отправке логов", "yellow"))
 	#print(colored("[4]", "red"), colored("Попробуй", "green"), colored("в", "yellow"), colored("Telegram", "cyan")+colored("!", "yellow"), colored("   <---", "cyan"))
 	print(colored("\n[99]", "red"), colored("Информация", "cyan"))
 	print(colored("\n[0] Выход", "red"))
 
 def donate():
 	print("")
-	print(colored("Ваша поддержа еще больше мотивирует нас выпускать обновления!", "green"))
+	print(colored("Спасибо за использование программы :D", "green"))
 	print("")
 	print(colored("QIWI", "yellow"))
 	print("├"+colored("https://qiwi.com/n/LUCKY1376", "cyan"), colored("Перевод по никнейму", "green"))
-	print("├"+colored("2200 7302 4344 6206", "cyan"), colored("MIR", "green"))
-	print("└"+colored("4890 4947 5754 5546", "cyan"), colored("VISA", "blue"))
+	print("└"+colored("2200 7302 4344 6206", "cyan"), colored("MIR", "green"))
+	#print("└"+colored("4890 4947 5754 5546", "cyan"), colored("VISA", "blue"))
 	print("")
 	print(colored("Сбербанк", "green"))
-	print("├"+colored("2202 2024 3331 7181", "cyan"), colored("MIR", "green"))
-	print("└"+colored("5469 4500 1265 2996", "cyan"), colored("MasterCard", "red"))
-	print("")
-	print(colored("Юмани", "blue"))
-	print("├"+colored("4100 1174 8743 5875", "cyan"), "Номер счета")
-	print("└"+colored("2202 1201 0852 7850", "cyan"), colored("MIR", "green"))
+	print("└"+colored("2202 2024 3331 7181", "cyan"), colored("MIR", "green"))
+	#print("└"+colored("5469 4500 1265 2996", "cyan"), colored("MasterCard", "red"))
+	#print("")
+	##print(colored("Юмани", "blue"))
+	#print("├"+colored("4100 1174 8743 5875", "cyan"), "Номер счета")
+	#print("└"+colored("2202 1201 0852 7850", "cyan"), colored("MIR", "green"))
 	print("\nНажмите Enter чтобы вернуться назад")
 	input()
 
@@ -199,6 +202,7 @@ def banner_info():
 	print(colored("\nТелеграм", "cyan"))
 	print("├"+colored("rizza", "green")+":", colored("https://t.me/rlzza", "cyan"))
 	print("├"+colored("LostIk", "red")+":", colored("https://t.me/lolzby", "cyan"))
+	print("├"+colored("Android APK", "magenta")+":", colored("https://t.me/orion_cloud_bot", "cyan"))
 	print("└"+colored("Канал", "cyan")+":", colored("https://t.me/orionbomber", "cyan"))
 	print("\nНажмите Enter чтобы вернуться назад")
 	input()
@@ -342,16 +346,16 @@ def ICC():
 		print(colored("[!]", "red"), colored("Ваше устройство не подключено к интернету или интернет слишком слабый!", "magenta"))
 		exit()
 
-def telebot():
+def app():
 	if platform in ["darwin", "win32"]:
 		print(colored("Открываю ссылку!", "green"))
-		webbrowser.open("https://t.me/orionbomb_bot", new=0, autoraise=True)
+		webbrowser.open("https://t.me/orion_cloud_bot", new=0, autoraise=True)
 		print("\nНажмите Enter чтобы вернуть назад")
 		input()
 	else:
 		print()
-		print(colored(" Попробуй данный Sms Bomber в новом", "yellow"), colored("Telegram", "cyan"), colored("Боте", "green")+colored("!", "yellow"))
-		print(colored("\n         ---> ", "magenta"), colored("@orionbomb_bot", "cyan"), colored(" <---", "magenta"))
+		print(colored(" Попробуй данный Sms Bomber в новом", "yellow"), colored("Android", "green"), colored("приложении", "yellow"), colored("ORION app", "green"))
+		print(colored("\n                 ---> ", "magenta"), colored("@orion_cloud_bot", "cyan"), colored(" <---", "magenta"))
 		print("\n\nНажмите Enter чтобы вернуть назад")
 		input()
 
@@ -769,7 +773,7 @@ def start(number, country, proxy_=None):
 	print()
 
 
-	if platform == "win32":
+	if platform in ["darwin", "win32"]:
 		if random.randint(1, 2) == 2:
 			print(colored("Подпишитесь на наш", "green"), colored("Телеграм!", "cyan"))
 			print(colored("Открываю ссылку...\n", "yellow"))
@@ -794,7 +798,7 @@ def start(number, country, proxy_=None):
 	while starting_spam:
 		try:
 			if circles == len(services_list):
-				print(colored("Круг ", "green")+colored(circles_2, "yellow"), colored("Пройден!", "green"))
+				print(colored("Круг ", "green")+colored(str(circles_2), "yellow"), colored("Пройден!", "green"))
 				circles -= len(services_list)
 				circles_2 += 1
 			time.sleep(1)
