@@ -355,7 +355,7 @@ def app():
 	else:
 		print()
 		print(colored(" Попробуй данный Sms Bomber в новом", "yellow"), colored("Android", "green"), colored("приложении", "yellow"), colored("ORION app", "green"))
-		print(colored("\n                 ---> ", "magenta"), colored("@orion_cloud_bot", "cyan"), colored(" <---", "magenta"))
+		print(colored("\n                 ---> ", "magenta"), colored("orion-cloud.ru", "cyan"), colored(" <---", "magenta"))
 		print("\n\nНажмите Enter чтобы вернуть назад")
 		input()
 
