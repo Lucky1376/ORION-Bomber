@@ -77,7 +77,7 @@ def clear():
 	elif platform == "win32":
 		os.system("cls")
 	else:
-		print(colored("\nИзвините наша программа не поддерживает вашу операционную систему ;(\n", "red"))
+		print(colored("\nSorry, our program does not support your operating system ;(\n", "red"))
 		exit()
 
 def anim_text(text, speed, color="green"):
@@ -116,15 +116,15 @@ def banner():
 	░ ░ ░ ▒    ░░   ░  ▒ ░░ ░ ░ ▒     ░   ░ ░ 
 	    ░ ░     ░      ░      ░ ░           ░ """, "red")
 
-	pred_info = " "*24+colored("Сервисы", "green")+"\n"
-	pred_info_ru = " "*17+colored("Россия ", "blue")+colored(ru_s, "green")+"   "
-	pred_info_by = colored("Беларусь ", "cyan")+colored(by_s, "green")+"\n"
+	pred_info = " "*24+colored("Services", "green")+"\n"
+	pred_info_ru = " "*17+colored("Russia ", "blue")+colored(ru_s, "green")+"   "
+	pred_info_by = colored("Belarus ", "cyan")+colored(by_s, "green")+"\n"
 	pred_info = pred_info+pred_info_ru+pred_info_by
 
 	info = " "*13+colored("[", "blue")+"Developers :"+colored("rizza", "green")+" and "+colored("LostIk", "red")
 	info_2 = " "*13+colored("[", "blue")+"Version    :"+colored(ver, "red")
 	info_3 = " "*13+colored("[", "blue")+"Telegram   :"+colored("@orionbomber", "cyan")+colored("   <--", "green")
-	info_4 = "\n"+" "*12+colored("Программа больше не поддерживается!", "red")+"\n"
+	info_4 = "\n"+" "*12+colored("This program is no longer supported!", "red")+"\n"
 
 	print(banner)
 	print(pred_info)
@@ -134,31 +134,31 @@ def banner():
 	print(info_4)
 
 def banner_tools():
-	print(colored("[1]", "red"), colored("Начать спам", "green"))
-	print(colored("[2]", "red"), colored("Поддержать разработчиков!    <---", "green"))
-	print(colored("[3]", "red"), colored("Android приложение", "magenta"))
-	#print(colored("[3]", "red"), colored("Инструкция по отправке логов", "yellow"))
-	#print(colored("[4]", "red"), colored("Попробуй", "green"), colored("в", "yellow"), colored("Telegram", "cyan")+colored("!", "yellow"), colored("   <---", "cyan"))
-	print(colored("\n[99]", "red"), colored("Информация", "cyan"))
-	print(colored("\n[0] Выход", "red"))
+	print(colored("[1]", "red"), colored("Start spam", "green"))
+	print(colored("[2]", "red"), colored("Support developers!    <---", "green"))
+	print(colored("[3]", "red"), colored("Android app", "magenta"))
+	#print(colored("[3]", "red"), colored("How to send logs", "yellow"))
+	#print(colored("[4]", "red"), colored("Try", "green"), colored("in", "yellow"), colored("Telegram", "cyan")+colored("!", "yellow"), colored("   <---", "cyan"))
+	print(colored("\n[99]", "red"), colored("Information", "cyan"))
+	print(colored("\n[0] Exit", "red"))
 
 def donate():
 	print("")
-	print(colored("Спасибо за использование программы :D", "green"))
+	print(colored("Thanks for using the program :D", "green"))
 	print("")
 	print(colored("QIWI", "yellow"))
-	print("├"+colored("https://qiwi.com/n/LUCKY1376", "cyan"), colored("Перевод по никнейму", "green"))
+	print("├"+colored("https://qiwi.com/n/LUCKY1376", "cyan"), colored("Transfer by nickname", "green"))
 	print("└"+colored("2200 7302 4344 6206", "cyan"), colored("MIR", "green"))
 	#print("└"+colored("4890 4947 5754 5546", "cyan"), colored("VISA", "blue"))
 	print("")
-	print(colored("Сбербанк", "green"))
+	print(colored("Sberbank", "green"))
 	print("└"+colored("2202 2024 3331 7181", "cyan"), colored("MIR", "green"))
 	#print("└"+colored("5469 4500 1265 2996", "cyan"), colored("MasterCard", "red"))
 	#print("")
-	##print(colored("Юмани", "blue"))
-	#print("├"+colored("4100 1174 8743 5875", "cyan"), "Номер счета")
+	##print(colored("YooMoney", "blue"))
+	#print("├"+colored("4100 1174 8743 5875", "cyan"), "Account number")
 	#print("└"+colored("2202 1201 0852 7850", "cyan"), colored("MIR", "green"))
-	print("\nНажмите Enter чтобы вернуться назад")
+	print("\nPress Enter to go back")
 	input()
 
 def inst_logs():
@@ -167,25 +167,25 @@ def inst_logs():
 		if platform == "linux" or platform == "linux2":
 			shutil.copyfile('tools/logs.txt', '/storage/emulated/0/Download/logs.txt')
 			shutil.copyfile('tools/error_logs.txt', '/storage/emulated/0/Download/error_logs.txt')
-			print(colored("Файлы", "green"), colored("logs.txt error_logs.txt", "cyan"), colored("были сохранены в папку Download на вашем устройстве", "green"))
-			print(colored("Пожалуйста отправьте поочередно эти 2 файла в наш чат телеграм", "green"), colored("https://t.me/+xWLy0dl5IsQ5YzYy", "cyan"))
+			print(colored("Files", "green"), colored("logs.txt error_logs.txt", "cyan"), colored("were saved to the Download folder on your device", "green"))
+			print(colored("Please send these 2 files one by one to our Telegram chat", "green"), colored("https://t.me/+xWLy0dl5IsQ5YzYy", "cyan"))
 			print("")
-			print("\nНажмите Enter чтобы вернуться назад")
+			print("\nPress Enter to go back")
 			input()
 		elif platform == "win32" or platform == "darwin":
 			print("")
-			print(colored("Пожалуйста отправьте в наш чат телеграм", "green"), colored("https://t.me/+xWLy0dl5IsQ5YzYy", "cyan"), colored("поочередно файлы", "green"), colored("logs.txt error_logs.txt", "cyan"), colored("из папки", "green"), colored("tools", "cyan"))
+			print(colored("Please send to our Telegram chat", "green"), colored("https://t.me/+xWLy0dl5IsQ5YzYy", "cyan"), colored("the files", "green"), colored("logs.txt error_logs.txt", "cyan"), colored("one by one from the", "green"), colored("tools", "cyan"), colored("folder", "green"))
 			print("")
-			print("\nНажмите Enter чтобы вернуться назад")
+			print("\nPress Enter to go back")
 			input()
 	except:
 		print("")
-		print(colored("Мы не смогли переместить файлы в нужную директорию", "yellow"))
-		print(colored("Возможно у вас для Термукса в настройках разрешения приложению не доступны Файлы и медиаконтент", "yellow"))
-		print(colored("Пожалуйста разрешите Термуксу в настройках все нужные разрешения и повторите попытку"))
-		print(colored("За помощью по данному вопросу пишите в наш чат телеграм"), colored("https://t.me/+xWLy0dl5IsQ5YzYy", "cyan"))
+		print(colored("We could not move files to the required directory", "yellow"))
+		print(colored("Termux may not have access to Files and Media in app permissions", "yellow"))
+		print(colored("Please grant all required permissions to Termux and try again"))
+		print(colored("For help with this issue, contact our Telegram chat"), colored("https://t.me/+xWLy0dl5IsQ5YzYy", "cyan"))
 		print("")
-		print("\nНажмите Enter чтобы вернуться назад")
+		print("\nPress Enter to go back")
 		input()
 
 def clear_logs():
@@ -194,17 +194,17 @@ def clear_logs():
 	with open("tools/error_logs.txt", "w"):
 		pass
 	print("")
-	print(colored("Логи успешно были очищены", "green"))
-	print("\nНажмите Enter чтобы вернуться назад")
+	print(colored("Logs were cleared successfully", "green"))
+	print("\nPress Enter to go back")
 	input()
 
 def banner_info():
-	print(colored("\nТелеграм", "cyan"))
+	print(colored("\nTelegram", "cyan"))
 	print("├"+colored("rizza", "green")+":", colored("https://t.me/rlzza", "cyan"))
 	print("├"+colored("LostIk", "red")+":", colored("https://t.me/lolzby", "cyan"))
 	print("├"+colored("Android APK", "magenta")+":", colored("https://t.me/orion_cloud_bot", "cyan"))
-	print("└"+colored("Канал", "cyan")+":", colored("https://t.me/orionbomber", "cyan"))
-	print("\nНажмите Enter чтобы вернуться назад")
+	print("└"+colored("Channel", "cyan")+":", colored("https://t.me/orionbomber", "cyan"))
+	print("\nPress Enter to go back")
 	input()
 
 def number_ckeck(numb):
@@ -226,12 +226,12 @@ def start_input():
 					  "2": "ru"}
 	clear()
 	while True:
-		print(colored("[99] Отмена", "red"))
+		print(colored("[99] Cancel", "red"))
 		print("")
-		print(colored("[1]", "red"), colored("Беларусь +375", "blue"))
-		print(colored("[2]", "red"), colored("Россия +7", "cyan"))
+		print(colored("[1]", "red"), colored("Belarus +375", "blue"))
+		print(colored("[2]", "red"), colored("Russia +7", "cyan"))
 		print("")
-		ct = input(colored("Выберите страну: ", "green"))
+		ct = input(colored("Select country: ", "green"))
 		if ct == "2":
 			break
 		elif ct == "1":
@@ -240,29 +240,29 @@ def start_input():
 			return 0, 0, 0
 		else:
 			clear()
-			print(colored("Новая страна", "magenta"), colored(ct, "cyan")+colored("!", "magenta"))
+			print(colored("New country", "magenta"), colored(ct, "cyan")+colored("!", "magenta"))
 			print()
 	clear()
 	while True:
-		print(colored("[99] Отмена", "red"))
+		print(colored("[99] Cancel", "red"))
 		print()
-		numb = input(colored("Введите номер без кода страны "+country_code[ct]+" ", "green"))
+		numb = input(colored("Enter number without country code "+country_code[ct]+" ", "green"))
 		if number_ckeck(numb):
 			break
 		else:
 			clear()
-			print(colored("Не очень похоже на номер телефона...", "magenta"))
+			print(colored("This does not look like a phone number...", "magenta"))
 			print()
 		if numb == "99":
 			return 0, 0, 0
 	clear()
 	while True:
-		print(colored("[99] Отмена", "red"))
+		print(colored("[99] Cancel", "red"))
 		print()
-		print(colored("[1]", "red"), colored("Да", "green"))
-		print(colored("[2]", "red"), colored("Нет", "red"))
+		print(colored("[1]", "red"), colored("Yes", "green"))
+		print(colored("[2]", "red"), colored("No", "red"))
 		print()
-		pr = input(colored("Использовать прокси?: ", "green"))
+		pr = input(colored("Use proxy?: ", "green"))
 		if pr in ["1", "2"]:
 			if pr == "1":
 				pr = country_code_2[ct]
@@ -273,27 +273,27 @@ def start_input():
 			return 0, 0, 0
 		else:
 			clear()
-			print(colored("Выбери один из вариантов...", "magenta"))
+			print(colored("Pick one of the options...", "magenta"))
 			print()
 	clear()
 	if pr != None:
 		while True:
-			print(colored("[99] Отмена", "red"))
+			print(colored("[99] Cancel", "red"))
 			print()
-			print(colored("[1]", "red"), colored("Общедоступный прокси", "yellow"))
-			print("└"+colored("Общедоступный прокси используют все пользователи ORION-Bomber", "cyan"))
+			print(colored("[1]", "red"), colored("Public proxy", "yellow"))
+			print("└"+colored("Public proxies are shared by all ORION-Bomber users", "cyan"))
 			print()
-			print(colored("[2]", "red"), colored("Свой прокси", "green"))
-			print("└"+colored("Ваш прокси обязательно должен иметь протокол HTTP или HTTPS с поддержкой ipv4 и страну вашего номера", "cyan"))
+			print(colored("[2]", "red"), colored("Your own proxy", "green"))
+			print("└"+colored("Your proxy must support HTTP or HTTPS over IPv4 and match your phone-number country", "cyan"))
 			print()
-			who_pr = input("Вариант: ")
+			who_pr = input("Option: ")
 			if who_pr in ["1", "2"]:
 				if who_pr == "2":
 					print()
-					print(colored("[99] Отмена", "red"))
+					print(colored("[99] Cancel", "red"))
 					print()
-					print(colored("Введите Ip и Port и логин и пароль если прокси частный", "green"))
-					print("└"+colored("Пример:\n├123.45.678.910:8080\n└123.45.678.910:8080:LOGIN:PASSWORD", "cyan"))
+					print(colored("Enter IP and Port, and login/password if the proxy is private", "green"))
+					print("└"+colored("Example:\n├123.45.678.910:8080\n└123.45.678.910:8080:LOGIN:PASSWORD", "cyan"))
 					print()
 					new_pr = input(colored("~# ", "red"))
 					
@@ -303,26 +303,26 @@ def start_input():
 						# Shared Proxy Check
 						result = proxy.SPC(new_pr.split(":")[0], new_pr.split(":")[1])
 						if result == False:
-							print(colored("Ваш прокси не работает!", "red"))
+							print(colored("Your proxy is not working!", "red"))
 						else:
 							pr = {"ip": new_pr.split(":")[0],
 								  "port": new_pr.split(":")[1],
 								  "format": result}
-							print(colored("Прокси работает!", "green"))
+							print(colored("Proxy is working!", "green"))
 							time.sleep(2)
 							break
 					elif len(new_pr.split(":")) > 2:
 						# Private Proxy Check
 						result = proxy.SPC(new_pr.split(":")[0], new_pr.split(":")[1], login=new_pr.split(":")[2], password=new_pr.split(":")[3])
 						if result == False:
-							print(colored("Ваш прокси не работает!", "red"))
+							print(colored("Your proxy is not working!", "red"))
 						else:
 							pr = {"ip": new_pr.split(":")[0],
 								  "port": new_pr.split(":")[1],
 								  "login": new_pr.split(":")[2],
 								  "password": new_pr.split(":")[3],
 								  "format": result}
-							print(colored("Прокси работает!", "green"))
+							print(colored("Proxy is working!", "green"))
 							time.sleep(2)
 							break
 
@@ -332,31 +332,31 @@ def start_input():
 				return 0, 0, 0
 			else:
 				clear()
-				print(colored("К сожалению придется выбрать а не писать", "magenta"), colored(who_pr, "cyan"))
+				print(colored("Please choose one of the options instead of typing custom text", "magenta"), colored(who_pr, "cyan"))
 				print()
 
 	return country_code[ct]+numb, country_code_2[ct], pr
 
 def ICC():
 	try:
-		anim_text("Проверка интернет соединения...", speed=0.02, color="green")
+		anim_text("Checking internet connection...", speed=0.02, color="green")
 		r.get("https://google.com", timeout=5)
 	except Exception as es:
 		clear()
-		print(colored("[!]", "red"), colored("Ваше устройство не подключено к интернету или интернет слишком слабый!", "magenta"))
+		print(colored("[!]", "red"), colored("Your device is not connected to the internet or the connection is too weak!", "magenta"))
 		exit()
 
 def app():
 	if platform in ["darwin", "win32"]:
-		print(colored("Открываю ссылку!", "green"))
+		print(colored("Opening link!", "green"))
 		webbrowser.open("https://t.me/orion_cloud_bot", new=0, autoraise=True)
-		print("\nНажмите Enter чтобы вернуть назад")
+		print("\nPress Enter to go back")
 		input()
 	else:
 		print()
-		print(colored(" Попробуй данный Sms Bomber в новом", "yellow"), colored("Android", "green"), colored("приложении", "yellow"), colored("ORION app", "green"))
+		print(colored(" Try this SMS Bomber in the new", "yellow"), colored("Android", "green"), colored("app", "yellow"), colored("ORION app", "green"))
 		print(colored("\n                 ---> ", "magenta"), colored("orion-cloud.ru", "cyan"), colored(" <---", "magenta"))
-		print("\n\nНажмите Enter чтобы вернуть назад")
+		print("\n\nPress Enter to go back")
 		input()
 
 def check_moderator():
@@ -364,14 +364,14 @@ def check_moderator():
 	anim_text("!WARNING!", speed=0.085, color="red")
 	time.sleep(1.5)
 	clear()
-	anim_text("Эта функция предназначена только разработчикам...", speed=0.030, color="magenta")
+	anim_text("This feature is for developers only...", speed=0.030, color="magenta")
 	time.sleep(1)
 	print()
-	anim_text("Для продолжения введите код пароль если вы знаете что вы делаете...", speed=0.022, color="cyan")
+	anim_text("To continue, enter the password code only if you know what you are doing...", speed=0.022, color="cyan")
 	time.sleep(1)
 	while True:
 		print("\n")
-		print(colored("[0] Выход", "red"))
+		print(colored("[0] Exit", "red"))
 		print()
 		try:
 			password = input(colored("~# ", "magenta"))
@@ -382,7 +382,7 @@ def check_moderator():
 		elif password == "0":
 			return "return"
 		else:
-			anim_text("Пароль неверный...", speed=0.030, color="red")
+			anim_text("Wrong password...", speed=0.030, color="red")
 			time.sleep(1)
 
 def force_update():
@@ -397,10 +397,10 @@ def force_update():
 		update_list = update_list.content.decode("utf-8").split("\n")
 
 		clear()
-		print(colored("[!]", "magenta"), colored("Найдено новое обновление V", "green")+colored(last_ver, "cyan")+colored("!", "green"))
+		print(colored("[!]", "magenta"), colored("New update found V", "green")+colored(last_ver, "cyan")+colored("!", "green"))
 		print("")
 		k = 0
-		print(colored("Что нового?", "green"))
+		print(colored("What's new?", "green"))
 		for par in update_list:
 			if len(update_list)-1 == k:
 				print("└"+colored(par, "cyan"))
@@ -408,17 +408,17 @@ def force_update():
 				print("├"+colored(par, "cyan"))
 			k+=1
 		print("")
-		print(colored("Желаете ли вы обновиться до актуальной версии?", "yellow"))
+		print(colored("Do you want to update to the latest version?", "yellow"))
 		print("")
-		print(colored("[1]", "red"), colored("Да", "green"))
-		print(colored("[2]", "red"), colored("Нет", "red"))
+		print(colored("[1]", "red"), colored("Yes", "green"))
+		print(colored("[2]", "red"), colored("No", "red"))
 		print("")
 		while True:
 			how = input(colored("~# ", "red"))
 			if how == "1":
 				clear()
 				if platform == "linux" or platform == "linux2":
-					print(colored("Устанавливаю архив...", "green"))
+					print(colored("Installing archive...", "green"))
 					os.chdir("/data/data/com.termux/files/home")
 					os.system("rm -rf ORION-Bomber")
 					
@@ -428,7 +428,7 @@ def force_update():
 					a.write(result.content)
 					a.close()
 					
-					print(colored("Распаковка архива...", "green"))
+					print(colored("Extracting archive...", "green"))
 
 					fantasy_zip = zipfile.ZipFile("ORION-Bomber.zip")
 					fantasy_zip.extractall("ORION-Bomber")
@@ -445,7 +445,7 @@ def force_update():
 					os.chdir("/data/data/com.termux/files/home/ORION-Bomber")
 					os.system("rm -rf ORION-Bomber-master")
 
-					print(colored("Обновление прошло успешно, запускаю ORION-Bomber...", "green"))
+					print(colored("Update completed successfully, launching ORION-Bomber...", "green"))
 					time.sleep(1.5)
 
 					os.system("pip install -r requirements.txt")
@@ -456,22 +456,22 @@ def force_update():
 					os.startfile(os.getcwd()+"/updaters/windows.exe")
 					exit()
 				else:
-					print(colored("[!]", "red"), colored("Наша программа пока не может установить обновление на вашу операционную ситему, вам придется скачать обновление вручную. В будущем мы постораемся сделать автообновление под вашу ОС!", "magenta"))
-					print("\nНажмите Enter чтобы запустить программу на старой версии или введите 1 чтобы я открыл ссылку на репозиторий с актуальной версией")
+					print(colored("[!]", "red"), colored("Our program cannot install updates on your operating system yet. You will need to download the update manually. We will try to add auto-update support for your OS in the future!", "magenta"))
+					print("\nPress Enter to run the old version, or type 1 to open the repository link with the latest version")
 					if input() == "1":
 						result_open = webbrowser.open("https://github.com/Lucky1376/ORION-Bomber", new=0, autoraise=True)
 						if not(result_open):
 							clear()
-							print(colored("Мне не удалось открыть ссылку на актуальную версию на вашем устройстве ;(", "red"))
-							print("\n"+"Попробуйте открыть ее сами! "+colored("https://github.com/Lucky1376/ORION-Bomber", "green"))
-							print("\nНажмите Enter чтобы запустить программу на старой версии или введите 1 чтобы выйти")
+							print(colored("I could not open the link to the latest version on your device ;(", "red"))
+							print("\n"+"Try opening it manually: "+colored("https://github.com/Lucky1376/ORION-Bomber", "green"))
+							print("\nPress Enter to run the old version, or type 1 to exit")
 							if input() == "1":
 								exit()
 							else:
 								return
 						else:
 							clear()
-							print(colored("Скачивайте обновление!", "green"))
+							print(colored("Download the update!", "green"))
 							exit()
 					else:
 						return
@@ -489,11 +489,11 @@ def CFU():
 		in_d = True
 	except:
 		clear()
-		print(colored("[!]", "red"), colored("Ваше устройство не подключено к интернету или интернет слишком слабый!", "magenta"))
+		print(colored("[!]", "red"), colored("Your device is not connected to the internet or the connection is too weak!", "magenta"))
 		exit()
 	clear()
 	if in_d:
-		anim_text("Проверяем обновление...", speed=0.02, color="green")
+		anim_text("Checking for updates...", speed=0.02, color="green")
 		# ├ └
 
 		result = r.get("https://raw.githubusercontent.com/Lucky1376/ORION-Bomber/master/tools/version.txt")
@@ -507,10 +507,10 @@ def CFU():
 		a.close()
 		if last_ver != current_ver:
 			clear()
-			print(colored("[!]", "magenta"), colored("Найдено новое обновление V", "green")+colored(last_ver, "cyan")+colored("!", "green"))
+			print(colored("[!]", "magenta"), colored("New update found V", "green")+colored(last_ver, "cyan")+colored("!", "green"))
 			print("")
 			k = 0
-			print(colored("Что нового?", "green"))
+			print(colored("What's new?", "green"))
 			for par in update_list:
 				if len(update_list)-1 == k:
 					print("└"+colored(par, "cyan"))
@@ -518,17 +518,17 @@ def CFU():
 					print("├"+colored(par, "cyan"))
 				k+=1
 			print("")
-			print(colored("Желаете ли вы обновиться до актуальной версии?", "yellow"))
+			print(colored("Do you want to update to the latest version?", "yellow"))
 			print("")
-			print(colored("[1]", "red"), colored("Да", "green"))
-			print(colored("[2]", "red"), colored("Нет", "red"))
+			print(colored("[1]", "red"), colored("Yes", "green"))
+			print(colored("[2]", "red"), colored("No", "red"))
 			print("")
 			while True:
 				how = input(colored("~# ", "red"))
 				if how == "1":
 					clear()
 					if platform == "linux" or platform == "linux2":
-						print(colored("Устанавливаю архив...", "green"))
+						print(colored("Installing archive...", "green"))
 						os.chdir("/data/data/com.termux/files/home")
 						os.system("rm -rf ORION-Bomber")
 						
@@ -538,7 +538,7 @@ def CFU():
 						a.write(result.content)
 						a.close()
 						
-						print(colored("Распаковка архива...", "green"))
+						print(colored("Extracting archive...", "green"))
 
 						fantasy_zip = zipfile.ZipFile("ORION-Bomber.zip")
 						fantasy_zip.extractall("ORION-Bomber")
@@ -555,7 +555,7 @@ def CFU():
 						os.chdir("/data/data/com.termux/files/home/ORION-Bomber")
 						os.system("rm -rf ORION-Bomber-master")
 
-						print(colored("Обновление прошло успешно, запускаю ORION-Bomber...", "green"))
+						print(colored("Update completed successfully, launching ORION-Bomber...", "green"))
 						time.sleep(1.5)
 
 						os.system("pip install -r requirements.txt")
@@ -566,22 +566,22 @@ def CFU():
 						os.startfile(os.getcwd()+"/updaters/windows.exe")
 						exit()
 					else:
-						print(colored("[!]", "red"), colored("Наша программа пока не может установить обновление на вашу операционную ситему, вам придется скачать обновление вручную. В будущем мы постораемся сделать автообновление под вашу ОС!", "magenta"))
-						print("\nНажмите Enter чтобы запустить программу на старой версии или введите 1 чтобы я открыл ссылку на репозиторий с актуальной версией")
+						print(colored("[!]", "red"), colored("Our program cannot install updates on your operating system yet. You will need to download the update manually. We will try to add auto-update support for your OS in the future!", "magenta"))
+						print("\nPress Enter to run the old version, or type 1 to open the repository link with the latest version")
 						if input() == "1":
 							result_open = webbrowser.open("https://github.com/Lucky1376/ORION-Bomber", new=0, autoraise=True)
 							if not(result_open):
 								clear()
-								print(colored("Мне не удалось открыть ссылку на актуальную версию на вашем устройстве ;(", "red"))
-								print("\n"+"Попробуйте открыть ее сами! "+colored("https://github.com/Lucky1376/ORION-Bomber", "green"))
-								print("\nНажмите Enter чтобы запустить программу на старой версии или введите 1 чтобы выйти")
+								print(colored("I could not open the link to the latest version on your device ;(", "red"))
+								print("\n"+"Try opening it manually: "+colored("https://github.com/Lucky1376/ORION-Bomber", "green"))
+								print("\nPress Enter to run the old version, or type 1 to exit")
 								if input() == "1":
 									exit()
 								else:
 									return
 							else:
 								clear()
-								print(colored("Скачивайте обновление!", "green"))
+								print(colored("Download the update!", "green"))
 								exit()
 						else:
 							return
@@ -620,7 +620,7 @@ def check_files_fn(dir_, files):
 	return True
 
 def check_files():
-	anim_text("Проверка файлов...", speed=0.02, color="green")
+	anim_text("Checking files...", speed=0.02, color="green")
 	files = os.listdir()
 	list_ = ["main.py", "LICENSE", "README.md", "tools"]
 	list_2 = ["proxy.py", "sender.py", "services.json", "tools.py", "version.txt", "logs.txt", "error_logs.txt"]
@@ -628,8 +628,8 @@ def check_files():
 
 	def ward():
 		clear()
-		print(colored("Наша программа не нашла некоторые наши файлы", "red"))
-		print(colored("Пожалуйста установите программу заново предварительно удалив папку с этой!\n", "green"))
+		print(colored("Our program did not find some required files", "red"))
+		print(colored("Please reinstall the program after deleting this folder first!\n", "green"))
 		exit()
 
 	if not(check_files_fn("", list_)):
@@ -694,23 +694,23 @@ def start(number, country, proxy_=None):
 	elif proxy_ in ["ru", "by"]:
 		starting = True
 		while starting:
-			print(colored("\nПодготовка прокси... (Не дольше 1 минуты)", "yellow"))
+			print(colored("\nPreparing proxies... (No longer than 1 minute)", "yellow"))
 			if proxy_ == "by":
 				proxy_class = proxy.Proxy(country=["ru", "by"])
 			else:
 				proxy_class = proxy.Proxy(country=[country])
 			proxy_class.get()
 			print("")
-			print(colored("Проверка найденного списка прокси... (Не дольше 2х минут)", "yellow"))
+			print(colored("Checking found proxy list... (No longer than 2 minutes)", "yellow"))
 			proxy_class.verify()
 			if proxy_class.mix() == False:
-				print(colored("\n\nУПС!", "yellow"), colored("К сожалению наша программа не смогла найти ни одного рабочего прокси ;(", "green"))
+				print(colored("\n\nOOPS!", "yellow"), colored("Unfortunately, our program could not find any working proxy ;(", "green"))
 				print("")
-				print(colored("[1]", "red"), colored("Без прокси", "green"))
-				print(colored("[2]", "red"), colored("Попробуем еще раз", "yellow"))
-				print(colored("[3]", "red"), colored("Выход", "red"))
+				print(colored("[1]", "red"), colored("Without proxy", "green"))
+				print(colored("[2]", "red"), colored("Try again", "yellow"))
+				print(colored("[3]", "red"), colored("Exit", "red"))
 				print("")
-				print(colored("Начать спам без прокси или попробуем еще раз?", "yellow"))
+				print(colored("Start spam without proxy or try again?", "yellow"))
 				while True:
 					how = input(colored("~# ", "red"))
 					if how in ["3", "0", "99"]:
@@ -722,9 +722,9 @@ def start(number, country, proxy_=None):
 					elif how == "2":
 						break
 			else:
-				print(colored("\n\nПытаемся найти подходящий! (Не дольше 1 минуты)", "cyan"))
+				print(colored("\n\nTrying to find a suitable one! (No longer than 1 minute)", "cyan"))
 				all_list = proxy_class.mix()
-				bar = ChargingBar('Ищем подходящий', max = len(all_list["all"]))
+				bar = ChargingBar('Searching for a match', max = len(all_list["all"]))
 				# proxy_class.list[proxy_]
 				for pr in all_list["all"]:
 					ch = proxy.SPC(pr["ip"], pr["port"])
@@ -738,13 +738,13 @@ def start(number, country, proxy_=None):
 					else:
 						all_list["all"].remove(pr)
 				if proxy_ in ["ru", "by"]:
-					print(colored("\n\nК сожалению наша программа не нашла рабочий прокси ;(", "yellow"))
+					print(colored("\n\nUnfortunately, our program did not find a working proxy ;(", "yellow"))
 					print("")
-					print(colored("[1]", "red"), colored("Да", "green"))
-					print(colored("[2]", "red"), colored("Нет", "red"))
+					print(colored("[1]", "red"), colored("Yes", "green"))
+					print(colored("[2]", "red"), colored("No", "red"))
 					print("")
 					while True:
-						how = input(colored("Начать спам без прокси? ", "green"))
+						how = input(colored("Start spam without proxy? ", "green"))
 						if how == "2":
 							return
 						elif how == "1":
@@ -753,7 +753,7 @@ def start(number, country, proxy_=None):
 							break
 				else:
 					print("")
-					print(colored("Прокси найден!", "green"))
+					print(colored("Proxy found!", "green"))
 					time.sleep(2)
 					starting = False
 	else:
@@ -764,22 +764,22 @@ def start(number, country, proxy_=None):
 	print()
 	an=["3", "2", "1"]
 	for i in an:
-		print(colored("Спам начнется через ", "red")+colored(i, "green")+" ",sep=' ',end='\r')
+		print(colored("Spam will start in ", "red")+colored(i, "green")+" ",sep=' ',end='\r')
 		time.sleep(1)
 	clear()
-	print(colored("Остановка спама", "yellow"))
-	print("├"+colored("Termux", "magenta")+":", colored("На встроенной клавиатуре от Termux выбрать CTRL затем C", "cyan"))
-	print("└"+colored("Windows", "blue")+":", colored("Комбинация клавишь Ctrl+C или Ctrl+Z", "cyan"))
+	print(colored("Stopping spam", "yellow"))
+	print("├"+colored("Termux", "magenta")+":", colored("On the built-in Termux keyboard, press CTRL then C", "cyan"))
+	print("└"+colored("Windows", "blue")+":", colored("Use Ctrl+C or Ctrl+Z", "cyan"))
 	print()
 
 
 	if platform in ["darwin", "win32"]:
 		if random.randint(1, 2) == 2:
-			print(colored("Подпишитесь на наш", "green"), colored("Телеграм!", "cyan"))
-			print(colored("Открываю ссылку...\n", "yellow"))
+			print(colored("Subscribe to our", "green"), colored("Telegram!", "cyan"))
+			print(colored("Opening link...\n", "yellow"))
 			webbrowser.open("https://t.me/orionbomber", new=0, autoraise=True)
 	else:
-		print(colored("Подпишитесь на наш", "green"), colored("Телеграм!", "cyan"), colored("t.me/orionbomber", "red"))
+		print(colored("Subscribe to our", "green"), colored("Telegram!", "cyan"), colored("t.me/orionbomber", "red"))
 		print()
 		
 	# Number formats
@@ -798,7 +798,7 @@ def start(number, country, proxy_=None):
 	while starting_spam:
 		try:
 			if circles == len(services_list):
-				print(colored("Круг ", "green")+colored(str(circles_2), "yellow"), colored("Пройден!", "green"))
+				print(colored("Round ", "green")+colored(str(circles_2), "yellow"), colored("Completed!", "green"))
 				circles -= len(services_list)
 				circles_2 += 1
 			time.sleep(1)
@@ -815,17 +815,17 @@ def start(number, country, proxy_=None):
 							logs.save_logs(serv, result[0])
 						if result[0] == False:
 							# Checking the proxy before the next spam attempt
-							print(colored("Проверка прокси...", "yellow"))
+							print(colored("Checking proxy...", "yellow"))
 							if "login" in proxy_:
 								test_proxy = proxy.SPC(proxy_["ip"], proxy_["port"], login=proxy_["login"], password=proxy_["password"])
 								if test_proxy == False:
-									print(colored("Ваш прокси больше не работает!", "red"))
+									print(colored("Your proxy is no longer working!", "red"))
 									print("")
-									print(colored("[1]", "red"), colored("Да", "green"))
-									print(colored("[2]", "red"), colored("Нет", "red"))
+									print(colored("[1]", "red"), colored("Yes", "green"))
+									print(colored("[2]", "red"), colored("No", "red"))
 									while True:
 										print("")
-										print(colored("Продолжить спам без прокси?", "yellow"))
+										print(colored("Continue spam without proxy?", "yellow"))
 										print("")
 										how = input(colored("~# ", "red"))
 										if how == "2":
@@ -840,8 +840,8 @@ def start(number, country, proxy_=None):
 										     "login": proxy_["login"],
 										     "password": proxy_["password"],
 										     "format": test_proxy}
-									print(colored("Прокси работает!", "green"))
-									print(colored("Продолжаю спам!", "green"))
+									print(colored("Proxy is working!", "green"))
+									print(colored("Continuing spam!", "green"))
 
 							else:
 								try:
@@ -852,13 +852,13 @@ def start(number, country, proxy_=None):
 								if general == False:
 									test_proxy = proxy.SPC(proxy_["ip"], proxy_["port"])
 									if test_proxy == False:
-										print(colored("Ваш прокси больше не работает!", "red"))
+										print(colored("Your proxy is no longer working!", "red"))
 										print("")
-										print(colored("[1]", "red"), colored("Да", "green"))
-										print(colored("[2]", "red"), colored("Нет", "red"))
+										print(colored("[1]", "red"), colored("Yes", "green"))
+										print(colored("[2]", "red"), colored("No", "red"))
 										while True:
 											print("")
-											print(colored("Продолжить спам без прокси?", "yellow"))
+											print(colored("Continue spam without proxy?", "yellow"))
 											print("")
 											how = input(colored("~# ", "red"))
 											if how == "2":
@@ -868,18 +868,18 @@ def start(number, country, proxy_=None):
 												proxy_ = None
 												break
 									else:
-										print(colored("Ваш прокси работает, продолжаю спам", "green"))
+										print(colored("Your proxy works, continuing spam", "green"))
 								else:
 									test_proxy = proxy.SPC(proxy_["ip"], proxy_["port"])
 									if test_proxy == False:
 										if len(all_list["all"]) < 1:
-											print(colored("Увы но прокси закончились ;(", "yellow"))
+											print(colored("Unfortunately, proxies are exhausted ;(", "yellow"))
 											print("")
-											print(colored("[1]", "red"), colored("Да", "green"))
-											print(colored("[2]", "red"), colored("Нет", "red"))
+											print(colored("[1]", "red"), colored("Yes", "green"))
+											print(colored("[2]", "red"), colored("No", "red"))
 											while True:
 												print("")
-												print(colored("Продолжить спам без прокси?", "yellow"))
+												print(colored("Continue spam without proxy?", "yellow"))
 												print("")
 												how = input(colored("~# ", "red"))
 												if how == "2":
@@ -889,7 +889,7 @@ def start(number, country, proxy_=None):
 													proxy_ = None
 													break
 										else:
-											print(colored("Берем следующий прокси...", "green"))
+											print(colored("Taking the next proxy...", "green"))
 											last_pr = proxy_
 											all_list["all"].remove(proxy_)
 											for pr in all_list["all"]:
@@ -903,13 +903,13 @@ def start(number, country, proxy_=None):
 												else:
 													all_list["all"].remove(pr)
 											if proxy_ == last_pr:
-												print(colored("Увы но прокси закончились ;(", "yellow"))
+												print(colored("Unfortunately, proxies are exhausted ;(", "yellow"))
 												print("")
-												print(colored("[1]", "red"), colored("Да", "green"))
-												print(colored("[2]", "red"), colored("Нет", "red"))
+												print(colored("[1]", "red"), colored("Yes", "green"))
+												print(colored("[2]", "red"), colored("No", "red"))
 												while True:
 													print("")
-													print(colored("Продолжить спам без прокси?", "yellow"))
+													print(colored("Continue spam without proxy?", "yellow"))
 													print("")
 													how = input(colored("~# ", "red"))
 													if how == "2":
@@ -919,7 +919,7 @@ def start(number, country, proxy_=None):
 														proxy_ = None
 														break
 									else:
-										print(colored("Прокси работает, продолжаю спам!", "green"))
+										print(colored("Proxy works, continuing spam!", "green"))
 						else:
 							circles += 1
 							if result[0] != False:
@@ -961,8 +961,8 @@ def start(number, country, proxy_=None):
 		except KeyboardInterrupt:
 			starting_spam = False
 			print("\n")
-			print(colored("Спам был принудительно оставлен\n", "green"))
-			print("Нажмите Enter чтобы вернуть назад")
+			print(colored("Spam was stopped manually\n", "green"))
+			print("Press Enter to go back")
 			try:
 				input()
 			except KeyboardInterrupt:
@@ -971,11 +971,11 @@ def start(number, country, proxy_=None):
 		except Exception as e:
 			starting_spam = False
 			print("\n")
-			print(colored("Из-за неизвестной ошибки наша программа выдала ошибку при спаме\n", "yellow"))
+			print(colored("Due to an unknown issue, our program raised an error during spam\n", "yellow"))
 			logs.error_logs(traceback.format_exc())
-			print(colored("Данная ошибка была сохранена в логи", "green"))
-			print(colored("Пожалуйста отправьте нам файл с логами по инструкции в главном меню чтобы мы могли улучшать наш проект с вашей помощью", "green"))
-			print("\nНажмите Enter чтобы вернуть назад")
+			print(colored("This error was saved to logs", "green"))
+			print(colored("Please send us the log file using instructions from the main menu so we can improve the project with your help", "green"))
+			print("\nPress Enter to go back")
 			try:
 				input()
 			except KeyboardInterrupt:

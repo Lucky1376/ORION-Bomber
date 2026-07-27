@@ -155,7 +155,7 @@
       },
       "tashirpizza": {
         "url": "https://tashirpizza.ru/ajax/mindbox_register",
-        "data": "{'phone': '*phone()*', 'fio': 'Олег Олегов Олегович', 'bd': ''}",
+        "data": "{'phone': '*phone()*', 'fio': 'John Doe', 'bd': ''}",
         "response": 200,
         "timeout": 60
       },
@@ -282,7 +282,7 @@
       },
       "av.by_by": {
         "url": "https://api.av.by/auth/phone/sign-up",
-        "json": "{\"name\":\"Олег\",\"password\":\"HifbWy523i46oO\",\"phone\":{\"country\":1,\"number\":\"*-phone*\"},\"userEula\":{\"accepted\":true}}",
+        "json": "{\"name\":\"John\",\"password\":\"HifbWy523i46oO\",\"phone\":{\"country\":1,\"number\":\"*-phone*\"},\"userEula\":{\"accepted\":true}}",
         "response": 204,
         "timeout": 60,
         "cookies": "https://av.by"
@@ -305,7 +305,7 @@
         "url": "https://authorization.wildberries.eu/api/v2/code/request",
         "json": "{\"contact\": \"*phone*\", \"auth_method\": \"sms\", \"lang\": \"ru\"}",
         "response": 200,
-        "HZF": "не умеет добавлять сервисы, и легко сливаетя, и ваще он полудурок копченый",
+        "HZF": "cannot add services, gives up too easily, and is generally unreliable",
         "timeout": 60
       },
       "findclone_by": {

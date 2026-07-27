@@ -9,7 +9,7 @@ def SPC(ip, port, login=None, password=None):
     proxy_http = {'http': 'http://' + ipp}
 
     ip_user = requests.get("http://icanhazip.com/", headers={'User-Agent': ua}).text
-    if login == None and password == None: # проверка публичных прокси
+    if login == None and password == None: # checking public proxies
         try:
             ip_proxy = requests.get("http://icanhazip.com/", headers={'User-Agent': ua}, proxies=proxy_http, timeout=5)
             if ip_user not in ip_proxy.text and ip_proxy.status_code == 200:
@@ -45,23 +45,23 @@ class Proxy:
 		# Checking for Errors in Parameters
 		# -----------------------------------------------
 		if len(country) < 1:
-			print("Не указаны страны")
+			print("No countries specified")
 			exit()
 		else:
 			for ct in country:
 				if ct not in ["ru", "by", "ua", "us"]:
-					print(f"{ct} - неизвестная страна")
+					print(f"{ct} - unknown country")
 					exit()
 		if unknown not in [False, True]:
-			print("Неизвестный параметр для unknown")
+			print("Invalid value for unknown parameter")
 			exit()
 		try:
 			timeout = int(timeout)
 		except:
-			print("Параметр timeout возможно указан как строка")
+			print("The timeout parameter may be provided as a string")
 			exit()
 		if timeout < 10 or timeout > 15:
-			print("timeout не может быть меньше 10 или больше 15 секунд")
+			print("timeout cannot be less than 10 or greater than 15 seconds")
 			exit()
 		# -----------------------------------------------
 		self.unknown = unknown
@@ -102,7 +102,7 @@ class Proxy:
 
 	def verify(self):
 		if self.list == {}:
-			print("Список прокси пустой")
+			print("Proxy list is empty")
 			return
 		else:
 			# Progress bar
@@ -110,7 +110,7 @@ class Proxy:
 			for key in self.list:
 				for i in range(len(self.list[key])):
 					pr_b.append(i)
-			bar = ChargingBar('Проверка', max = len(pr_b))
+			bar = ChargingBar('Checking', max = len(pr_b))
 
 		new_list = {}
 
@@ -169,13 +169,13 @@ class Proxy:
 				col_page += result.json()["total"] // 50
 			# Progress bar
 			pr_b = list(range(1, col_page+3))
-			bar = ChargingBar('Парсинг', max = len(pr_b))
+			bar = ChargingBar('Parsing', max = len(pr_b))
 		else:
 			# Progress bar
 			pr_b = list(range(1, 4))
-			bar = ChargingBar('Парсинг', max = len(pr_b))
+			bar = ChargingBar('Parsing', max = len(pr_b))
 		
-		"""Парсинг"""
+		"""Parsing"""
 		if can == True:
 			i = 1
 			while i < col_page:
@@ -255,7 +255,7 @@ class Proxy:
 		except:
 			pass
 		if response.status_code == 200 or can == True:
-			"""Парсинг"""
+			"""Parsing"""
 			html = BS(response.content, "html.parser")
 
 			all_list_bs = html.find("div", "table-responsive fpl-list").find("tbody")
